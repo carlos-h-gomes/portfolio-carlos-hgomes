@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -51,76 +50,112 @@
       margin-top: 50px;
       color: #777;
     }
+    .lang-en { display: none; }
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .lang-switch button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
+  <div class="lang-switch">
+    <button onclick="setLanguage('pt')">🇧🇷 Português</button>
+    <button onclick="setLanguage('en')">🇺🇸 English</button>
+  </div>
 
-  <h1>Carlos Gomes</h1>
-  <p>Profissional de TI | Integrações, IA e Automação</p>
-  <p><a href="https://www.linkedin.com/in/carlos-he-gomes">linkedin.com/in/carlos-he-gomes</a></p>
+  <div class="lang-pt">
+    <h1>Carlos Gomes</h1>
+    <p>Profissional de TI | Integrações, IA e Automação</p>
+    <p><a href="https://www.linkedin.com/in/carlos-he-gomes">linkedin.com/in/carlos-he-gomes</a></p>
+    <h2>Sobre mim</h2>
+    <p>Apaixonado por tecnologia, crio soluções práticas com IA e automação sem precisar programar. Utilizo IA Generativa e ferramentas digitais para transformar processos e gerar resultados.</p>
+  </div>
 
-  <h2>Sobre mim</h2>
-  <p>
-      Apaixonado por tecnologia, crio soluções práticas com IA e automação sem precisar programar. Utilizo IA Generativa e ferramentas digitais para transformar processos e gerar resultados.
-    </p>
+  <div class="lang-en">
+    <h1>Carlos Gomes</h1>
+    <p>IT Professional | Integrations, AI & Automation</p>
+    <p><a href="https://www.linkedin.com/in/carlos-he-gomes">linkedin.com/in/carlos-he-gomes</a></p>
+    <h2>About me</h2>
+    <p>Passionate about technology, I create practical solutions using AI and automation without needing to code. I leverage Generative AI and digital tools to transform processes and deliver impactful results.</p>
+  </div>
 
-  <h2>Projetos</h2>
+  <h2 class="lang-pt">Projetos</h2>
+  <h2 class="lang-en">Projects</h2>
 
   <div class="project">
-    <h3>Férias e Folgas</h3>
-    <p>Sistema de gestão de férias, folgas e regras operacionais para squads e times, incluindo dashboards analíticos.</p>
+    <h3>Férias e Folgas / Vacation and Leave Manager</h3>
+    <p class="lang-pt">Sistema de gestão de férias, folgas e regras operacionais para squads e times, incluindo dashboards analíticos.</p>
+    <p class="lang-en">System for managing vacations, leaves, and operational rules for squads and teams, including analytics dashboards.</p>
     <img src="print_ferias_hub.png" alt="Tela inicial Férias e Folgas">
     <img src="print_ferias_dashboard.png" alt="Dashboard Férias e Folgas">
     <img src="print_ferias_regras.png" alt="Tela de Regras Férias e Folgas">
   </div>
 
   <div class="project">
-    <h3>Farol</h3>
-    <p>Ferramenta para gestão de clientes, incluindo farol de risco, timeline de planos de ação e comentários categorizados por sentimento.</p>
+    <h3>Farol / Client Health Dashboard</h3>
+    <p class="lang-pt">Ferramenta para gestão de clientes, incluindo farol de risco, timeline de planos de ação e comentários categorizados por sentimento.</p>
+    <p class="lang-en">Client management tool with risk indicator, action plan timeline, and comments categorized by sentiment.</p>
     <img src="print_farol_risco.png" alt="Tela Farol de Risco">
     <img src="print_farol_timeline.png" alt="Timeline Planos de Ação">
     <img src="print_farol_clientes.png" alt="Gestão de Clientes Farol">
   </div>
 
   <div class="project">
-    <h3>APIs Utilidades</h3>
-    <p>Conjunto de APIs para formatação de texto, cálculos, conversões e validações, utilizados em diversos projetos de automação e IA Generativa.</p>
+    <h3>APIs Utilidades / Utility APIs</h3>
+    <p class="lang-pt">Conjunto de APIs para formatação de texto, cálculos, conversões e validações, utilizados em diversos projetos de automação e IA Generativa.</p>
+    <p class="lang-en">Set of APIs for text formatting, calculations, conversions, and validations used in various automation and AI projects.</p>
     <img src="print_apis_utilidades.png" alt="Documentação APIs Utilidades">
   </div>
 
-  <h2>Soluções aplicadas</h2>
+  <h2 class="lang-pt">Soluções aplicadas</h2>
+  <h2 class="lang-en">Applied Solutions</h2>
 
   <div class="project">
-    <h3>OCR para Documentos Fiscais</h3>
-    <p>Desenvolvimento de uma solução que extrai automaticamente dados de comprovantes da Receita Federal (como CNPJ, razão social, data de abertura, etc.) usando OCR com Python e Tesseract. Aplicado para leitura automatizada de documentos enviados por clientes.</p>
-  </div>
-
-
-  <div class="project">
-    <h3>Mini API JSONPath para consultas inteligentes</h3>
-    <p>Construção de uma API REST que recebe objetos JSON e expressões JSONPath, retornando resultados sob demanda. Utilizado como ferramenta de apoio interno para buscas dinâmicas em dados complexos.</p>
-  </div>
-
-
-  <div class="project">
-    <h3>Organizador automático de fluxogramas</h3>
-    <p>Solução desenvolvida para organizar automaticamente blocos sobrepostos em fluxogramas do diagrams.net (Draw.io), otimizando a visualização de fluxos extensos criados manualmente por analistas.</p>
+    <h3>OCR para Documentos Fiscais / OCR for Tax Documents</h3>
+    <p class="lang-pt">Solução que extrai automaticamente dados de comprovantes da Receita Federal usando Python e Tesseract.</p>
+    <p class="lang-en">Solution that automatically extracts data from Brazilian tax receipts using Python and Tesseract.</p>
   </div>
 
   <div class="project">
-    <h3>HUB de Serviços Internos</h3>
-    <p>Plataforma criada para centralizar ferramentas internas e APIs utilitárias em um único ambiente. Permite que colaboradores executem tarefas como formatação de texto, extração de dados e integrações sem depender do time de tecnologia. Reduziu carga de atendimento técnico e acelerou processos operacionais.</p>
+    <h3>API JSONPath / Smart JSONPath API</h3>
+    <p class="lang-pt">API REST que recebe objetos JSON e expressões JSONPath, retornando resultados sob demanda.</p>
+    <p class="lang-en">REST API that receives JSON objects and JSONPath expressions, returning on-demand results.</p>
   </div>
 
   <div class="project">
-    <h3>Consulta de Tickets Externa</h3>
-    <p>Desenvolvimento de uma solução que permite a consulta de status de tickets abertos por clientes, com base em filtros simples como e-mail ou número de protocolo. Criado para atender demandas de clientes, suprindo uma limitação da plataforma original e melhorando a transparência com o cliente final.</p>
+    <h3>Organizador de Fluxogramas / Auto Flowchart Organizer</h3>
+    <p class="lang-pt">Ferramenta para organizar blocos sobrepostos em fluxogramas do diagrams.net automaticamente.</p>
+    <p class="lang-en">Tool to automatically organize overlapping blocks in diagrams.net flowcharts.</p>
+  </div>
+
+  <div class="project">
+    <h3>HUB de Serviços Internos / Internal Services HUB</h3>
+    <p class="lang-pt">Centraliza ferramentas internas e APIs utilitárias em um ambiente acessível a todos os colaboradores.</p>
+    <p class="lang-en">Centralized hub for internal tools and utility APIs accessible by all collaborators.</p>
+  </div>
+
+  <div class="project">
+    <h3>Consulta de Tickets / Ticket Status Checker</h3>
+    <p class="lang-pt">Permite a consulta de status de tickets por e-mail ou protocolo, aumentando a transparência com o cliente.</p>
+    <p class="lang-en">Allows checking ticket status via email or protocol, increasing transparency for clients.</p>
   </div>
 
   <div class="footer">
-    Portfólio - Carlos Gomes | IA Generativa e Automação<br/>
+    <span class="lang-pt">Portfólio - Carlos Gomes | IA Generativa e Automação</span>
+    <span class="lang-en">Portfolio - Carlos Gomes | Generative AI & Automation</span><br/>
     Última atualização: Julho de 2025
   </div>
 
+  <script>
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang-pt').forEach(el => el.style.display = lang === 'pt' ? '' : 'none');
+      document.querySelectorAll('.lang-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+    }
+  </script>
 </body>
 </html>
