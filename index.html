@@ -425,41 +425,63 @@
 
     // ===== Catálogo de projetos (ajuste slugs conforme nomes de pasta em /projects) =====
     const PROJECTS = [
-      { slug:'quality-ai', title:'Quality AI Assistant', pill:'AI • Quality • CX',
-        desc_pt:'Assistente generativo para auditoria de interações, com análise de sentimento e recomendações.',
-        desc_en:'Generative assistant for auditing interactions with sentiment and recommendations.',
-        chips:['Python','OpenAI','APIs'] },
-
-      { slug:'bi-analytics', title:'BI Analytics Platform', pill:'BI • Analytics',
-        desc_pt:'Plataforma de BI com ingestão via APIs e dashboards quase em tempo real.',
-        desc_en:'BI platform with API ingestion and near real-time dashboards.',
-        chips:['Python','Flask','Metabase'] },
-
-      { slug:'onboarding', title:'Customer Onboarding Portal', pill:'Onboarding • UX',
-        desc_pt:'Portal com formulários dinâmicos, etapas guiadas e personalização visual.',
-        desc_en:'Portal with dynamic forms, guided steps and branding.',
-        chips:['Flask','HTML','CSS/JS'] },
-
-      { slug:'botflow', title:'BotFlow Orchestrator', pill:'Bots • Flows',
-        desc_pt:'Orquestrador visual para fluxos multi-plataforma com import/export.',
-        desc_en:'Visual orchestrator with multi-platform import/export.',
-        chips:['Python','Draw.io/YEd','Connectors'] },
-
-      { slug:'vacation-leave', title:'Vacation & Leave Manager', pill:'Ops • HR',
-        desc_pt:'Gestão de férias/folgas com calendário global e regras por squads.',
-        desc_en:'Vacation/leave management with global calendar and squad rules.',
-        chips:['Python','Flask','HTML/CSS'] },
-
-      { slug:'client-health', title:'Client Health Monitor', pill:'CS • Retention',
-        desc_pt:'Risco de churn, plano de ação e indicadores visuais.',
-        desc_en:'Churn risk, action plan and visual indicators.',
-        chips:['Python','Flask','JSON'] },
-
-      { slug:'utility-apis', title:'Utility APIs', pill:'Ops • APIs',
-        desc_pt:'Coleção de APIs para OCR, validações e integrações.',
-        desc_en:'API collection for OCR, validations and integrations.',
-        chips:['Python','Flask','REST'] },
-    ];
+    {
+      slug: 'quality-ai',
+      title: 'Quality AI Assistant',
+      pill: 'AI • Quality • CX',
+      desc_pt: 'Assistente generativo para auditoria de interações, com análise de sentimento e recomendações.',
+      desc_en: 'Generative assistant for auditing interactions with sentiment and recommendations.',
+      chips: ['Python','OpenAI','APIs']
+    },
+    {
+      slug: 'bi-analytics',
+      title: 'BI Analytics Platform',
+      pill: 'BI • Analytics',
+      desc_pt: 'Plataforma de BI com ingestão via APIs e dashboards quase em tempo real.',
+      desc_en: 'BI platform with API ingestion and near real-time dashboards.',
+      chips: ['Python','Flask','Metabase']
+    },
+    {
+      slug: 'onboarding',
+      title: 'Customer Onboarding Portal',
+      pill: 'Onboarding • UX',
+      desc_pt: 'Portal com formulários dinâmicos, etapas guiadas e personalização visual.',
+      desc_en: 'Portal with dynamic forms, guided steps and branding.',
+      chips: ['Flask','HTML','CSS/JS']
+    },
+    {
+      slug: 'botflow',
+      title: 'BotFlow Orchestrator',
+      pill: 'Bots • Flows',
+      desc_pt: 'Orquestrador visual para fluxos multi-plataforma com import/export.',
+      desc_en: 'Visual orchestrator with multi-platform import/export.',
+      chips: ['Python','Draw.io/YEd','Connectors']
+    },
+    {
+      slug: 'vacation',
+      title: 'Vacation & Leave Manager',
+      pill: 'Ops • HR',
+      desc_pt: 'Gestão de férias/folgas com calendário global, regras por squads e painéis.',
+      desc_en: 'Vacation/leave management with global calendar, squad rules and dashboards.',
+      chips: ['Python','Flask','HTML/CSS']
+    },
+    {
+      slug: 'client-health',
+      title: 'Client Health Monitor',
+      pill: 'CS • Retention',
+      desc_pt: 'Risco de churn, plano de ação e indicadores visuais.',
+      desc_en: 'Churn risk, action plan and visual indicators.',
+      chips: ['Python','Flask','JSON']
+    },
+    {
+      slug: 'utility-apis',
+      title: 'Utility APIs',
+      pill: 'Ops • APIs',
+      desc_pt: 'Coleção de APIs para automações: OCR, validações, formatação e integrações.',
+      desc_en: 'API collection for automation: OCR, validations, formatting and integrations.',
+      chips: ['Python','Flask','REST']
+    }
+  ];
 
     // Renderização de cards
     function projectCard(p){
@@ -518,3 +540,4 @@
   </script>
 </body>
 </html>
+
