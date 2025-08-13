@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Clients - Hi Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i data-feather="users"></i> Manage Clients</h1>
+    <a href="{{ url_for('admin.add_client') }}" class="btn btn-primary">
+        <i data-feather="plus"></i> Add Client
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if clients %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Users</th>
+                            <th>Data Period</th>
+                            <th>Retention</th>
+                            <th>Last Update</th>
+                            <th>Status</th>
+                            <th>Dashboards</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                        <tr>
+                            <td>
+                                <strong>{{ client.name }}</strong>
+                            </td>
+                            <td>
+                                {% if client.users %}
+                                    {% for client_user in client.users %}
+                                        {{ client_user.user.email }}
+                                        {% if client_user.is_primary %}
+                                            <span class="badge bg-primary">Primary</span>
+                                        {% endif %}
+                                        {% if not loop.last %}<br>{% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    <span class="text-muted">No users</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <small>Desde: {{ client.data_start_date.strftime('%d/%m/%Y') if client.data_start_date else 'N/A' }}</small>
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ client.data_retention_days }} dias</span>
+                                <br><small>{{ (client.data_retention_days / 30)|round|int }} meses</small>
+                            </td>
+                            <td>
+                                {% if client.last_data_update %}
+                                    {{ client.last_data_update.strftime('%d/%m/%Y %H:%M') }}
+                                {% else %}
+                                    <span class="text-muted">Nunca</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if client.is_active %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="badge bg-info">{{ client.dashboards|length }}</span>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="{{ url_for('admin.client_dashboards', client_id=client.id) }}" 
+                                       class="btn btn-outline-primary" title="View Dashboards">
+                                        <i data-feather="bar-chart-2"></i>
+                                    </a>
+                                    <a href="{{ url_for('client.select_client', client_id=client.id) }}" 
+                                       class="btn btn-outline-info" title="View as Client">
+                                        <i data-feather="eye"></i>
+                                    </a>
+                                    <a href="{{ url_for('admin.refresh_client_data', client_id=client.id) }}" 
+                                       class="btn btn-outline-success" title="Refresh Data">
+                                        <i data-feather="refresh-cw"></i>
+                                    </a>
+                                    <a href="{{ url_for('admin.edit_client', client_id=client.id) }}" 
+                                       class="btn btn-outline-warning" title="Edit Client">
+                                        <i data-feather="edit"></i>
+                                    </a>
+                                    <a href="{{ url_for('admin.toggle_client_status', client_id=client.id) }}" 
+                                       class="btn btn-outline-{% if client.is_active %}secondary{% else %}success{% endif %}" 
+                                       title="{% if client.is_active %}Inativar{% else %}Ativar{% endif %}"
+                                       onclick="return confirm('Tem certeza que deseja {% if client.is_active %}inativar{% else %}ativar{% endif %} este cliente?')">
+                                        <i data-feather="{% if client.is_active %}pause{% else %}play{% endif %}"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center text-muted py-5">
+                <i data-feather="users" size="64"></i>
+                <h4 class="mt-3">No Clients Yet</h4>
+                <p>Start by adding your first client to generate dashboards.</p>
+                <a href="{{ url_for('admin.add_client') }}" class="btn btn-primary">
+                    <i data-feather="plus"></i> Add First Client
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Etapa: Classificações</h2>
+
+<p><strong>📌 Instrução:</strong><br>
+As classificações permitem categorizar os atendimentos em até 5 níveis hierárquicos, como por exemplo: SAC → Reclamação → Produto → Entrega. Clique em “+ Subclassificação” para adicionar níveis adicionais.</p>
+
+<style>
+  .classificacao-container {
+    margin-top: 20px;
+  }
+  .classificacao-bloco {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  .nivel {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+  .nivel input[type="text"] {
+    padding: 4px;
+    width: 300px;
+    margin-right: 8px;
+  }
+  .nivel button {
+    padding: 4px 8px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+</style>
+
+<form method="post">
+  <div class="classificacao-container" id="classificacao-container">
+    <!-- Classificação principal -->
+    <div class="classificacao-bloco">
+      <div class="nivel">
+        <input type="text" name="nivel[]" placeholder="Digite a classificação (ex: SAC)">
+        <button type="button" onclick="addSubnivel(this)">+ Subclassificação</button>
+        <button type="button" onclick="removerNivel(this)">🗑️ Remover</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="button" onclick="adicionarClassificacao()">+ Nova Classificação</button>
+  <br><br>
+  <button type="submit">Avançar →</button>
+</form>
+
+<script>
+function adicionarClassificacao() {
+  const container = document.getElementById("classificacao-container");
+  const bloco = document.createElement("div");
+  bloco.className = "classificacao-bloco";
+  bloco.innerHTML = `
+    <div class="nivel">
+      <input type="text" name="nivel[]" placeholder="Digite a classificação (ex: SAC)">
+      <button type="button" onclick="addSubnivel(this)">+ Subclassificação</button>
+      <button type="button" onclick="removerNivel(this)">🗑️ Remover</button>
+    </div>
+  `;
+  container.appendChild(bloco);
+}
+
+function addSubnivel(botao) {
+  const parent = botao.closest('.nivel');
+  const depth = getNivelDepth(parent);
+  if (depth >= 5) {
+    alert('Limite de 5 níveis alcançado.');
+    return;
+  }
+  const novo = document.createElement("div");
+  novo.className = "nivel";
+  novo.innerHTML = `
+    <input type="text" name="nivel[]" placeholder="Digite subnível">
+    <button type="button" onclick="addSubnivel(this)">+ Subclassificação</button>
+    <button type="button" onclick="removerNivel(this)">🗑️ Remover</button>
+  `;
+  parent.appendChild(novo);
+}
+
+function getNivelDepth(element) {
+  let depth = 1;
+  while (element.closest('.nivel') && element.closest('.nivel').parentElement.closest('.nivel')) {
+    depth++;
+    element = element.closest('.nivel').parentElement.closest('.nivel');
+  }
+  return depth;
+}
+
+function removerNivel(botao) {
+  const nivel = botao.closest(".nivel");
+  const bloco = botao.closest(".classificacao-bloco");
+  if (nivel === bloco.firstElementChild) {
+    bloco.remove();
+  } else {
+    nivel.remove();
+  }
+}
+</script>
+{% endblock %}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Análise de Atendimentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4faff;
+            margin: 0;
+            padding: 20px;
+            color: #1f2937;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        h1 {
+            color: #0077cc;
+            margin: 0;
+        }
+
+        form {
+            background: #e8f1fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: flex-end;
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        form .field-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 200px;
+            min-width: 200px;
+        }
+
+        form input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 40px;
+        }
+
+        .alerta {
+            margin: 10px 0;
+            padding: 10px;
+            background: #dbeafe;
+            border-left: 6px solid #3b82f6;
+            color: #1e3a8a;
+            border-radius: 5px;
+        }
+
+        #loading {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            margin: -60px 0 0 -60px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #graphs > div {
+            margin-top: 20px;
+        }
+
+        #download-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0077cc;
+            text-decoration: underline;
+        }
+        /* Switch IA */
+        .switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider-round {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider-round:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        .switch input:checked + .slider-round {
+            background-color: #0077cc;
+        }
+
+        .switch input:checked + .slider-round:before {
+            transform: translateX(24px);
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='img/logo_hi.png') }}" alt="Logo Hi">
+        <h1>Análise de Atendimentos</h1>
+    </header>
+
+    <form id="date-form">
+        <div class="field-group">
+            <label for="token">Token do Cliente:</label>
+            <input type="text" id="token" name="token" required>
+        </div>
+
+        <div class="field-group">
+            <label for="quantidade">Quantidade de Atendimentos (máx 2000):</label>
+            <input type="number" id="quantidade" name="quantidade" max="2000" value="100" required>
+        </div>
+
+        <div class="field-group">
+            <label for="start_date">Data Início:</label>
+            <input type="text" id="start_date" name="start_date" class="datepicker">
+        </div>
+
+        <div class="field-group">
+            <label for="end_date">Data Fim:</label>
+            <input type="text" id="end_date" name="end_date" class="datepicker">
+        </div>
+
+        <div class="field-group">
+            <label for="modelo_ia">IA Utilizada:</label>
+            <div class="switch-wrapper">
+                <span>GPT</span>
+                <label class="switch">
+                    <input type="checkbox" id="modelo_ia" name="modelo_ia" value="gemini">
+                    <span class="slider-round"></span>
+                </label>
+                <span>Gemini</span>
+            </div>
+        </div>
+
+
+        <button type="submit">Analisar</button>
+    </form>
+
+    <div class="alerta">
+        ⚠️ Quanto maior a quantidade de atendimentos processados, maior será o consumo de tokens da IA. Recomendamos limitar a análise por período ou amostra.
+    </div>
+
+    <div id="loading"></div>
+
+    <div id="graphs">
+        <div id="graph-sentimento"></div>
+        <div id="graph-resolutividade"></div>
+        <div id="graph-qualidade"></div>
+        <div id="graph-total">Total de atendimentos encontrados: <strong>{{ total_atendimentos }}</strong></div>
+    </div>
+
+    <a id="download-link">Baixar Relatório</a>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
