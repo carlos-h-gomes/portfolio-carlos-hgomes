@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Etapa: Horário de Atendimento do Chat</h2>
+<p>Você pode configurar até dois períodos por dia (ex: manhã e tarde). Se houver diferentes horários por departamento, clique em <strong>"Adicionar outro departamento"</strong>.</p>
+
+<form method="post">
+  <div id="horarios-container">
+    <!-- Primeira Tabela -->
+    <div class="tabela-horarios">
+      <label><strong>Departamento:</strong>
+        <input type="text" name="departamento_1" placeholder="Ex: SAC" required>
+      </label>
+      <table>
+        <thead>
+          <tr>
+            <th>Dia da Semana</th>
+            <th>Início 1º Turno</th>
+            <th>Fim 1º Turno</th>
+            <th>Início 2º Turno</th>
+            <th>Fim 2º Turno</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dia in ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"] %}
+          <tr>
+            <td>{{ dia }}</td>
+            <td><input type="time" name="horarios_1_{{ loop.index0 }}_inicio1"></td>
+            <td><input type="time" name="horarios_1_{{ loop.index0 }}_fim1"></td>
+            <td><input type="time" name="horarios_1_{{ loop.index0 }}_inicio2"></td>
+            <td><input type="time" name="horarios_1_{{ loop.index0 }}_fim2"></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <button type="button" onclick="removerTabela(this)">Remover Tabela</button>
+    </div>
+  </div>
+
+  <br>
+  <button type="button" onclick="adicionarTabela()">+ Adicionar outro departamento</button>
+  <br><br>
+  <button type="submit">Avançar →</button>
+</form>
+
+<style>
+  .tabela-horarios {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 6px;
+    text-align: center;
+  }
+  input[type="time"] {
+    width: 100%;
+  }
+</style>
+
+<script>
+let tabelaCount = 1;
+
+function adicionarTabela() {
+  tabelaCount++;
+
+  const dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+  const container = document.getElementById("horarios-container");
+
+  const div = document.createElement("div");
+  div.classList.add("tabela-horarios");
+
+  let html = `
+    <label><strong>Departamento:</strong>
+      <input type="text" name="departamento_${tabelaCount}" placeholder="Ex: Financeiro" required>
+    </label>
+    <table>
+      <thead>
+        <tr>
+          <th>Dia da Semana</th>
+          <th>Início 1º Turno</th>
+          <th>Fim 1º Turno</th>
+          <th>Início 2º Turno</th>
+          <th>Fim 2º Turno</th>
+        </tr>
+      </thead>
+      <tbody>`;
+
+  dias.forEach((dia, index) => {
+    html += `
+      <tr>
+        <td>${dia}</td>
+        <td><input type="time" name="horarios_${tabelaCount}_${index}_inicio1"></td>
+        <td><input type="time" name="horarios_${tabelaCount}_${index}_fim1"></td>
+        <td><input type="time" name="horarios_${tabelaCount}_${index}_inicio2"></td>
+        <td><input type="time" name="horarios_${tabelaCount}_${index}_fim2"></td>
+      </tr>`;
+  });
+
+  html += `</tbody></table>
+    <button type="button" onclick="removerTabela(this)">Remover Tabela</button>`;
+
+  div.innerHTML = html;
+  container.appendChild(div);
+}
+
+function removerTabela(botao) {
+  const bloco = botao.closest(".tabela-horarios");
+  bloco.remove();
+}
+</script>
+{% endblock %}

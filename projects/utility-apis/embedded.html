@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Utility Apis — Preview</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b1020;color:#e6ecff}
+.wrap{padding:12px}
+select{padding:10px;border-radius:10px;border:1px solid #ffffff33;background:#121a3f;color:#e6ecff}
+iframe{width:100%;height:80vh;border:0;background:#000;margin-top:10px;border-top:1px solid #ffffff22}
+</style>
+<div class="wrap">
+  <label>Preview:
+    <select id="sel">
+      <option value="demo.html">demo.html</option>
+    </select>
+  </label>
+  <iframe id="f" src="demo.html" title="preview"></iframe>
+</div>
+<script>
+const s=document.getElementById('sel'), f=document.getElementById('f');
+s.addEventListener('change',()=>f.src=s.value);
+</script>
