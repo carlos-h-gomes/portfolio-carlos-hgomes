@@ -1,0 +1,60 @@
+<!doctype html><meta charset="utf-8"><title>BI Analytics Platform — Example</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a3f;--muted:#9fb0ff;--ink:#e6ecff;--acc:#6d8eff;--acc2:#8a5cff;--ok:#41d1a7;--warn:#ffcf5c;--bad:#ff6d8e}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b1020,#0a0e22);color:var(--ink)}
+.wrap{max-width:1200px;margin:auto;padding:22px}
+h1{font-size:clamp(22px,4vw,36px);margin:8px 0 12px}
+h2{font-size:clamp(18px,3vw,22px);margin:16px 0 8px;color:var(--muted)}
+.panel{background:#ffffff10;border:1px solid #ffffff22;border-radius:14px;box-shadow:0 10px 30px #00000044;padding:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#ffffff10;border:1px solid #ffffff22;border-radius:12px;padding:12px}
+.kpi .v{font-weight:800;font-size:1.3rem}
+.kpi .k{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.table{width:100%;border-collapse:separate;border-spacing:0 8px}
+.table th{color:#aab6ff;text-align:left;font-weight:600;font-size:.9rem;padding:6px 8px}
+.table td{background:#ffffff0f;border:1px solid #ffffff1f;border-left:0;border-right:0;padding:10px 8px}
+.badge{padding:4px 8px;border-radius:999px;font-size:.78rem;border:1px solid #ffffff33;background:#ffffff12}
+.badge.ok{color:#0fe0b0;border-color:#0fe0b033;background:#0fe0b012}
+.badge.warn{color:#ffd479;border-color:#ffd47933;background:#ffd47912}
+.badge.bad{color:#ff7d9a;border-color:#ff7d9a33;background:#ff7d9a12}
+.code{font-family:ui-monospace,Consolas,monospace;background:#0f1433;border:1px solid #28306a;border-radius:10px;padding:10px;overflow:auto}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.sub{color:var(--muted)}
+hr{border:0;border-top:1px solid #ffffff1f;margin:16px 0}
+.note{color:#a4b3ff;font-size:.9rem}
+svg{max-width:100%}
+</style>
+<div class="wrap">
+  <h1>BI Analytics Platform</h1>
+  
+<p class="sub">Ingestão via API, transformação e dashboards quase em tempo real.</p>
+<div class="kpis">
+  <div class="kpi"><div class="v">R$ 1.2M</div><div class="k">MRR</div></div>
+  <div class="kpi"><div class="v">3.8%</div><div class="k">Churn</div></div>
+  <div class="kpi"><div class="v">+24%</div><div class="k">Upsell</div></div>
+  <div class="kpi"><div class="v">98.5%</div><div class="k">SLA ingestão</div></div>
+</div>
+<div class="grid" style="margin-top:14px">
+  <div class="panel">
+    <h2>MRR por segmento</h2>
+    <svg viewBox="0 0 640 220" role="img" aria-label="bar chart">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6d8eff"/><stop offset="100%" stop-color="#8a5cff"/></linearGradient></defs>
+<line x1="28" y1="192" x2="612" y2="192" stroke="#4a56a0" />
+<rect x="28.0" y="28.0" width="97.33333333333333" height="164.0" fill="url(#g)"/><text x="76.66666666666666" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">Enterprise</text>
+<rect x="174.0" y="84.375" width="97.33333333333333" height="107.625" fill="url(#g)"/><text x="222.66666666666666" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">Mid</text>
+<rect x="320.0" y="99.75" width="97.33333333333333" height="92.25" fill="url(#g)"/><text x="368.6666666666667" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">SMB</text>
+<rect x="466.0" y="130.5" width="97.33333333333333" height="61.5" fill="url(#g)"/><text x="514.6666666666666" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">Long Tail</text>
+</svg>
+  </div>
+  <div class="panel">
+    <h2>Eventos (últimas 24h)</h2>
+    <div class="code">POST /ingest  •  2.1M linhas<br>POST /events  •  178K<br>ETL run #9842  •  ok (12m)</div>
+    <hr/>
+    <h2>Top apps</h2>
+    <ul class="note"><li>Inbox · 42%</li><li>Timeline · 28%</li><li>Chatbot · 19%</li><li>Relatórios · 11%</li></ul>
+  </div>
+</div>
+
+</div>
