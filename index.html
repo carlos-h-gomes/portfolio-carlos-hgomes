@@ -221,6 +221,18 @@
 /* variantes de cor (opcional) */
 .btn.whatsapp{ background:#25D366; border-color:transparent; color:#001; }
 .btn.linkedin{ background:#0077B5; border-color:transparent; }
+
+.contact-icon{
+  width:48px;height:48px;border-radius:999px;
+  display:grid;place-items:center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:#fff;font-size:22px;line-height:1;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  transition: transform .2s ease;
+}
+.card:hover .contact-icon{ transform: translateY(-2px) }
+
+                   
   </style>
 </head>
 <body>
@@ -392,39 +404,52 @@
   <div class="container">
     <h2 class="section-title" data-i18n="contact.title">Contato</h2>
 
-    <div class="contact-tiles">
+    <div class="grid">
       <!-- Email -->
-      <article class="contact-tile">
-        <div class="contact-icon" aria-hidden="true">📧</div>
-        <h3 data-i18n="contact.email.title">Me envie um e-mail</h3>
+      <article class="card" style="padding:18px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="contact-icon">📧</div>
+          <h3 style="margin:0" data-i18n="contact.email.title">Me envie um e-mail</h3>
+        </div>
         <p class="muted" data-i18n="contact.email.desc">Clique abaixo para abrir seu cliente de e-mail.</p>
-        <a class="btn primary" href="mailto:carloshegomes@outlook.com" data-i18n="contact.email.cta">
-          carloshegomes@outlook.com
-        </a>
+        <div class="actions" style="margin-top:auto;padding:0">
+          <a class="btn primary" href="mailto:carloshegomes@outlook.com" data-i18n="contact.email.cta" style="width:100%;justify-content:center">
+            carloshegomes@outlook.com
+          </a>
+        </div>
       </article>
 
       <!-- WhatsApp -->
-      <article class="contact-tile">
-        <div class="contact-icon" aria-hidden="true">💬</div>
-        <h3 data-i18n="contact.whatsapp.title">Me chame no WhatsApp</h3>
+      <article class="card" style="padding:18px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="contact-icon">💬</div>
+          <h3 style="margin:0" data-i18n="contact.whatsapp.title">Me chame no WhatsApp</h3>
+        </div>
         <p class="muted" data-i18n="contact.whatsapp.desc">Converse comigo diretamente pelo app.</p>
-        <a class="btn whatsapp" href="https://wa.me/5511981648739" target="_blank" rel="noopener" data-i18n="contact.whatsapp.cta">
-          +55 11 98164-8739
-        </a>
+        <div class="actions" style="margin-top:auto;padding:0">
+          <a class="btn" href="https://wa.me/5511981648739" target="_blank" rel="noopener" data-i18n="contact.whatsapp.cta" style="width:100%;justify-content:center;background:#25D366;border-color:transparent;color:#001">
+            +55 11 98164-8739
+          </a>
+        </div>
       </article>
 
       <!-- LinkedIn -->
-      <article class="contact-tile">
-        <div class="contact-icon" aria-hidden="true">🔗</div>
-        <h3 data-i18n="contact.linkedin.title">Me envie uma mensagem no LinkedIn</h3>
+      <article class="card" style="padding:18px;display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+          <div class="contact-icon">🔗</div>
+          <h3 style="margin:0" data-i18n="contact.linkedin.title">Me envie uma mensagem no LinkedIn</h3>
+        </div>
         <p class="muted" data-i18n="contact.linkedin.desc">Acesse meu perfil profissional.</p>
-        <a class="btn linkedin" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" data-i18n="contact.linkedin.cta">
-          linkedin.com/in/carlos-he-gomes
-        </a>
+        <div class="actions" style="margin-top:auto;padding:0">
+          <a class="btn" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" data-i18n="contact.linkedin.cta" style="width:100%;justify-content:center;background:#0077B5;border-color:transparent">
+            linkedin.com/in/carlos-he-gomes
+          </a>
+        </div>
       </article>
     </div>
   </div>
 </section>
+
 
 
 
@@ -794,6 +819,7 @@
   </script>
 </body>
 </html>
+
 
 
 
