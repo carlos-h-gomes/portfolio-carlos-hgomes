@@ -1,0 +1,15 @@
+[
+  {
+    "slug": "projects",
+    "title": "Projects",
+    "short": "Projeto Projects — visualização e detalhes.",
+    "tags": [
+      "HTML",
+      "CSS",
+      "JS"
+    ],
+    "repo": "#",
+    "demo": "/projects/projects/embedded.html",
+    "thumb": "assets/img/projects.jpg"
+  }
+]
