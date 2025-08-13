@@ -126,6 +126,8 @@
     .timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:#ffffff22;border-radius:2px}
     .t-item{position:relative;margin:14px 0 18px}
     .t-item:before{content:"";position:absolute;left:-1px;top:.45rem;width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 10px var(--accent)}
+    .t-item{ padding-left: 6px; }            
+    .t-item:before{ left: -15px; top: .55rem; 
     .t-title{font-weight:700}
     .t-sub{color:var(--muted);font-size:.92rem}
 
@@ -206,36 +208,49 @@
     </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title" data-i18n="about.title">Sobre mim</h2>
-      <p class="section-sub" data-i18n="about.sub">
-        Profissional de TI com foco em IA Generativa, Automação e Integrações. Não me defino como programador — meu forte é engenharia de prompts e orquestração de soluções com IA.
-      </p>
-      <div class="grid">
-        <div class="card" style="padding:18px">
-          <h3 data-i18n="about.h.skills">Principais habilidades</h3>
-          <ul class="muted">
-            <li data-i18n="about.li1">Prompt engineering e estratégia de IA</li>
-            <li data-i18n="about.li2">Desenho de fluxos (bots, onboarding, qualidade)</li>
-            <li data-i18n="about.li3">Integração de APIs e automações</li>
-            <li data-i18n="about.li4">Transformar dados em decisões (dashboards/indicadores)</li>
-          </ul>
-        </div>
-        <div class="card" style="padding:18px">
-          <h3 data-i18n="about.h.values">Valores</h3>
-          <p class="muted" data-i18n="about.values">
-            Tecnologia deve servir à experiência humana — simplicidade, velocidade e clareza na entrega.
-          </p>
-        </div>
-        <div class="card" style="padding:18px">
-          <h3>Stack</h3>
-          <p class="muted">Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI), SQLite/Metabase</p>
-        </div>
+ <!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title" data-i18n="about.title">Sobre mim</h2>
+
+    <p class="section-sub" data-i18n="about.sub">
+      Profissional de TI com mais de 10 anos de experiência, sendo os últimos focados em IA generativa,
+      automações e integrações de sistemas. Atuo no desenvolvimento e otimização de fluxos conversacionais,
+      criação de prompts avançados para geração de código em Python e ajustes de LLMs para respostas
+      coerentes e criativas. Com vivência sólida em infraestrutura e suporte técnico, mantenho sempre o foco
+      em resultados mensuráveis e ganhos operacionais, entregando soluções escaláveis que impulsionam
+      a eficiência.
+    </p>
+
+    <div class="grid">
+      <div class="card" style="padding:18px">
+        <h3 data-i18n="about.h.skills">Principais habilidades</h3>
+        <ul class="muted">
+          <li data-i18n="about.li1">Prompt engineering e estratégia de IA</li>
+          <li data-i18n="about.li2">Desenho e otimização de fluxos conversacionais</li>
+          <li data-i18n="about.li3">Integração de APIs e automações de processos</li>
+          <li data-i18n="about.li4">Geração e ajuste de código Python via IA</li>
+          <li data-i18n="about.li5">Dashboards e indicadores para tomada de decisão</li>
+        </ul>
+      </div>
+
+      <div class="card" style="padding:18px">
+        <h3 data-i18n="about.h.values">Valores</h3>
+        <p class="muted" data-i18n="about.values">
+          Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza
+          na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.
+        </p>
+      </div>
+
+      <div class="card" style="padding:18px">
+        <h3 data-i18n="about.h.stack">Stack</h3>
+        <p class="muted" data-i18n="about.stack">
+          Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- CAREER -->
 <section id="career">
@@ -431,7 +446,20 @@
         
         "career.edu.title": "Formação Acadêmica",
         "career.edu.li1": "MBA em Gestão da Qualidade de Software.",
-        "career.edu.li2": "MBA em Inteligência Artificial & Big Data (em andamento)."
+        "career.edu.li2": "MBA em Inteligência Artificial & Big Data (em andamento).",
+
+        "about.title": "Sobre mim",
+        "about.sub": "Profissional de TI com mais de 10 anos de experiência, sendo os últimos focados em IA generativa, automações e integrações de sistemas. Atuo no desenvolvimento e otimização de fluxos conversacionais, criação de prompts avançados para geração de código em Python e ajustes de LLMs para respostas coerentes e criativas. Com vivência sólida em infraestrutura e suporte técnico, mantenho sempre o foco em resultados mensuráveis e ganhos operacionais, entregando soluções escaláveis que impulsionam a eficiência.",
+        "about.h.skills": "Principais habilidades",
+        "about.li1": "Prompt engineering e estratégia de IA",
+        "about.li2": "Desenho e otimização de fluxos conversacionais",
+        "about.li3": "Integração de APIs e automações de processos",
+        "about.li4": "Geração e ajuste de código Python via IA",
+        "about.li5": "Dashboards e indicadores para tomada de decisão",
+        "about.h.values": "Valores",
+        "about.values": "Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.",
+        "about.h.stack": "Stack",
+        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos."
       },
       en:{
         "nav.home":"Home","nav.projects":"Projects","nav.about":"About","nav.career":"Career","nav.contact":"Contact",
@@ -479,7 +507,20 @@
         
         "career.edu.title": "Education",
         "career.edu.li1": "MBA in Software Quality Management.",
-        "career.edu.li2": "MBA in Artificial Intelligence & Big Data (in progress)."
+        "career.edu.li2": "MBA in Artificial Intelligence & Big Data (in progress).",
+
+        "about.title": "About Me",
+        "about.sub": "IT professional with over 10 years of experience, with recent years focused on generative AI, automation, and systems integration. Skilled in developing and optimizing conversational flows, creating advanced prompts for Python code generation, and refining LLMs for coherent and creative responses. Strong background in infrastructure and technical support, always focused on measurable results and operational gains, delivering scalable solutions that drive efficiency.",
+        "about.h.skills": "Key Skills",
+        "about.li1": "Prompt engineering and AI strategy",
+        "about.li2": "Design and optimization of conversational flows",
+        "about.li3": "API integration and process automation",
+        "about.li4": "Python code generation and fine-tuning via AI",
+        "about.li5": "Dashboards and metrics for decision-making",
+        "about.h.values": "Values",
+        "about.values": "I believe technology should serve the human experience, prioritizing simplicity, speed, and clarity in delivery. My goal is to create real impact through intelligent, scalable, and user-focused solutions.",
+        "about.h.stack": "Stack",
+        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, corporate systems integration."
       }
     };
     let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
@@ -647,6 +688,7 @@
   </script>
 </body>
 </html>
+
 
 
 
