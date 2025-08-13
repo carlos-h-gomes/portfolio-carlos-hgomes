@@ -12,8 +12,6 @@ h2{font-size:clamp(18px,3vw,22px);margin:16px 0 8px;color:var(--muted)}
 .kpi .k{color:var(--muted);font-size:.9rem}
 .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
-.btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:12px;border:1px solid #ffffff33;background:#ffffff10;color:var(--ink);text-decoration:none}
-.btn.primary{border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
 .table{width:100%;border-collapse:separate;border-spacing:0 8px}
 .table th{color:#aab6ff;text-align:left;font-weight:600;font-size:.9rem;padding:6px 8px}
 .table td{background:#ffffff0f;border:1px solid #ffffff1f;border-left:0;border-right:0;padding:10px 8px}
@@ -29,24 +27,25 @@ hr{border:0;border-top:1px solid #ffffff1f;margin:16px 0}
 svg{max-width:100%}
 </style>
 <div class="wrap">
-  <a class="btn" href="/"><span>←</span>Voltar ao Portfólio</a>
   <h1>Customer Onboarding Portal</h1>
-  <p class="sub">Formulários dinâmicos, etapas guiadas e branding.</p>
-  <div class="panel">
-    <h2>Passo 2 de 5 — Integrações</h2>
-    <div class="toolbar">
-      <a class="btn primary">Conectar CRM</a>
-      <a class="btn">Conectar Helpdesk</a>
-      <a class="btn">Conectar BI</a>
-    </div>
-    <p class="note">Mapeie campos obrigatórios:</p>
-    <div class="code">lead.email → contato.email<br>lead.company → conta.nome<br>lead.phone → contato.telefone</div>
-    <hr/>
-    <p class="note">Checklist</p>
-    <ul class="note">
-      <li>Domínio verificado</li>
-      <li>SSO configurado</li>
-      <li>Webhook de eventos habilitado</li>
-    </ul>
+  
+<p class="sub">Formulários dinâmicos, etapas guiadas e branding.</p>
+<div class="panel">
+  <h2>Passo 2 de 5 — Integrações</h2>
+  <div class="toolbar">
+    <span class="code">Conectar CRM</span>
+    <span class="code">Conectar Helpdesk</span>
+    <span class="code">Conectar BI</span>
   </div>
+  <p class="note">Mapeie campos obrigatórios:</p>
+  <div class="code">lead.email → contato.email<br>lead.company → conta.nome<br>lead.phone → contato.telefone</div>
+  <hr/>
+  <p class="note">Checklist</p>
+  <ul class="note">
+    <li>Domínio verificado</li>
+    <li>SSO configurado</li>
+    <li>Webhook de eventos habilitado</li>
+  </ul>
+</div>
+
 </div>

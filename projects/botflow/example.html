@@ -12,8 +12,6 @@ h2{font-size:clamp(18px,3vw,22px);margin:16px 0 8px;color:var(--muted)}
 .kpi .k{color:var(--muted);font-size:.9rem}
 .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
-.btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:12px;border:1px solid #ffffff33;background:#ffffff10;color:var(--ink);text-decoration:none}
-.btn.primary{border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
 .table{width:100%;border-collapse:separate;border-spacing:0 8px}
 .table th{color:#aab6ff;text-align:left;font-weight:600;font-size:.9rem;padding:6px 8px}
 .table td{background:#ffffff0f;border:1px solid #ffffff1f;border-left:0;border-right:0;padding:10px 8px}
@@ -29,12 +27,12 @@ hr{border:0;border-top:1px solid #ffffff1f;margin:16px 0}
 svg{max-width:100%}
 </style>
 <div class="wrap">
-  <a class="btn" href="/"><span>←</span>Voltar ao Portfólio</a>
   <h1>BotFlow Orchestrator</h1>
-  <p class="sub">Fluxos visuais com import/export multi-plataforma.</p>
-  <div class="panel">
-    <h2>Exemplo de fluxo</h2>
-    
+  
+<p class="sub">Fluxos visuais com import/export multi-plataforma.</p>
+<div class="panel">
+  <h2>Exemplo de fluxo</h2>
+  
 <svg viewBox="0 0 800 340">
   <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0%" stop-color="#6d8eff"/><stop offset="100%" stop-color="#8a5cff"/></linearGradient></defs>
@@ -54,6 +52,7 @@ svg{max-width:100%}
     <path d="M0,0 L6,3 L0,6 z" fill="#6d8eff"/></marker></defs>
 </svg>
 
-    <p class="note">Nós e setas representam intents e ações. Suporta grupos, versões e validações.</p>
-  </div>
+  <p class="note">Nós e setas representam intents e ações. Suporta grupos, versões e validações.</p>
+</div>
+
 </div>
