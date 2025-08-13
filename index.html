@@ -308,6 +308,108 @@
    Só garante um respiro maior entre os cards no mobile */
 #contact .grid{gap:18px}
 
+/* ===== FOOTER STRIP (faixa inferior) ===== */
+.footer-strip{
+  margin-top:40px;
+  border-top:1px solid #ffffff1a;
+  background:
+    radial-gradient(500px 160px at 100% 0%, #8a5cff22 0%, transparent 60%),
+    radial-gradient(500px 160px at 0% 100%, #6d8eff22 0%, transparent 55%),
+    linear-gradient(180deg, #0d1230, #0a0f26);
+}
+.footer-strip.sticky{
+  position:sticky; bottom:0; z-index:40;
+  /* se preferir fixo: position:fixed; left:0; right:0; bottom:0; */
+}
+
+.footer-strip__inner{
+  max-width:1100px; margin:0 auto; padding:10px 16px;
+  display:grid; grid-template-columns: 1.1fr 1fr 1.2fr; gap:10px; align-items:center;
+}
+
+.fs-left{display:flex; align-items:center; gap:10px; min-width:0}
+.fs-left .dot{width:10px;height:10px;border-radius:999px;
+  background:linear-gradient(45deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 16px var(--accent)}
+.fs-muted{color:var(--muted); opacity:.9; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+
+.fs-nav{display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap}
+.fs-link{color:var(--text); opacity:.9}
+.fs-link:hover{opacity:1; text-decoration:underline}
+
+.fs-actions{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap}
+.footer-strip__bar{
+  border-top:1px solid #ffffff1a; color:var(--muted);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 16px; font-size:.92rem;
+}
+
+/* Responsivo: colunas viram linhas, mantendo tudo dentro da faixa */
+@media (max-width: 960px){
+  .footer-strip__inner{
+    grid-template-columns: 1fr;
+    row-gap:10px;
+  }
+  .fs-left{justify-content:flex-start}
+  .fs-nav{justify-content:flex-start}
+  .fs-actions{justify-content:flex-start}
+}
+
+/* Quando fixo, dá um respiro no fim da página para não cobrir conteúdo */
+.footer-strip.sticky + * { scroll-margin-bottom: 80px; }
+
+
+  .footer-full{
+  width:100%;
+  margin-top:56px;
+  background:
+    radial-gradient(800px 260px at 90% 0%, #8a5cff22 0%, transparent 60%),
+    radial-gradient(700px 260px at 0% 100%, #6d8eff22 0%, transparent 55%),
+    linear-gradient(180deg, #0c1233, #0a0f26 65%, #0a0f26 100%);
+  border-top:1px solid #ffffff1a;
+  color:var(--text);
+}
+.footer-full__inner{
+  max-width:1100px;
+  margin:0 auto;
+  padding:28px 20px 34px;
+  display:grid;
+  grid-template-columns: 1.1fr 1fr 1.2fr;
+  gap:22px;
+  align-items:flex-start;
+}
+
+.ff-col{display:flex;flex-direction:column;gap:10px}
+.ff-title{margin:0 0 6px;font-size:.95rem;letter-spacing:.3px;color:var(--muted)}
+.ff-link{color:var(--text);opacity:.9;margin:2px 0}
+.ff-link:hover{opacity:1;text-decoration:underline}
+.ff-muted{color:var(--muted);margin:6px 0 0}
+.ff-copy{color:var(--muted);opacity:.9;margin:0}
+.ff-actions{display:flex;flex-wrap:wrap;gap:8px}
+.ff-contact{display:flex;flex-wrap:wrap;gap:8px}
+
+.ff-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;
+  border:1px solid #ffffff22;background:#ffffff10;
+}
+.ff-chip:hover{background:#ffffff14}
+
+@media (max-width: 980px){
+  .footer-full__inner{grid-template-columns:1fr 1fr; gap:18px}
+}
+@media (max-width: 680px){
+  .footer-full__inner{grid-template-columns:1fr}
+}
+
+/* Mantém consistência com a marca do topo */
+.footer-full .brand{display:flex;align-items:center;gap:10px}
+.footer-full .brand .dot{
+  width:10px;height:10px;border-radius:999px;
+  background:linear-gradient(45deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 16px var(--accent);
+}
+
                    
   </style>
 </head>
@@ -542,39 +644,22 @@
   </div>
 </div>
 
-  <footer class="site-footer">
-  <div class="footer-inner">
-    <div class="f-col">
-      <div class="brand">
-        <span class="dot"></span>
-        <strong>Carlos Gomes</strong>
+  <footer class="footer-full" role="contentinfo">
+    <div class="ff-col">
+      <div class="ff-actions">
+        <button id="toTopBtn" class="btn ghost" aria-label="Back to top">↑ Topo</button>
+        <button id="themeBtnFooter" class="btn" aria-label="Theme">🌙</button>
       </div>
-      <div class="f-muted">IA Generativa • Automação • Integrações</div>
-    </div>
 
-    <nav class="f-col">
-      <a href="#home" class="f-link" data-i18n="nav.home">Início</a>
-      <a href="#projects" class="f-link" data-i18n="nav.projects">Projetos</a>
-      <a href="#about" class="f-link" data-i18n="nav.about">Sobre mim</a>
-      <a href="#career" class="f-link" data-i18n="nav.career">Carreira</a>
-      <a href="#contact" class="f-link" data-i18n="nav.contact">Contato</a>
-    </nav>
-
-    <div class="f-col f-actions">
-      <a class="btn ghost" href="docs/Curriculo_Carlos_Henrique_Gomes.pdf" data-i18n="hero.btnCvPt">📄 Baixar CV (PT)</a>
-      <a class="btn ghost" href="docs/Carlos_Henrique_Gomes_CV_EN.pdf" data-i18n="hero.btnCvEn">📄 Download CV (EN)</a>
-      <a class="btn" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener">LinkedIn</a>
+      <div class="footer-full__inner">
+    <div class="ff-col">
+      <div class="brand">
+      </div>
+      <p class="ff-copy">© <span id="year"></span> • Carlos Gomes</p>
     </div>
-  </div>
-
-  <div class="footer-bar">
-    <div class="bar-left">© <span id="year"></span> • Carlos Gomes</div>
-    <div class="bar-right">
-      <button id="toTopBtn" class="btn ghost" aria-label="Back to top">↑ Topo</button>
-      <button id="themeBtnFooter" class="btn" aria-label="Theme">🌙</button>
-    </div>
-  </div>
 </footer>
+
+
 
 
 
@@ -923,10 +1008,11 @@
     m.addEventListener('click', __backdropClose);
   }
 
-  const toTopBtn = document.getElementById('toTopBtn');
+// Footer: Topo
+const toTopBtn = document.getElementById('toTopBtn');
 if (toTopBtn) toTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-// Footer: toggle de tema sincronizado
+// Tema sincronizado header/footer
 const themeBtnFooter = document.getElementById('themeBtnFooter');
 function syncThemeButtons(){
   const isLight = document.body.classList.contains('light');
@@ -934,35 +1020,15 @@ function syncThemeButtons(){
   if (themeBtnFooter) themeBtnFooter.textContent = isLight ? '🌙' : '☀️';
 }
 syncThemeButtons();
-
 if (themeBtnFooter){
   themeBtnFooter.addEventListener('click', ()=>{
     document.body.classList.toggle('light');
-    const isLight = document.body.classList.contains('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     syncThemeButtons();
   });
 }
+
+
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
