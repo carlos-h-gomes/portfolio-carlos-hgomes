@@ -518,26 +518,34 @@
     applyLang = function(lang){ _applyLang(lang); renderProjects(); }
 
     // Modal preview
-    function openPreview(title, slug){
-      const m = document.getElementById('previewModal');
-      const f = document.getElementById('modalFrame');
-      const t = document.getElementById('modalTitle');
-      const a = document.getElementById('modalOpenTab');
-      t.textContent = title || (i18n[currentLang]?.['projects.title'] || 'Preview');
-      const url = `projects/${slug}/embedded.html`;
+    async function openPreview(title, slug){
+    const m = document.getElementById('previewModal');
+    const f = document.getElementById('modalFrame');
+    const t = document.getElementById('modalTitle');
+    const a = document.getElementById('modalOpenTab');
+
+    t.textContent = title || 'Preview';
+
+    // tenta example.html primeiro; se 404, usa embedded.html
+    const base = `projects/${slug}`;
+    const exampleURL = `${base}/example.html`;
+    const embeddedURL = `${base}/embedded.html`;
+
+    try {
+      const res = await fetch(exampleURL, { method: 'HEAD' });
+      const url = res.ok ? exampleURL : embeddedURL;
       f.src = url;
       a.href = url;
-      m.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
+    } catch (e) {
+      f.src = embeddedURL;
+      a.href = embeddedURL;
     }
-    function closePreview(){
-      const m = document.getElementById('previewModal');
-      const f = document.getElementById('modalFrame');
-      m.style.display = 'none';
-      f.src = '';
-      document.body.style.overflow = '';
-    }
+
+    m.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
   </script>
 </body>
 </html>
+
 
