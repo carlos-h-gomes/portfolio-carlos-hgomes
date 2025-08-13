@@ -610,26 +610,27 @@
 
     // Renderização de cards
     function projectCard(p){
-      const lang = (localStorage.getItem('lang') || (navigator.language.startsWith('pt')?'pt':'en'));
-      const desc = lang==='pt' ? p.desc_pt : p.desc_en;
-      return `
-      <article class="card">
-        <div class="thumb" aria-hidden="true">
-          <!-- Troque por uma imagem real quando quiser: <img src="assets/img/${p.slug}.jpg" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover"> -->
-          <svg width="96" height="96" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="white" opacity=".8" stroke-width="2"/></svg>
-        </div>
-        <div class="content">
-          <span class="pill">${p.pill}</span>
-          <h3>${p.title}</h3>
-          <p class="desc">${desc}</p>
-          <div class="chips">${p.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
-        </div>
-        <div class="actions">
-          <button class="btn" onclick="location.href='projects/${p.slug}/'" data-i18n="btn.page">${i18n[currentLang]?.['btn.page']||'Página'}</button>
-          <button class="btn primary" onclick="openPreview('${p.title}','${p.slug}')" data-i18n="btn.example">${i18n[currentLang]?.['btn.example']||'Abrir exemplo'}</button>
-        </div>
-      </article>`;
-    }
+  const lang = (localStorage.getItem('lang') || (navigator.language.startsWith('pt')?'pt':'en'));
+  const desc = lang==='pt' ? p.desc_pt : p.desc_en;
+  // se existir thumbnail em projects/<slug>/thumbnail.png, ele será exibido
+  const thumbPath = `projects/${p.slug}/thumbnail.png`;
+  return `
+  <article class="card">
+    <div class="thumb" aria-hidden="true">
+      <img src="${thumbPath}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block" onerror="this.closest('.thumb').innerHTML='<svg width=96 height=96 viewBox=\\'0 0 24 24\\' fill=\\'none\\'><path d=\\'M4 6h16M4 12h16M4 18h16\\' stroke=\\'white\\' opacity=\\.8 stroke-width=\\'2\\'/></svg>';">
+    </div>
+    <div class="content">
+      <span class="pill">${p.pill}</span>
+      <h3>${p.title}</h3>
+      <p class="desc">${desc}</p>
+      <div class="chips">${p.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
+    </div>
+    <div class="actions">
+      <button class="btn primary" onclick="openPreview('${p.title}','${p.slug}')" data-i18n="btn.example">${i18n[currentLang]?.['btn.example']||'Abrir exemplo'}</button>
+    </div>
+  </article>`;
+}
+
 
     function renderProjects(){
       const grid = document.getElementById('projectsGrid');
@@ -688,6 +689,7 @@
   </script>
 </body>
 </html>
+
 
 
 
