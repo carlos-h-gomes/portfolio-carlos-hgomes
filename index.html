@@ -922,9 +922,31 @@
     window.addEventListener('keydown', __escClose);
     m.addEventListener('click', __backdropClose);
   }
+
+  const toTopBtn = document.getElementById('toTopBtn');
+if (toTopBtn) toTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// Footer: toggle de tema sincronizado
+const themeBtnFooter = document.getElementById('themeBtnFooter');
+function syncThemeButtons(){
+  const isLight = document.body.classList.contains('light');
+  if (themeBtn) themeBtn.textContent = isLight ? '🌙' : '☀️';
+  if (themeBtnFooter) themeBtnFooter.textContent = isLight ? '🌙' : '☀️';
+}
+syncThemeButtons();
+
+if (themeBtnFooter){
+  themeBtnFooter.addEventListener('click', ()=>{
+    document.body.classList.toggle('light');
+    const isLight = document.body.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    syncThemeButtons();
+  });
+}
   </script>
 </body>
 </html>
+
 
 
 
