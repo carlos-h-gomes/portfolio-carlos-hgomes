@@ -232,6 +232,82 @@
 }
 .card:hover .contact-icon{ transform: translateY(-2px) }
 
+/* ======= MOBILE-FIRST & REFINOS ======= */
+
+/* Container com padding fluido no mobile */
+.container{padding-left:min(5vw,20px);padding-right:min(5vw,20px)}
+
+/* Hero: stack perfeito no mobile e espaçamento menor */
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr; gap:20px; padding:32px 16px 20px}
+  .title{font-size:clamp(24px, 6vw, 40px)}
+  .subtitle{font-size:1rem}
+  .cta .btn{width:100%; justify-content:center}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 520px){
+  .metrics{grid-template-columns:1fr}
+}
+
+/* Navbar: quebra elegante no mobile */
+@media (max-width: 860px){
+  .nav-inner{flex-wrap:wrap; gap:10px}
+  .controls{width:100%; justify-content:flex-end}
+  .nav .spacer{flex-basis:100%}
+}
+
+/* Seções: reduzir paddings no mobile */
+@media (max-width: 900px){
+  section{padding:36px 0}
+  .section-title{font-size:1.5rem}
+  .section-sub{font-size:.98rem}
+}
+
+/* Grid genérica (projetos/contatos) com melhor quebra */
+@media (max-width: 1024px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 680px){
+  .grid{grid-template-columns:1fr}
+}
+
+/* Cartões: evitar overflow e ajustar paddings no mobile */
+@media (max-width: 680px){
+  .card{border-radius:14px}
+  .content{padding:14px}
+  .actions{padding:10px 14px 14px}
+}
+
+/* Imagens de thumb totalmente responsivas */
+.thumb img{width:100%; height:160px; object-fit:cover; display:block}
+@media (max-width: 520px){
+  .thumb{height:140px}
+  .thumb img{height:140px}
+}
+
+/* Timeline: correção de alinhamento do ponto e do texto */
+.timeline{position:relative; padding-left:22px}
+.timeline:before{
+  content:""; position:absolute; left:8px; top:0; bottom:0;
+  width:2px; background:#ffffff22; border-radius:2px;
+}
+.t-item{position:relative; margin:14px 0 18px; padding-left:6px}
+.t-item:before{
+  content:""; position:absolute; left:-8px; top:.6rem;
+  width:10px; height:10px; border-radius:50%;
+  background:linear-gradient(45deg,var(--accent),var(--accent-2));
+  box-shadow:0 0 10px var(--accent);
+}
+/* Evitar sobreposição em telas muito estreitas */
+@media (max-width: 520px){
+  .timeline{padding-left:20px}
+  .t-item:before{left:-10px}
+}
+
+/* Contatos no formato de cards como os projetos (já está usando .grid)
+   Só garante um respiro maior entre os cards no mobile */
+#contact .grid{gap:18px}
+
                    
   </style>
 </head>
@@ -466,9 +542,40 @@
   </div>
 </div>
 
-  <footer class="footer">
-  Portfólio — Carlos Gomes • <span id="year"></span>
+  <footer class="site-footer">
+  <div class="footer-inner">
+    <div class="f-col">
+      <div class="brand">
+        <span class="dot"></span>
+        <strong>Carlos Gomes</strong>
+      </div>
+      <div class="f-muted">IA Generativa • Automação • Integrações</div>
+    </div>
+
+    <nav class="f-col">
+      <a href="#home" class="f-link" data-i18n="nav.home">Início</a>
+      <a href="#projects" class="f-link" data-i18n="nav.projects">Projetos</a>
+      <a href="#about" class="f-link" data-i18n="nav.about">Sobre mim</a>
+      <a href="#career" class="f-link" data-i18n="nav.career">Carreira</a>
+      <a href="#contact" class="f-link" data-i18n="nav.contact">Contato</a>
+    </nav>
+
+    <div class="f-col f-actions">
+      <a class="btn ghost" href="docs/Curriculo_Carlos_Henrique_Gomes.pdf" data-i18n="hero.btnCvPt">📄 Baixar CV (PT)</a>
+      <a class="btn ghost" href="docs/Carlos_Henrique_Gomes_CV_EN.pdf" data-i18n="hero.btnCvEn">📄 Download CV (EN)</a>
+      <a class="btn" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="bar-left">© <span id="year"></span> • Carlos Gomes</div>
+    <div class="bar-right">
+      <button id="toTopBtn" class="btn ghost" aria-label="Back to top">↑ Topo</button>
+      <button id="themeBtnFooter" class="btn" aria-label="Theme">🌙</button>
+    </div>
+  </div>
 </footer>
+
 
 
   <script>
@@ -818,6 +925,7 @@
   </script>
 </body>
 </html>
+
 
 
 
