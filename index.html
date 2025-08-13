@@ -555,7 +555,7 @@
   <footer class="footer-full" role="contentinfo">
     <div class="ff-col">
       <div class="ff-actions">
-        <button id="toTopBtn" class="btn ghost" aria-label="Back to top">↑ Topo</button>
+        <button id="toTopBtn" class="btn ghost" type="button" aria-label="Back to top">↑ Topo</button>
         <button id="themeBtnFooter" class="btn" aria-label="Theme">🌙</button>
       </div>
 
@@ -902,8 +902,23 @@
     /* =========================
        Footer: Topo
     ==========================*/
-    const toTopBtn = document.getElementById('toTopBtn');
-    if (toTopBtn) toTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    function scrollTopSmooth(){
+  const root = document.scrollingElement || document.documentElement || document.body;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try{
+    root.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+  }catch(_){
+    // fallback bem amplo
+    root.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+}
+
+const toTopBtn = document.getElementById('toTopBtn');
+toTopBtn?.addEventListener('click', (e)=>{
+  e.preventDefault();
+  scrollTopSmooth();
+});
 
     /* =========================
        MENU MOBILE
@@ -947,5 +962,6 @@
   </script>
 </body>
 </html>
+
 
 
