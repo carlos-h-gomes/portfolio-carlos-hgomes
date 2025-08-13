@@ -328,7 +328,8 @@
     sections.forEach(s=>obs.observe(s));
 
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Theme toggle with persistence
     const themeBtn = document.getElementById('themeBtn');
@@ -571,6 +572,7 @@
   </script>
 </body>
 </html>
+
 
 
 
