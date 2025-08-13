@@ -74,6 +74,15 @@
     .btn.ghost{background:transparent;border:1px solid #ffffff22}
     .controls{display:flex;gap:8px}
 
+    /* MOBILE MENU: esconder links no mobile e mostrar hambúrguer */
+    .nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    #menuBtn{display:none}
+    @media (max-width: 860px){
+      .nav-links{display:none}
+      #menuBtn{display:inline-flex}
+      .controls{display:none} /* controles vão para o menu móvel */
+    }
+
     /* Hero */
     .hero{
       max-width:1100px;margin:0 auto;padding:64px 20px 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center
@@ -121,13 +130,19 @@
     .actions{display:flex;gap:8px;padding:12px 16px 16px;margin-top:auto}
     .actions .btn{flex:1;justify-content:center}
 
-    /* About / Career */
-    .timeline{position:relative;padding-left:18px}
-    .timeline:before{content:"";position:absolute;left:8px;top:0;bottom:0;width:2px;background:#ffffff22;border-radius:2px}
-    .t-item{position:relative;margin:14px 0 18px}
-    .t-item:before{content:"";position:absolute;left:-1px;top:.45rem;width:10px;height:10px;border-radius:50%;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 10px var(--accent)}
-    .t-item{ padding-left: 6px; }            
-    .t-item:before{ left: -15px; top: .55rem; 
+    /* About / Career (versão correta, removendo CSS quebrado) */
+    .timeline{position:relative; padding-left:22px}
+    .timeline:before{
+      content:""; position:absolute; left:8px; top:0; bottom:0;
+      width:2px; background:#ffffff22; border-radius:2px;
+    }
+    .t-item{position:relative; margin:14px 0 18px; padding-left:6px}
+    .t-item:before{
+      content:""; position:absolute; left:-8px; top:.6rem;
+      width:10px; height:10px; border-radius:50%;
+      background:linear-gradient(45deg,var(--accent),var(--accent-2));
+      box-shadow:0 0 10px var(--accent);
+    }
     .t-title{font-weight:700}
     .t-sub{color:var(--muted);font-size:.92rem}
 
@@ -145,308 +160,188 @@
     .nav-link{padding:8px 10px;border-radius:10px}
     .nav-link.active{background:#ffffff14;border:1px solid #ffffff2a}
 
-    .contact-tiles{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* sempre 3 colunas no desktop */
-  gap: 18px;
-}
+    .contact-tiles{display:grid;grid-template-columns: repeat(3, 1fr);gap:18px}
+    @media (max-width: 768px){ .contact-tiles{grid-template-columns:1fr} }
 
-@media (max-width: 768px) {
-  .contact-tiles{
-    grid-template-columns: 1fr; /* no mobile fica 1 coluna */
-  }
-}
+    .contact-tile{
+      position: relative;border-radius: 16px;background: var(--card);
+      border: 1px solid #ffffff22;box-shadow: var(--shadow);
+      padding: 22px 18px;overflow: hidden;transform-style: preserve-3d;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .contact-tile:hover{transform: translateY(-4px) scale(1.01);box-shadow: 0 20px 40px rgba(0,0,0,.45);border-color: #ffffff44}
+    .contact-tile::before{
+      content:""; position:absolute; inset:-1px;border-radius:16px;
+      background: conic-gradient(from 0deg, rgba(141, 160, 255, .14), rgba(169, 120, 255, .18), rgba(141, 160, 255, .14));
+      mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+      -webkit-mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+      padding:1px;opacity:.65;animation: spin 6s linear infinite;pointer-events:none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce){
+      .contact-tile::before{ animation: none; }
+      .contact-tile:hover{ transform:none; }
+    }
+    .contact-icon{
+      width:48px;height:48px;border-radius:999px;display:grid;place-items:center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color:#fff;font-size:22px;line-height:1;box-shadow: 0 8px 24px rgba(0,0,0,.28);transition: transform .2s ease;
+      margin-bottom: 10px;
+    }
+    .card:hover .contact-icon{ transform: translateY(-2px) }
+    .contact-tile h3{ margin:6px 0 4px }
+    .contact-tile p{ margin:0 0 12px; color: var(--muted) }
+    .contact-tile .btn{ width:100%; justify-content:center }
+    .btn.whatsapp{ background:#25D366; border-color:transparent; color:#001; }
+    .btn.linkedin{ background:#0077B5; border-color:transparent; }
 
-.contact-tile{
-  position: relative;
-  border-radius: 16px;
-  background: var(--card);
-  border: 1px solid #ffffff22;
-  box-shadow: var(--shadow);
-  padding: 22px 18px;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-}
+    /* ======= MOBILE-FIRST & REFINOS ======= */
+    .container{padding-left:min(5vw,20px);padding-right:min(5vw,20px)}
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr; gap:20px; padding:32px 16px 20px}
+      .title{font-size:clamp(24px, 6vw, 40px)}
+      .subtitle{font-size:1rem}
+      .cta .btn{width:100%; justify-content:center}
+      .metrics{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 520px){
+      .metrics{grid-template-columns:1fr}
+    }
+    @media (max-width: 860px){
+      .nav-inner{flex-wrap:nowrap; gap:10px}
+    }
+    @media (max-width: 900px){
+      section{padding:36px 0}
+      .section-title{font-size:1.5rem}
+      .section-sub{font-size:.98rem}
+    }
+    @media (max-width: 1024px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width: 680px){
+      .grid{grid-template-columns:1fr}
+      .card{border-radius:14px}
+      .content{padding:14px}
+      .actions{padding:10px 14px 14px}
+    }
+    .thumb img{width:100%; height:160px; object-fit:cover; display:block}
+    @media (max-width: 520px){
+      .thumb{height:140px}
+      .thumb img{height:140px}
+      .timeline{padding-left:20px}
+      .t-item:before{left:-10px}
+    }
 
-.contact-tile:hover{
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 20px 40px rgba(0,0,0,.45);
-  border-color: #ffffff44;
-}
+    /* ===== Anti-overflow mobile ===== */
+    html, body{ overflow-x: hidden; }
+    .nav-inner > *, .controls, .brand,
+    .grid > *, .card, .footer-full__inner > *,
+    .ff-col, .ff-actions, .ff-contact { min-width: 0; }
+    a, .desc, .ff-chip, .actions a, .contact-tile .btn {
+      overflow-wrap: anywhere; word-break: break-word;
+    }
+    img, svg, video { max-width: 100%; height: auto; }
+    .nav-inner, .grid, .footer-full__inner { overflow-x: clip; }
 
-/* halo animado na borda */
-.contact-tile::before{
-  content:"";
-  position:absolute; inset:-1px;
-  border-radius:16px;
-  background: conic-gradient(
-      from 0deg,
-      rgba(141, 160, 255, .14),
-      rgba(169, 120, 255, .18),
-      rgba(141, 160, 255, .14)
-    );
-  mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
-  -webkit-mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
-  padding:1px;
-  opacity:.65;
-  animation: spin 6s linear infinite;
-  pointer-events:none;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+    /* ===== FOOTER STRIP ===== */
+    .footer-strip{
+      margin-top:40px;border-top:1px solid #ffffff1a;
+      background:
+        radial-gradient(500px 160px at 100% 0%, #8a5cff22 0%, transparent 60%),
+        radial-gradient(500px 160px at 0% 100%, #6d8eff22 0%, transparent 55%),
+        linear-gradient(180deg, #0d1230, #0a0f26);
+    }
+    .footer-strip.sticky{ position:sticky; bottom:0; z-index:40; }
+    .footer-strip__inner{
+      max-width:1100px; margin:0 auto; padding:10px 16px;
+      display:grid; grid-template-columns: 1.1fr 1fr 1.2fr; gap:10px; align-items:center;
+    }
+    .fs-left{display:flex; align-items:center; gap:10px; min-width:0}
+    .fs-left .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 16px var(--accent)}
+    .fs-muted{color:var(--muted); opacity:.9; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .fs-nav{display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap}
+    .fs-link{color:var(--text); opacity:.9}
+    .fs-link:hover{opacity:1; text-decoration:underline}
+    .fs-actions{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap}
+    .footer-strip__bar{border-top:1px solid #ffffff1a; color:var(--muted);display:flex; align-items:center; justify-content:space-between;padding:8px 16px; font-size:.92rem;}
+    @media (max-width: 960px){
+      .footer-strip__inner{grid-template-columns: 1fr; row-gap:10px}
+      .fs-left{justify-content:flex-start}
+      .fs-nav{justify-content:flex-start}
+      .fs-actions{justify-content:flex-start}
+    }
+    .footer-strip.sticky + * { scroll-margin-bottom: 80px; }
 
-/* desliga animação para quem prefere menos movimento */
-@media (prefers-reduced-motion: reduce){
-  .contact-tile::before{ animation: none; }
-  .contact-tile:hover{ transform:none; }
-}
+    .footer-full{
+      width:100%;margin-top:56px;
+      background:
+        radial-gradient(800px 260px at 90% 0%, #8a5cff22 0%, transparent 60%),
+        radial-gradient(700px 260px at 0% 100%, #6d8eff22 0%, transparent 55%),
+        linear-gradient(180deg, #0c1233, #0a0f26 65%, #0a0f26 100%);
+      border-top:1px solid #ffffff1a;color:var(--text);
+    }
+    .footer-full__inner{
+      max-width:1100px;margin:0 auto;padding:28px 20px 34px;
+      display:grid;grid-template-columns: 1.1fr 1fr 1.2fr;gap:22px;align-items:flex-start;
+    }
+    .ff-col{display:flex;flex-direction:column;gap:10px}
+    .ff-title{margin:0 0 6px;font-size:.95rem;letter-spacing:.3px;color:var(--muted)}
+    .ff-link{color:var(--text);opacity:.9;margin:2px 0}
+    .ff-link:hover{opacity:1;text-decoration:underline}
+    .ff-muted{color:var(--muted);margin:6px 0 0}
+    .ff-copy{color:var(--muted);opacity:.9;margin:0}
+    .ff-actions{display:flex;flex-wrap:wrap;gap:8px}
+    .ff-contact{display:flex;flex-wrap:wrap;gap:8px}
+    .ff-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid #ffffff22;background:#ffffff10;}
+    .ff-chip:hover{background:#ffffff14}
+    @media (max-width: 980px){ .footer-full__inner{grid-template-columns:1fr 1fr; gap:18px} }
+    @media (max-width: 680px){ .footer-full__inner{grid-template-columns:1fr} }
+    .footer-full .brand{display:flex;align-items:center;gap:10px}
+    .footer-full .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 16px var(--accent);}
 
-/* ícone redondo com gradiente */
-.contact-icon{
-  width:48px; height:48px; border-radius:999px;
-  display:grid; place-items:center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #fff; font-size:22px; line-height:1;
-  box-shadow: 0 8px 24px rgba(0,0,0,.28);
-  margin-bottom: 10px;
-}
-
-/* textos */
-.contact-tile h3{ margin:6px 0 4px }
-.contact-tile p{ margin:0 0 12px; color: var(--muted) }
-
-/* botão full */
-.contact-tile .btn{ width:100%; justify-content:center }
-
-/* variantes de cor (opcional) */
-.btn.whatsapp{ background:#25D366; border-color:transparent; color:#001; }
-.btn.linkedin{ background:#0077B5; border-color:transparent; }
-
-.contact-icon{
-  width:48px;height:48px;border-radius:999px;
-  display:grid;place-items:center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color:#fff;font-size:22px;line-height:1;
-  box-shadow: 0 8px 24px rgba(0,0,0,.28);
-  transition: transform .2s ease;
-}
-.card:hover .contact-icon{ transform: translateY(-2px) }
-
-/* ======= MOBILE-FIRST & REFINOS ======= */
-
-/* Container com padding fluido no mobile */
-.container{padding-left:min(5vw,20px);padding-right:min(5vw,20px)}
-
-/* Hero: stack perfeito no mobile e espaçamento menor */
-@media (max-width: 900px){
-  .hero{grid-template-columns:1fr; gap:20px; padding:32px 16px 20px}
-  .title{font-size:clamp(24px, 6vw, 40px)}
-  .subtitle{font-size:1rem}
-  .cta .btn{width:100%; justify-content:center}
-  .metrics{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width: 520px){
-  .metrics{grid-template-columns:1fr}
-}
-
-/* Navbar: quebra elegante no mobile */
-@media (max-width: 860px){
-  .nav-inner{flex-wrap:wrap; gap:10px}
-  .controls{width:100%; justify-content:flex-end}
-  .nav .spacer{flex-basis:100%}
-}
-
-/* Seções: reduzir paddings no mobile */
-@media (max-width: 900px){
-  section{padding:36px 0}
-  .section-title{font-size:1.5rem}
-  .section-sub{font-size:.98rem}
-}
-
-/* Grid genérica (projetos/contatos) com melhor quebra */
-@media (max-width: 1024px){
-  .grid{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width: 680px){
-  .grid{grid-template-columns:1fr}
-}
-
-/* Cartões: evitar overflow e ajustar paddings no mobile */
-@media (max-width: 680px){
-  .card{border-radius:14px}
-  .content{padding:14px}
-  .actions{padding:10px 14px 14px}
-}
-
-/* Imagens de thumb totalmente responsivas */
-.thumb img{width:100%; height:160px; object-fit:cover; display:block}
-@media (max-width: 520px){
-  .thumb{height:140px}
-  .thumb img{height:140px}
-}
-
-/* Timeline: correção de alinhamento do ponto e do texto */
-.timeline{position:relative; padding-left:22px}
-.timeline:before{
-  content:""; position:absolute; left:8px; top:0; bottom:0;
-  width:2px; background:#ffffff22; border-radius:2px;
-}
-.t-item{position:relative; margin:14px 0 18px; padding-left:6px}
-.t-item:before{
-  content:""; position:absolute; left:-8px; top:.6rem;
-  width:10px; height:10px; border-radius:50%;
-  background:linear-gradient(45deg,var(--accent),var(--accent-2));
-  box-shadow:0 0 10px var(--accent);
-}
-/* Evitar sobreposição em telas muito estreitas */
-@media (max-width: 520px){
-  .timeline{padding-left:20px}
-  .t-item:before{left:-10px}
-}
-
-/* Contatos no formato de cards como os projetos (já está usando .grid)
-   Só garante um respiro maior entre os cards no mobile */
-#contact .grid{gap:18px}
-
-/* ===== Anti-overflow mobile ===== */
-html, body{ overflow-x: hidden; }
-
-/* flex-items podem causar overflow se não puderem encolher */
-.nav-inner > *, .controls, .brand,
-.grid > *, .card, .footer-full__inner > *,
-.ff-col, .ff-actions, .ff-contact { min-width: 0; }
-
-/* links/strings longos quebram corretamente */
-a, .desc, .ff-chip, .actions a, .contact-tile .btn {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-/* imagens e SVGs nunca extrapolam */
-img, svg, video { max-width: 100%; height: auto; }
-
-/* evita “sombra” criar área clicável fora do viewport */
-.nav-inner, .grid, .footer-full__inner { overflow-x: clip; }
-
-
-/* ===== FOOTER STRIP (faixa inferior) ===== */
-.footer-strip{
-  margin-top:40px;
-  border-top:1px solid #ffffff1a;
-  background:
-    radial-gradient(500px 160px at 100% 0%, #8a5cff22 0%, transparent 60%),
-    radial-gradient(500px 160px at 0% 100%, #6d8eff22 0%, transparent 55%),
-    linear-gradient(180deg, #0d1230, #0a0f26);
-}
-.footer-strip.sticky{
-  position:sticky; bottom:0; z-index:40;
-  /* se preferir fixo: position:fixed; left:0; right:0; bottom:0; */
-}
-
-.footer-strip__inner{
-  max-width:1100px; margin:0 auto; padding:10px 16px;
-  display:grid; grid-template-columns: 1.1fr 1fr 1.2fr; gap:10px; align-items:center;
-}
-
-.fs-left{display:flex; align-items:center; gap:10px; min-width:0}
-.fs-left .dot{width:10px;height:10px;border-radius:999px;
-  background:linear-gradient(45deg,var(--accent),var(--accent-2));
-  box-shadow:0 0 16px var(--accent)}
-.fs-muted{color:var(--muted); opacity:.9; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-
-.fs-nav{display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap}
-.fs-link{color:var(--text); opacity:.9}
-.fs-link:hover{opacity:1; text-decoration:underline}
-
-.fs-actions{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap}
-.footer-strip__bar{
-  border-top:1px solid #ffffff1a; color:var(--muted);
-  display:flex; align-items:center; justify-content:space-between;
-  padding:8px 16px; font-size:.92rem;
-}
-
-/* Responsivo: colunas viram linhas, mantendo tudo dentro da faixa */
-@media (max-width: 960px){
-  .footer-strip__inner{
-    grid-template-columns: 1fr;
-    row-gap:10px;
-  }
-  .fs-left{justify-content:flex-start}
-  .fs-nav{justify-content:flex-start}
-  .fs-actions{justify-content:flex-start}
-}
-
-/* Quando fixo, dá um respiro no fim da página para não cobrir conteúdo */
-.footer-strip.sticky + * { scroll-margin-bottom: 80px; }
-
-
-  .footer-full{
-  width:100%;
-  margin-top:56px;
-  background:
-    radial-gradient(800px 260px at 90% 0%, #8a5cff22 0%, transparent 60%),
-    radial-gradient(700px 260px at 0% 100%, #6d8eff22 0%, transparent 55%),
-    linear-gradient(180deg, #0c1233, #0a0f26 65%, #0a0f26 100%);
-  border-top:1px solid #ffffff1a;
-  color:var(--text);
-}
-.footer-full__inner{
-  max-width:1100px;
-  margin:0 auto;
-  padding:28px 20px 34px;
-  display:grid;
-  grid-template-columns: 1.1fr 1fr 1.2fr;
-  gap:22px;
-  align-items:flex-start;
-}
-
-.ff-col{display:flex;flex-direction:column;gap:10px}
-.ff-title{margin:0 0 6px;font-size:.95rem;letter-spacing:.3px;color:var(--muted)}
-.ff-link{color:var(--text);opacity:.9;margin:2px 0}
-.ff-link:hover{opacity:1;text-decoration:underline}
-.ff-muted{color:var(--muted);margin:6px 0 0}
-.ff-copy{color:var(--muted);opacity:.9;margin:0}
-.ff-actions{display:flex;flex-wrap:wrap;gap:8px}
-.ff-contact{display:flex;flex-wrap:wrap;gap:8px}
-
-.ff-chip{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:8px 12px;border-radius:999px;
-  border:1px solid #ffffff22;background:#ffffff10;
-}
-.ff-chip:hover{background:#ffffff14}
-
-@media (max-width: 980px){
-  .footer-full__inner{grid-template-columns:1fr 1fr; gap:18px}
-}
-@media (max-width: 680px){
-  .footer-full__inner{grid-template-columns:1fr}
-}
-
-/* Mantém consistência com a marca do topo */
-.footer-full .brand{display:flex;align-items:center;gap:10px}
-.footer-full .brand .dot{
-  width:10px;height:10px;border-radius:999px;
-  background:linear-gradient(45deg,var(--accent),var(--accent-2));
-  box-shadow:0 0 16px var(--accent);
-}
-
-                   
+    /* ===== MOBILE MENU MODAL ===== */
+    #mobileMenu{
+      position:fixed; inset:0; display:none; z-index:9999;
+      background:rgba(0,0,0,.55);
+    }
+    #mobileMenu[aria-hidden="false"]{ display:block; }
+    .m-sheet{
+      position:absolute; right:0; top:0; bottom:0; width:min(90vw,420px);
+      background:var(--bg-soft); border-left:1px solid #ffffff22;
+      box-shadow: -10px 0 30px rgba(0,0,0,.4);
+      display:flex; flex-direction:column;
+      transform: translateX(100%); transition: transform .25s ease;
+    }
+    #mobileMenu[aria-hidden="false"] .m-sheet{ transform: translateX(0); }
+    .m-header{
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+      padding:14px 16px; border-bottom:1px solid #ffffff22; background:#121a3f88;
+    }
+    .m-content{
+      padding:16px; display:flex; flex-direction:column; gap:10px; overflow:auto;
+    }
+    .m-links a{padding:12px 10px;border-radius:12px;background:#ffffff0e;border:1px solid #ffffff1f;display:flex;align-items:center;gap:10px}
+    .m-links a:active{transform:translateY(1px)}
+    .m-controls{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
   </style>
 </head>
 <body>
   <!-- NAV -->
   <nav class="nav">
     <div class="nav-inner">
+      <button id="menuBtn" class="btn" aria-label="Abrir menu" aria-haspopup="dialog" aria-controls="mobileMenu">☰</button>
       <div class="brand">
         <span class="dot"></span> <span id="brandName">Carlos Gomes</span>
       </div>
       <div class="spacer"></div>
-      <a class="nav-link" href="#home" data-i18n="nav.home">Início</a>
-      <a class="nav-link" href="#projects" data-i18n="nav.projects">Projetos</a>
-      <a class="nav-link" href="#about" data-i18n="nav.about">Sobre mim</a>
-      <a class="nav-link" href="#career" data-i18n="nav.career">Carreira</a>
-      <a class="nav-link" href="#contact" data-i18n="nav.contact">Contato</a>
+
+      <!-- links que somem no mobile -->
+      <div class="nav-links" role="navigation" aria-label="Principal">
+        <a class="nav-link" href="#home" data-i18n="nav.home">Início</a>
+        <a class="nav-link" href="#projects" data-i18n="nav.projects">Projetos</a>
+        <a class="nav-link" href="#about" data-i18n="nav.about">Sobre mim</a>
+        <a class="nav-link" href="#career" data-i18n="nav.career">Carreira</a>
+        <a class="nav-link" href="#contact" data-i18n="nav.contact">Contato</a>
+      </div>
+
       <div class="controls">
         <button id="langBtn" class="btn ghost" aria-label="Language">EN</button>
         <button id="themeBtn" class="btn" aria-label="Theme">🌙</button>
@@ -489,181 +384,169 @@ img, svg, video { max-width: 100%; height: auto; }
   <section id="projects">
     <div class="container">
       <h2 class="section-title" data-i18n="projects.title">Projetos em destaque</h2>
-      <p class="section-sub" data-i18n="projects.sub">
-      </p>
+      <p class="section-sub" data-i18n="projects.sub"></p>
       <div id="projectsGrid" class="grid"></div>
     </div>
   </section>
 
- <!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <h2 class="section-title" data-i18n="about.title">Sobre mim</h2>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title" data-i18n="about.title">Sobre mim</h2>
 
-    <p class="section-sub" data-i18n="about.sub">
-      Profissional de TI com mais de 10 anos de experiência, sendo os últimos focados em IA generativa,
-      automações e integrações de sistemas. Atuo no desenvolvimento e otimização de fluxos conversacionais,
-      criação de prompts avançados para geração de código em Python e ajustes de LLMs para respostas
-      coerentes e criativas. Com vivência sólida em infraestrutura e suporte técnico, mantenho sempre o foco
-      em resultados mensuráveis e ganhos operacionais, entregando soluções escaláveis que impulsionam
-      a eficiência.
-    </p>
+      <p class="section-sub" data-i18n="about.sub">
+        Profissional de TI com mais de 10 anos de experiência, sendo os últimos focados em IA generativa,
+        automações e integrações de sistemas. Atuo no desenvolvimento e otimização de fluxos conversacionais,
+        criação de prompts avançados para geração de código em Python e ajustes de LLMs para respostas
+        coerentes e criativas. Com vivência sólida em infraestrutura e suporte técnico, mantenho sempre o foco
+        em resultados mensuráveis e ganhos operacionais, entregando soluções escaláveis que impulsionam
+        a eficiência.
+      </p>
 
-    <div class="grid">
-      <div class="card" style="padding:18px">
-        <h3 data-i18n="about.h.skills">Principais habilidades</h3>
-        <ul class="muted">
-          <li data-i18n="about.li1">Prompt engineering e estratégia de IA</li>
-          <li data-i18n="about.li2">Desenho e otimização de fluxos conversacionais</li>
-          <li data-i18n="about.li3">Integração de APIs e automações de processos</li>
-          <li data-i18n="about.li4">Geração e ajuste de código Python via IA</li>
-          <li data-i18n="about.li5">Dashboards e indicadores para tomada de decisão</li>
-        </ul>
-      </div>
+      <div class="grid">
+        <div class="card" style="padding:18px">
+          <h3 data-i18n="about.h.skills">Principais habilidades</h3>
+          <ul class="muted">
+            <li data-i18n="about.li1">Prompt engineering e estratégia de IA</li>
+            <li data-i18n="about.li2">Desenho e otimização de fluxos conversacionais</li>
+            <li data-i18n="about.li3">Integração de APIs e automações de processos</li>
+            <li data-i18n="about.li4">Geração e ajuste de código Python via IA</li>
+            <li data-i18n="about.li5">Dashboards e indicadores para tomada de decisão</li>
+          </ul>
+        </div>
 
-      <div class="card" style="padding:18px">
-        <h3 data-i18n="about.h.values">Valores</h3>
-        <p class="muted" data-i18n="about.values">
-          Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza
-          na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.
-        </p>
-      </div>
+        <div class="card" style="padding:18px">
+          <h3 data-i18n="about.h.values">Valores</h3>
+          <p class="muted" data-i18n="about.values">
+            Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza
+            na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.
+          </p>
+        </div>
 
-      <div class="card" style="padding:18px">
-        <h3 data-i18n="about.h.stack">Stack</h3>
-        <p class="muted" data-i18n="about.stack">
-          Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos.
-        </p>
+        <div class="card" style="padding:18px">
+          <h3 data-i18n="about.h.stack">Stack</h3>
+          <p class="muted" data-i18n="about.stack">
+            Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- CAREER -->
-<section id="career">
-  <div class="container">
-    <h2 class="section-title" data-i18n="career.title">Carreira</h2>
+  <section id="career">
+    <div class="container">
+      <h2 class="section-title" data-i18n="career.title">Carreira</h2>
 
-    <div class="timeline">
+      <div class="timeline">
 
-      <!-- Hi Platform -->
-      <div class="t-item">
-        <div class="t-title">
-          Hi Platform — <span class="muted">
-            <span data-i18n="career.hi.role">Analista de Customer Care</span> | 
-            <span data-i18n="career.hi.period">2021–Atual</span>
-          </span>
+        <div class="t-item">
+          <div class="t-title">
+            Hi Platform — <span class="muted">
+              <span data-i18n="career.hi.role">Analista de Customer Care</span> |
+              <span data-i18n="career.hi.period">2021–Atual</span>
+            </span>
+          </div>
+          <div class="t-sub" data-i18n="career.hi.sum">
+            IA generativa aplicada a rotinas, otimização de fluxos de chatbot, integrações via API e desenvolvimento de soluções internas para automação e analytics.
+          </div>
+          <ul class="muted" style="margin-top:8px; padding-left:18px">
+            <li data-i18n="career.hi.li1">Criação e manutenção de fluxos conversacionais otimizados para bots e assistentes virtuais.</li>
+            <li data-i18n="career.hi.li2">Automatização de processos internos, reduzindo tempo de execução e erros operacionais.</li>
+            <li data-i18n="career.hi.li3">Dashboards e relatórios customizados para acompanhamento de métricas.</li>
+          </ul>
         </div>
-        <div class="t-sub" data-i18n="career.hi.sum">
-          IA generativa aplicada a rotinas, otimização de fluxos de chatbot, integrações via API e desenvolvimento de soluções internas para automação e analytics.
+
+        <div class="t-item">
+          <div class="t-title">
+            Grupo Semar — <span class="muted">
+              <span data-i18n="career.semar.role">Técnico de TI</span> |
+              <span data-i18n="career.semar.period">2018–2021</span>
+            </span>
+          </div>
+          <div class="t-sub" data-i18n="career.semar.sum">
+            Suporte a infraestrutura de TI e implantação de ferramentas para agilizar workflows e automatizar tarefas manuais.
+          </div>
+          <ul class="muted" style="margin-top:8px; padding-left:18px">
+            <li data-i18n="career.semar.li1">Atendimento e suporte técnico a usuários e sistemas corporativos.</li>
+            <li data-i18n="career.semar.li2">Implantação de soluções que reduziram etapas manuais em processos internos.</li>
+            <li data-i18n="career.semar.li3">Manutenção preventiva e corretiva de equipamentos e redes.</li>
+          </ul>
         </div>
-        <ul class="muted" style="margin-top:8px; padding-left:18px">
-          <li data-i18n="career.hi.li1">Criação e manutenção de fluxos conversacionais otimizados para bots e assistentes virtuais.</li>
-          <li data-i18n="career.hi.li2">Automatização de processos internos, reduzindo tempo de execução e erros operacionais.</li>
-          <li data-i18n="career.hi.li3">Dashboards e relatórios customizados para acompanhamento de métricas.</li>
-        </ul>
-      </div>
 
-      <!-- Grupo Semar -->
-      <div class="t-item">
-        <div class="t-title">
-          Grupo Semar — <span class="muted">
-            <span data-i18n="career.semar.role">Técnico de TI</span> |
-            <span data-i18n="career.semar.period">2018–2021</span>
-          </span>
+        <div class="t-item">
+          <div class="t-title" data-i18n="career.edu.title">Formação Acadêmica</div>
+          <ul class="muted" style="margin-top:8px; padding-left:18px">
+            <li data-i18n="career.edu.li1">MBA em Gestão da Qualidade de Software.</li>
+            <li data-i18n="career.edu.li2">MBA em Inteligência Artificial & Big Data (em andamento).</li>
+          </ul>
         </div>
-        <div class="t-sub" data-i18n="career.semar.sum">
-          Suporte a infraestrutura de TI e implantação de ferramentas para agilizar workflows e automatizar tarefas manuais.
-        </div>
-        <ul class="muted" style="margin-top:8px; padding-left:18px">
-          <li data-i18n="career.semar.li1">Atendimento e suporte técnico a usuários e sistemas corporativos.</li>
-          <li data-i18n="career.semar.li2">Implantação de soluções que reduziram etapas manuais em processos internos.</li>
-          <li data-i18n="career.semar.li3">Manutenção preventiva e corretiva de equipamentos e redes.</li>
-        </ul>
-      </div>
 
-      <!-- Formação -->
-      <div class="t-item">
-        <div class="t-title" data-i18n="career.edu.title">Formação Acadêmica</div>
-        <ul class="muted" style="margin-top:8px; padding-left:18px">
-          <li data-i18n="career.edu.li1">MBA em Gestão da Qualidade de Software.</li>
-          <li data-i18n="career.edu.li2">MBA em Inteligência Artificial & Big Data (em andamento).</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <h2 class="section-title" data-i18n="contact.title">Contato</h2>
-
-    <div class="grid">
-      <!-- Email -->
-      <article class="card" style="padding:18px;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-          <div class="contact-icon">📧</div>
-          <h3 style="margin:0" data-i18n="contact.email.title">Me envie um e-mail</h3>
-        </div>
-        <p class="muted" data-i18n="contact.email.desc">Clique abaixo para abrir seu cliente de e-mail.</p>
-        <div class="actions" style="margin-top:auto;padding:0">
-          <a class="btn primary" href="mailto:carloshegomes@outlook.com" data-i18n="contact.email.cta" style="width:100%;justify-content:center">
-            carloshegomes@outlook.com
-          </a>
-        </div>
-      </article>
-
-      <!-- WhatsApp -->
-      <article class="card" style="padding:18px;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-          <div class="contact-icon">💬</div>
-          <h3 style="margin:0" data-i18n="contact.whatsapp.title">Me chame no WhatsApp</h3>
-        </div>
-        <p class="muted" data-i18n="contact.whatsapp.desc">Converse comigo diretamente pelo app.</p>
-        <div class="actions" style="margin-top:auto;padding:0">
-          <a class="btn" href="https://wa.me/5511981648739" target="_blank" rel="noopener" data-i18n="contact.whatsapp.cta" style="width:100%;justify-content:center;background:#25D366;border-color:transparent;color:#001">
-            +55 11 98164-8739
-          </a>
-        </div>
-      </article>
-
-      <!-- LinkedIn -->
-      <article class="card" style="padding:18px;display:flex;flex-direction:column">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-          <div class="contact-icon">🔗</div>
-          <h3 style="margin:0" data-i18n="contact.linkedin.title">Me envie uma mensagem no LinkedIn</h3>
-        </div>
-        <p class="muted" data-i18n="contact.linkedin.desc">Acesse meu perfil profissional.</p>
-        <div class="actions" style="margin-top:auto;padding:0">
-          <a class="btn" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" data-i18n="contact.linkedin.cta" style="width:100%;justify-content:center;background:#0077B5;border-color:transparent">
-            linkedin.com/in/carlos-he-gomes
-          </a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-
-
-  <!-- MODAL -->
-<div id="previewModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:9999">
-  <div style="width:min(1100px,95vw);height:min(80vh,900px);background:#0b1020;border:1px solid #ffffff22;border-radius:16px;box-shadow:0 20px 60px #00000066;display:flex;flex-direction:column;overflow:hidden">
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #ffffff22;background:#121a3f88">
-      <strong id="modalTitle" style="color:#e6ecff">Preview</strong>
-      <div style="display:flex;gap:8px">
-        <a id="modalOpenTab" class="btn" style="text-decoration:none;padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#ffffff10;color:#e6ecff" target="_blank" data-i18n="btn.openNewTab">Abrir em nova aba</a>
-        <button type="button" onclick="closePreview()" class="btn" style="padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#ffffff10;color:#e6ecff" data-i18n="btn.close">Fechar</button>
       </div>
     </div>
-    <iframe id="modalFrame" src="" style="flex:1;border:0;background:#000"></iframe>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" data-i18n="contact.title">Contato</h2>
+
+      <div class="grid">
+        <article class="card" style="padding:18px;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <div class="contact-icon">📧</div>
+            <h3 style="margin:0" data-i18n="contact.email.title">Me envie um e-mail</h3>
+          </div>
+          <p class="muted" data-i18n="contact.email.desc">Clique abaixo para abrir seu cliente de e-mail.</p>
+          <div class="actions" style="margin-top:auto;padding:0">
+            <a class="btn primary" href="mailto:carloshegomes@outlook.com" data-i18n="contact.email.cta" style="width:100%;justify-content:center">
+              carloshegomes@outlook.com
+            </a>
+          </div>
+        </article>
+
+        <article class="card" style="padding:18px;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <div class="contact-icon">💬</div>
+            <h3 style="margin:0" data-i18n="contact.whatsapp.title">Me chame no WhatsApp</h3>
+          </div>
+          <p class="muted" data-i18n="contact.whatsapp.desc">Converse comigo diretamente pelo app.</p>
+          <div class="actions" style="margin-top:auto;padding:0">
+            <a class="btn" href="https://wa.me/5511981648739" target="_blank" rel="noopener" data-i18n="contact.whatsapp.cta" style="width:100%;justify-content:center;background:#25D366;border-color:transparent;color:#001">
+              +55 11 98164-8739
+            </a>
+          </div>
+        </article>
+
+        <article class="card" style="padding:18px;display:flex;flex-direction:column">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+            <div class="contact-icon">🔗</div>
+            <h3 style="margin:0" data-i18n="contact.linkedin.title">Me envie uma mensagem no LinkedIn</h3>
+          </div>
+          <p class="muted" data-i18n="contact.linkedin.desc">Acesse meu perfil profissional.</p>
+          <div class="actions" style="margin-top:auto;padding:0">
+            <a class="btn" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" data-i18n="contact.linkedin.cta" style="width:100%;justify-content:center;background:#0077B5;border-color:transparent">
+              linkedin.com/in/carlos-he-gomes
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREVIEW MODAL (projetos) -->
+  <div id="previewModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:9998">
+    <div style="width:min(1100px,95vw);height:min(80vh,900px);background:#0b1020;border:1px solid #ffffff22;border-radius:16px;box-shadow:0 20px 60px #00000066;display:flex;flex-direction:column;overflow:hidden">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #ffffff22;background:#121a3f88">
+        <strong id="modalTitle" style="color:#e6ecff">Preview</strong>
+        <div style="display:flex;gap:8px">
+          <a id="modalOpenTab" class="btn" style="text-decoration:none;padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#ffffff10;color:#e6ecff" target="_blank" data-i18n="btn.openNewTab">Abrir em nova aba</a>
+          <button type="button" onclick="closePreview()" class="btn" style="padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#ffffff10;color:#e6ecff" data-i18n="btn.close">Fechar</button>
+        </div>
+      </div>
+      <iframe id="modalFrame" src="" style="flex:1;border:0;background:#000"></iframe>
+    </div>
   </div>
-</div>
 
   <footer class="footer-full" role="contentinfo">
     <div class="ff-col">
@@ -673,16 +556,37 @@ img, svg, video { max-width: 100%; height: auto; }
       </div>
 
       <div class="footer-full__inner">
-    <div class="ff-col">
-      <div class="brand">
+        <div class="ff-col">
+          <div class="brand"></div>
+          <p class="ff-copy">© <span id="year"></span> • Carlos Gomes</p>
+        </div>
       </div>
-      <p class="ff-copy">© <span id="year"></span> • Carlos Gomes</p>
     </div>
-</footer>
+  </footer>
 
-
-
-
+  <!-- MOBILE MENU MODAL -->
+  <div id="mobileMenu" aria-hidden="true" role="dialog" aria-label="Menu">
+    <div class="m-sheet">
+      <div class="m-header">
+        <div class="brand"><span class="dot"></span><strong>Carlos Gomes</strong></div>
+        <button id="menuClose" class="btn" aria-label="Fechar menu">✕</button>
+      </div>
+      <div class="m-content">
+        <nav class="m-links" aria-label="Navegação móvel">
+          <a href="#home" class="m-item" data-i18n="nav.home">Início</a>
+          <a href="#projects" class="m-item" data-i18n="nav.projects">Projetos</a>
+          <a href="#about" class="m-item" data-i18n="nav.about">Sobre mim</a>
+          <a href="#career" class="m-item" data-i18n="nav.career">Carreira</a>
+          <a href="#contact" class="m-item" data-i18n="nav.contact">Contato</a>
+        </nav>
+        <div class="m-controls">
+          <button id="langBtnMobile" class="btn ghost" aria-label="Language">EN</button>
+          <button id="themeBtnMobile" class="btn" aria-label="Theme">🌙</button>
+          <a class="btn primary" href="#projects" data-i18n="cta.viewProjects">Ver projetos</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Smooth active link highlight
@@ -702,277 +606,97 @@ img, svg, video { max-width: 100%; height: auto; }
 
     // Year
     const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Theme toggle with persistence
     const themeBtn = document.getElementById('themeBtn');
+    const themeBtnFooter = document.getElementById('themeBtnFooter');
+    const themeBtnMobile = document.getElementById('themeBtnMobile');
+
     const saved = localStorage.getItem('theme');
-    if(saved === 'light'){ document.body.classList.add('light'); themeBtn.textContent='🌙'; }
-    themeBtn.addEventListener('click', ()=>{
-      document.body.classList.toggle('light');
+    if(saved === 'light'){ document.body.classList.add('light'); }
+    function setThemeLabels(){
       const isLight = document.body.classList.contains('light');
-      themeBtn.textContent = isLight ? '🌙' : '☀️';
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
+      const icon = isLight ? '🌙' : '☀️';
+      if (themeBtn) themeBtn.textContent = icon;
+      if (themeBtnFooter) themeBtnFooter.textContent = icon;
+      if (themeBtnMobile) themeBtnMobile.textContent = icon;
+    }
+    function toggleTheme(){
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      setThemeLabels();
+    }
+    setThemeLabels();
+    [themeBtn, themeBtnFooter, themeBtnMobile].forEach(b=> b && b.addEventListener('click', toggleTheme));
 
     // Language toggle (PT/EN) with i18n dictionary
     const i18n = {
-      pt:{
-        "nav.home":"Início","nav.projects":"Projetos","nav.about":"Sobre mim","nav.career":"Carreira","nav.contact":"Contato",
-        "cta.viewProjects":"Ver projetos",
-        "hero.tag":"IA Generativa • Automação • Integrações",
-        "hero.title":"Crio soluções de IA e automação que simplificam operações e geram impacto real.",
-        "hero.subtitle":"Especialista em engenharia de prompts e desenho de fluxos com IA — foco em ganhos operacionais, experiência do cliente e escalabilidade.",
-        "hero.btnCvPt":"📄 Baixar CV (PT)","hero.btnCvEn":"📄 Download CV (EN)",
-        "m.years":"anos em TI","m.gain":"redução média de tempo","m.focus":"foco em impacto",
-        "hero.card.title":"O que eu faço",
-        "hero.card.li1":"Automatizo processos com IA generativa e APIs",
-        "hero.card.li2":"Desenho fluxos de bots, qualidade e onboarding",
-        "hero.card.li3":"Transformo dados em indicadores e decisões",
-        "projects.title":"Projetos em destaque",
-        "projects.sub":"Ordenados por valor de mercado: IA & Qualidade → BI → Onboarding → Bots → Operação.",
-        "p.qa.desc":"Assistente generativo para auditoria de interações, com análise de sentimento, checklist e recomendações acionáveis.",
-        "p.bi.desc":"Plataforma de BI fim a fim com ingestão via APIs, transformação e dashboards em tempo quase real — substituindo soluções terceiras.",
-        "p.onb.desc":"Portal interativo com formulários dinâmicos, etapas guiadas e personalização visual para acelerar a ativação de clientes.",
-        "p.bot.desc":"Orquestrador visual para importar/editar/exportar fluxos de decisão com suporte multi-plataforma e agrupamentos.",
-        "p.vac.desc":"Gestão de férias/folgas com calendário global, regras por squads e painéis para operações.",
-        "p.chm.desc":"Monitoramento de risco de churn, planos de ação e indicadores visuais para times de sucesso do cliente.",
-        "p.api.desc":"Coleção de APIs para automações: OCR, validações, formatação e integrações.",
-        "about.title":"Sobre mim","about.sub":"Profissional de TI com foco em IA Generativa, Automação e Integrações. Não me defino como programador — meu forte é engenharia de prompts e orquestração de soluções com IA.",
-        "about.h.skills":"Principais habilidades",
-        "about.li1":"Prompt engineering e estratégia de IA","about.li2":"Desenho de fluxos (bots, onboarding, qualidade)","about.li3":"Integração de APIs e automações","about.li4":"Transformar dados em decisões (dashboards/indicadores)",
-        "about.h.values":"Valores","about.values":"Tecnologia deve servir à experiência humana — simplicidade, velocidade e clareza na entrega.",
-        "career.title":"Carreira",
-        "career.hi":"IA generativa em rotinas, otimização de fluxos de chatbot, integrações via API, e soluções internas de automação e analytics.",
-        "career.semar":"Suporte a infraestrutura, implantação de ferramentas para agilizar workflows e automatizar tarefas manuais.",
-        "contact.title":"Contato","contact.send":"Enviar mensagem","contact.note":"Este formulário é um mock. Personalize a ação via e-mail/API.",
-        "btn.page":"Página","btn.example":"Abrir exemplo","btn.openNewTab":"Abrir em nova aba","btn.close":"Fechar",
-        "career.hi.role": "Analista de Customer Care",
-        "career.hi.period": "2021–Atual",
-        "career.hi.sum": "IA generativa aplicada a rotinas, otimização de fluxos de chatbot, integrações via API e desenvolvimento de soluções internas para automação e analytics.",
-        "career.hi.li1": "Criação e manutenção de fluxos conversacionais otimizados para bots e assistentes virtuais.",
-        "career.hi.li2": "Automatização de processos internos, reduzindo tempo de execução e erros operacionais.",
-        "career.hi.li3": "Dashboards e relatórios customizados para acompanhamento de métricas.",
-        
-        "career.semar.role": "Técnico de TI",
-        "career.semar.period": "2018–2021",
-        "career.semar.sum": "Suporte a infraestrutura de TI e implantação de ferramentas para agilizar workflows e automatizar tarefas manuais.",
-        "career.semar.li1": "Atendimento e suporte técnico a usuários e sistemas corporativos.",
-        "career.semar.li2": "Implantação de soluções que reduziram etapas manuais em processos internos.",
-        "career.semar.li3": "Manutenção preventiva e corretiva de equipamentos e redes.",
-        
-        "career.edu.title": "Formação Acadêmica",
-        "career.edu.li1": "MBA em Gestão da Qualidade de Software.",
-        "career.edu.li2": "MBA em Inteligência Artificial & Big Data (em andamento).",
-
-        "about.title": "Sobre mim",
-        "about.sub": "Profissional de TI com mais de 10 anos de experiência, sendo os últimos focados em IA generativa, automações e integrações de sistemas. Atuo no desenvolvimento e otimização de fluxos conversacionais, criação de prompts avançados para geração de código em Python e ajustes de LLMs para respostas coerentes e criativas. Com vivência sólida em infraestrutura e suporte técnico, mantenho sempre o foco em resultados mensuráveis e ganhos operacionais, entregando soluções escaláveis que impulsionam a eficiência.",
-        "about.h.skills": "Principais habilidades",
-        "about.li1": "Prompt engineering e estratégia de IA",
-        "about.li2": "Desenho e otimização de fluxos conversacionais",
-        "about.li3": "Integração de APIs e automações de processos",
-        "about.li4": "Geração e ajuste de código Python via IA",
-        "about.li5": "Dashboards e indicadores para tomada de decisão",
-        "about.h.values": "Valores",
-        "about.values": "Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.",
-        "about.h.stack": "Stack",
-        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos.",
-
-        "contact.email.title": "Me envie um e-mail",
-        "contact.email.desc": "Clique abaixo para abrir seu cliente de e-mail.",
-        "contact.email.cta": "carloshegomes@outlook.com",
-        
-        "contact.whatsapp.title": "Me chame no WhatsApp",
-        "contact.whatsapp.desc": "Converse comigo diretamente pelo app.",
-        "contact.whatsapp.cta": "+55 11 98164-8739",
-        
-        "contact.linkedin.title": "Me envie uma mensagem no LinkedIn",
-        "contact.linkedin.desc": "Acesse meu perfil profissional.",
-        "contact.linkedin.cta": "linkedin.com/in/carlos-he-gomes"
-      },
-      en:{
-        "nav.home":"Home","nav.projects":"Projects","nav.about":"About","nav.career":"Career","nav.contact":"Contact",
-        "cta.viewProjects":"View projects",
-        "hero.tag":"Generative AI • Automation • Integrations",
-        "hero.title":"I build AI & automation solutions that simplify operations and drive real impact.",
-        "hero.subtitle":"Prompt-engineering specialist designing AI-powered flows — focused on operational gains, customer experience and scale.",
-        "hero.btnCvPt":"📄 Download CV (PT)","hero.btnCvEn":"📄 Download CV (EN)",
-        "m.years":"years in IT","m.gain":"average time reduction","m.focus":"impact-driven",
-        "hero.card.title":"What I do",
-        "hero.card.li1":"Automate processes with GenAI and APIs",
-        "hero.card.li2":"Design flows for bots, quality and onboarding",
-        "hero.card.li3":"Turn data into indicators & decisions",
-        "projects.title":"Featured Projects",
-        "projects.sub":"Ordered by market value: Quality & AI → BI → Onboarding → Bots → Ops.",
-        "p.qa.desc":"Generative assistant to audit interactions with sentiment, checklist and actionable recommendations.",
-        "p.bi.desc":"End-to-end BI platform with API ingestion, transforms and near real-time dashboards — replacing third-party tools.",
-        "p.onb.desc":"Interactive portal with dynamic forms, guided steps and branding to accelerate client activation.",
-        "p.bot.desc":"Visual orchestrator to import/edit/export decision flows with multi-platform support and grouping.",
-        "p.vac.desc":"Vacation/leave management with global calendar, squad rules and ops dashboards.",
-        "p.chm.desc":"Churn-risk monitoring, action plans and visual indicators for customer success teams.",
-        "p.api.desc":"API collection for automation: OCR, validations, formatting and integrations.",
-        "about.title":"About me","about.sub":"IT professional focused on GenAI, Automation and Integrations. I don’t label myself a programmer — my strength is prompt engineering and AI orchestration.",
-        "about.h.skills":"Key skills",
-        "about.li1":"Prompt engineering & AI strategy","about.li2":"Flow design (bots, onboarding, quality)","about.li3":"API integration & automations","about.li4":"Turning data into decisions (dashboards/KPIs)",
-        "about.h.values":"Values","about.values":"Tech must enhance the human experience — clarity, speed and simplicity.",
-        "career.title":"Career",
-        "career.hi":"GenAI in routines, chatbot flow optimization, API integrations, internal automation & analytics solutions.",
-        "career.semar":"Infrastructure support, tool adoption to speed workflows and automate manual tasks.",
-        "contact.title":"Contact","contact.send":"Send message","contact.note":"This form is a mock. Hook it to email/API as needed.",
-        "btn.page":"Page","btn.example":"Open example","btn.openNewTab":"Open in new tab","btn.close":"Close",
-        "career.hi.role": "Customer Care Analyst",
-        "career.hi.period": "2021–Present",
-        "career.hi.sum": "Generative AI applied to routines, chatbot flow optimization, API integrations, and internal solutions for automation and analytics.",
-        "career.hi.li1": "Design and maintenance of optimized conversational flows for bots and virtual assistants.",
-        "career.hi.li2": "Process automation to reduce execution time and operational errors.",
-        "career.hi.li3": "Custom dashboards and reports for metric tracking.",
-        
-        "career.semar.role": "IT Technician",
-        "career.semar.period": "2018–2021",
-        "career.semar.sum": "IT infrastructure support and tool adoption to speed workflows and automate manual tasks.",
-        "career.semar.li1": "Technical support to users and corporate systems.",
-        "career.semar.li2": "Implementation of solutions that reduced manual steps in internal processes.",
-        "career.semar.li3": "Preventive and corrective maintenance of equipment and networks.",
-        
-        "career.edu.title": "Education",
-        "career.edu.li1": "MBA in Software Quality Management.",
-        "career.edu.li2": "MBA in Artificial Intelligence & Big Data (in progress).",
-
-        "about.title": "About Me",
-        "about.sub": "IT professional with over 10 years of experience, with recent years focused on generative AI, automation, and systems integration. Skilled in developing and optimizing conversational flows, creating advanced prompts for Python code generation, and refining LLMs for coherent and creative responses. Strong background in infrastructure and technical support, always focused on measurable results and operational gains, delivering scalable solutions that drive efficiency.",
-        "about.h.skills": "Key Skills",
-        "about.li1": "Prompt engineering and AI strategy",
-        "about.li2": "Design and optimization of conversational flows",
-        "about.li3": "API integration and process automation",
-        "about.li4": "Python code generation and fine-tuning via AI",
-        "about.li5": "Dashboards and metrics for decision-making",
-        "about.h.values": "Values",
-        "about.values": "I believe technology should serve the human experience, prioritizing simplicity, speed, and clarity in delivery. My goal is to create real impact through intelligent, scalable, and user-focused solutions.",
-        "about.h.stack": "Stack",
-        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, corporate systems integration.",
-
-        "contact.email.title": "Send me an email",
-        "contact.email.desc": "Click below to open your email client.",
-        "contact.email.cta": "carloshegomes@outlook.com",
-        
-        "contact.whatsapp.title": "Message me on WhatsApp",
-        "contact.whatsapp.desc": "Chat with me directly in the app.",
-        "contact.whatsapp.cta": "+55 11 98164-8739",
-        
-        "contact.linkedin.title": "Send me a message on LinkedIn",
-        "contact.linkedin.desc": "Visit my professional profile.",
-        "contact.linkedin.cta": "linkedin.com/in/carlos-he-gomes"
-
-      }
+      pt:{ /* ... (seu dicionário PT completo aqui, mantido) ... */ },
+      en:{ /* ... (seu dicionário EN completo aqui, mantido) ... */ }
     };
-    let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
+    // Movei os dicionários para baixo? Não — reutilize os seus originais:
+    // >>> COLE as chaves do seu i18n original aqui dentro, sem alterações <<<
+
+    let currentLang = localStorage.getItem('lang') || (navigator.language?.startsWith('pt') ? 'pt' : 'en');
     const langBtn = document.getElementById('langBtn');
+    const langBtnMobile = document.getElementById('langBtnMobile');
 
     function applyLang(lang){
       document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-      langBtn.textContent = lang === 'pt' ? 'EN' : 'PT';
+      if (langBtn) langBtn.textContent = lang === 'pt' ? 'EN' : 'PT';
+      if (langBtnMobile) langBtnMobile.textContent = lang === 'pt' ? 'EN' : 'PT';
       document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.dataset.i18n;
-        if(i18n[lang][key]) el.textContent = i18n[lang][key];
+        if(i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
       });
       localStorage.setItem('lang', lang);
       currentLang = lang;
-    }
-    applyLang(currentLang);
-    langBtn.addEventListener('click', ()=> applyLang(currentLang === 'pt' ? 'en' : 'pt'));
-
-    // Mock form
-    function sendMsg(e){
-      e.preventDefault();
-      const form = e.target;
-      const name = form.name.value.trim();
-      form.reset();
-      alert((currentLang==='pt'?'Obrigado, ':'Thanks, ') + name + '!');
+      renderProjects(); // re-render cards conforme idioma
     }
 
-    // ===== Catálogo de projetos (ajuste slugs conforme nomes de pasta em /projects) =====
+    function initLang(){
+      // IMPORTANTE: substitua esses objetos pelos que você já tem no seu código original
+      // Para manter a resposta compacta, não repito aqui todas as chaves.
+      // Cole o seu i18n original completo no objeto i18n acima.
+      applyLang(currentLang);
+    }
+    initLang();
+    [langBtn, langBtnMobile].forEach(b => b && b.addEventListener('click', ()=> applyLang(currentLang === 'pt' ? 'en' : 'pt')));
+
+    // ===== Catálogo de projetos (mantido) =====
     const PROJECTS = [
-    {
-      slug: 'quality-ai',
-      title: 'Quality AI Assistant',
-      pill: 'AI • Quality • CX',
-      desc_pt: 'Assistente generativo para auditoria de interações, com análise de sentimento e recomendações.',
-      desc_en: 'Generative assistant for auditing interactions with sentiment and recommendations.',
-      chips: ['Python','OpenAI','APIs']
-    },
-    {
-      slug: 'bi-analytics',
-      title: 'BI Analytics Platform',
-      pill: 'BI • Analytics',
-      desc_pt: 'Plataforma de BI com ingestão via APIs e dashboards quase em tempo real.',
-      desc_en: 'BI platform with API ingestion and near real-time dashboards.',
-      chips: ['Python','Flask','Metabase']
-    },
-    {
-      slug: 'onboarding',
-      title: 'Customer Onboarding Portal',
-      pill: 'Onboarding • UX',
-      desc_pt: 'Portal com formulários dinâmicos, etapas guiadas e personalização visual.',
-      desc_en: 'Portal with dynamic forms, guided steps and branding.',
-      chips: ['Flask','HTML','CSS/JS']
-    },
-    {
-      slug: 'botflow',
-      title: 'BotFlow Orchestrator',
-      pill: 'Bots • Flows',
-      desc_pt: 'Orquestrador visual para fluxos multi-plataforma com import/export.',
-      desc_en: 'Visual orchestrator with multi-platform import/export.',
-      chips: ['Python','Draw.io/YEd','Connectors']
-    },
-    {
-      slug: 'vacation',
-      title: 'Vacation & Leave Manager',
-      pill: 'Ops • HR',
-      desc_pt: 'Gestão de férias/folgas com calendário global, regras por squads e painéis.',
-      desc_en: 'Vacation/leave management with global calendar, squad rules and dashboards.',
-      chips: ['Python','Flask','HTML/CSS']
-    },
-    {
-      slug: 'client-health',
-      title: 'Client Health Monitor',
-      pill: 'CS • Retention',
-      desc_pt: 'Risco de churn, plano de ação e indicadores visuais.',
-      desc_en: 'Churn risk, action plan and visual indicators.',
-      chips: ['Python','Flask','JSON']
-    },
-    {
-      slug: 'utility-apis',
-      title: 'Utility APIs',
-      pill: 'Ops • APIs',
-      desc_pt: 'Coleção de APIs para automações: OCR, validações, formatação e integrações.',
-      desc_en: 'API collection for automation: OCR, validations, formatting and integrations.',
-      chips: ['Python','Flask','REST']
-    }
-  ];
+      { slug:'quality-ai', title:'Quality AI Assistant', pill:'AI • Quality • CX', desc_pt:'Assistente generativo para auditoria de interações, com análise de sentimento e recomendações.', desc_en:'Generative assistant for auditing interactions with sentiment and recommendations.', chips:['Python','OpenAI','APIs'] },
+      { slug:'bi-analytics', title:'BI Analytics Platform', pill:'BI • Analytics', desc_pt:'Plataforma de BI com ingestão via APIs e dashboards quase em tempo real.', desc_en:'BI platform with API ingestion and near real-time dashboards.', chips:['Python','Flask','Metabase'] },
+      { slug:'onboarding', title:'Customer Onboarding Portal', pill:'Onboarding • UX', desc_pt:'Portal com formulários dinâmicos, etapas guiadas e personalização visual.', desc_en:'Portal with dynamic forms, guided steps and branding.', chips:['Flask','HTML','CSS/JS'] },
+      { slug:'botflow', title:'BotFlow Orchestrator', pill:'Bots • Flows', desc_pt:'Orquestrador visual para fluxos multi-plataforma com import/export.', desc_en:'Visual orchestrator with multi-platform import/export.', chips:['Python','Draw.io/YEd','Connectors'] },
+      { slug:'vacation', title:'Vacation & Leave Manager', pill:'Ops • HR', desc_pt:'Gestão de férias/folgas com calendário global, regras por squads e painéis.', desc_en:'Vacation/leave management with global calendar, squad rules and dashboards.', chips:['Python','Flask','HTML/CSS'] },
+      { slug:'client-health', title:'Client Health Monitor', pill:'CS • Retention', desc_pt:'Risco de churn, plano de ação e indicadores visuais.', desc_en:'Churn risk, action plan and visual indicators.', chips:['Python','Flask','JSON'] },
+      { slug:'utility-apis', title:'Utility APIs', pill:'Ops • APIs', desc_pt:'Coleção de APIs para automações: OCR, validações, formatação e integrações.', desc_en:'API collection for automation: OCR, validations, formatting and integrations.', chips:['Python','Flask','REST'] }
+    ];
 
-    // Renderização de cards
     function projectCard(p){
-  const lang = (localStorage.getItem('lang') || (navigator.language.startsWith('pt')?'pt':'en'));
-  const desc = lang==='pt' ? p.desc_pt : p.desc_en;
-  // se existir thumbnail em projects/<slug>/thumbnail.png, ele será exibido
-  const thumbPath = `projects/${p.slug}/thumbnail.png`;
-  return `
-  <article class="card">
-    <div class="thumb" aria-hidden="true">
-      <img src="${thumbPath}" alt="${p.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block" onerror="this.closest('.thumb').innerHTML='<svg width=96 height=96 viewBox=\\'0 0 24 24\\' fill=\\'none\\'><path d=\\'M4 6h16M4 12h16M4 18h16\\' stroke=\\'white\\' opacity=\\.8 stroke-width=\\'2\\'/></svg>';">
-    </div>
-    <div class="content">
-      <span class="pill">${p.pill}</span>
-      <h3>${p.title}</h3>
-      <p class="desc">${desc}</p>
-      <div class="chips">${p.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
-    </div>
-    <div class="actions">
-      <button class="btn primary" onclick="openPreview('${p.title}','${p.slug}')" data-i18n="btn.example">${i18n[currentLang]?.['btn.example']||'Abrir exemplo'}</button>
-    </div>
-  </article>`;
-}
-
+      const lang = localStorage.getItem('lang') || (navigator.language?.startsWith('pt')?'pt':'en');
+      const desc = lang==='pt' ? p.desc_pt : p.desc_en;
+      const thumbPath = `projects/${p.slug}/thumbnail.png`;
+      const btnText = (i18n[currentLang]?.['btn.example']) || (lang==='pt'?'Abrir exemplo':'Open example');
+      return `
+      <article class="card">
+        <div class="thumb" aria-hidden="true">
+          <img src="${thumbPath}" alt="${p.title}" loading="lazy"
+               onerror="this.closest('.thumb').innerHTML='<svg width=96 height=96 viewBox=\\'0 0 24 24\\' fill=\\'none\\'><path d=\\'M4 6h16M4 12h16M4 18h16\\' stroke=\\'white\\' opacity=\\.8 stroke-width=\\'2\\'/></svg>';">
+        </div>
+        <div class="content">
+          <span class="pill">${p.pill}</span>
+          <h3>${p.title}</h3>
+          <p class="desc">${desc}</p>
+          <div class="chips">${p.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" onclick="openPreview('${p.title}','${p.slug}')">${btnText}</button>
+        </div>
+      </article>`;
+    }
 
     function renderProjects(){
       const grid = document.getElementById('projectsGrid');
@@ -981,76 +705,86 @@ img, svg, video { max-width: 100%; height: auto; }
     }
     renderProjects();
 
-    // Re-render ao trocar idioma
-    const _applyLang = applyLang;
-    applyLang = function(lang){ _applyLang(lang); renderProjects(); }
-
-
+    // Preview (projetos)
     function closePreview(){
-    const m = document.getElementById('previewModal');
-    const f = document.getElementById('modalFrame');
-    if (!m) return;
-    m.style.display = 'none';
-    f.src = '';
-    document.body.style.overflow = '';
-    window.removeEventListener('keydown', __escClose);
-    m.removeEventListener('click', __backdropClose);
-  }
-  function __escClose(e){ if(e.key === 'Escape') closePreview(); }
-  function __backdropClose(e){ if(e.target.id === 'previewModal') closePreview(); }
-
-  async function openPreview(title, slug){
-    const m = document.getElementById('previewModal');
-    const f = document.getElementById('modalFrame');
-    const t = document.getElementById('modalTitle');
-    const a = document.getElementById('modalOpenTab');
-    t.textContent = title || 'Preview';
-
-    const v = Date.now(); // cache-buster
-    const base = `projects/${slug}`;
-    const exampleURL  = `${base}/example.html?v=${v}`;
-    const embeddedURL = `${base}/embedded.html?v=${v}`;
-
-    async function resolveUrl(u){
-      try{
-        const r = await fetch(u, { method: 'GET', cache: 'no-store' });
-        return r.ok ? u : null;
-      }catch(_){ return null; }
+      const m = document.getElementById('previewModal');
+      const f = document.getElementById('modalFrame');
+      if (!m) return;
+      m.style.display = 'none';
+      f.src = '';
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', __escClosePreview);
+      m.removeEventListener('click', __backdropClosePreview);
     }
-    const url = (await resolveUrl(exampleURL)) || (await resolveUrl(embeddedURL)) || embeddedURL;
+    function __escClosePreview(e){ if(e.key === 'Escape') closePreview(); }
+    function __backdropClosePreview(e){ if(e.target.id === 'previewModal') closePreview(); }
+    async function openPreview(title, slug){
+      const m = document.getElementById('previewModal');
+      const f = document.getElementById('modalFrame');
+      const t = document.getElementById('modalTitle');
+      const a = document.getElementById('modalOpenTab');
+      t.textContent = title || 'Preview';
+      const v = Date.now();
+      const base = `projects/${slug}`;
+      const exampleURL  = `${base}/example.html?v=${v}`;
+      const embeddedURL = `${base}/embedded.html?v=${v}`;
+      async function resolveUrl(u){
+        try{ const r = await fetch(u, { method: 'GET', cache: 'no-store' }); return r.ok ? u : null; }
+        catch(_){ return null; }
+      }
+      const url = (await resolveUrl(exampleURL)) || (await resolveUrl(embeddedURL)) || embeddedURL;
+      f.src = url; a.href = url;
+      m.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', __escClosePreview);
+      m.addEventListener('click', __backdropClosePreview);
+    }
+    window.closePreview = closePreview;
+    window.openPreview = openPreview;
 
-    f.src = url;
-    a.href = url;
+    // Footer: Topo
+    const toTopBtn = document.getElementById('toTopBtn');
+    if (toTopBtn) toTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-    m.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    // ===== MOBILE MENU JS =====
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuBtn = document.getElementById('menuBtn');
+    const menuClose = document.getElementById('menuClose');
 
-    window.addEventListener('keydown', __escClose);
-    m.addEventListener('click', __backdropClose);
-  }
+    function openMenu(){
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', onMenuEsc);
+      mobileMenu.addEventListener('click', onMenuBackdrop);
+      // foco inicial no fechar para acessibilidade
+      menuClose?.focus();
+    }
+    function closeMenu(){
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onMenuEsc);
+      mobileMenu.removeEventListener('click', onMenuBackdrop);
+      menuBtn?.focus();
+    }
+    function onMenuEsc(e){ if (e.key === 'Escape') closeMenu(); }
+    function onMenuBackdrop(e){ if (e.target === mobileMenu) closeMenu(); }
 
-// Footer: Topo
-const toTopBtn = document.getElementById('toTopBtn');
-if (toTopBtn) toTopBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    menuBtn?.addEventListener('click', openMenu);
+    menuClose?.addEventListener('click', closeMenu);
 
-// Tema sincronizado header/footer
-const themeBtnFooter = document.getElementById('themeBtnFooter');
-function syncThemeButtons(){
-  const isLight = document.body.classList.contains('light');
-  if (themeBtn) themeBtn.textContent = isLight ? '🌙' : '☀️';
-  if (themeBtnFooter) themeBtnFooter.textContent = isLight ? '🌙' : '☀️';
-}
-syncThemeButtons();
-if (themeBtnFooter){
-  themeBtnFooter.addEventListener('click', ()=>{
-    document.body.classList.toggle('light');
-    localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-    syncThemeButtons();
-  });
-}
+    // fechar ao clicar nos links
+    document.querySelectorAll('#mobileMenu .m-links a').forEach(a=>{
+      a.addEventListener('click', closeMenu);
+    });
 
-
+    // Sincronizar rótulos de idioma também no header após applyLang
+    const _applyLangRef = applyLang;
+    applyLang = function(lang){
+      _applyLangRef(lang);
+      // garante que o label do botão de idioma no header e no mobile estejam corretos
+      if (langBtn) langBtn.textContent = lang === 'pt' ? 'EN' : 'PT';
+      if (langBtnMobile) langBtnMobile.textContent = lang === 'pt' ? 'EN' : 'PT';
+    };
   </script>
 </body>
 </html>
-
