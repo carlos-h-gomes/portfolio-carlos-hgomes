@@ -146,9 +146,15 @@
     .nav-link.active{background:#ffffff14;border:1px solid #ffffff2a}
 
     .contact-tiles{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* sempre 3 colunas no desktop */
   gap: 18px;
+}
+
+@media (max-width: 768px) {
+  .contact-tiles{
+    grid-template-columns: 1fr; /* no mobile fica 1 coluna */
+  }
 }
 
 .contact-tile{
@@ -788,6 +794,7 @@
   </script>
 </body>
 </html>
+
 
 
 
