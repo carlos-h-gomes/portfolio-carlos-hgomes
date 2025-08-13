@@ -144,6 +144,77 @@
     /* Active section link */
     .nav-link{padding:8px 10px;border-radius:10px}
     .nav-link.active{background:#ffffff14;border:1px solid #ffffff2a}
+
+    .contact-tiles{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.contact-tile{
+  position: relative;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid #ffffff22;
+  box-shadow: var(--shadow);
+  padding: 22px 18px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.contact-tile:hover{
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px rgba(0,0,0,.45);
+  border-color: #ffffff44;
+}
+
+/* halo animado na borda */
+.contact-tile::before{
+  content:"";
+  position:absolute; inset:-1px;
+  border-radius:16px;
+  background: conic-gradient(
+      from 0deg,
+      rgba(141, 160, 255, .14),
+      rgba(169, 120, 255, .18),
+      rgba(141, 160, 255, .14)
+    );
+  mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+  -webkit-mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
+  padding:1px;
+  opacity:.65;
+  animation: spin 6s linear infinite;
+  pointer-events:none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* desliga animação para quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce){
+  .contact-tile::before{ animation: none; }
+  .contact-tile:hover{ transform:none; }
+}
+
+/* ícone redondo com gradiente */
+.contact-icon{
+  width:48px; height:48px; border-radius:999px;
+  display:grid; place-items:center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff; font-size:22px; line-height:1;
+  box-shadow: 0 8px 24px rgba(0,0,0,.28);
+  margin-bottom: 10px;
+}
+
+/* textos */
+.contact-tile h3{ margin:6px 0 4px }
+.contact-tile p{ margin:0 0 12px; color: var(--muted) }
+
+/* botão full */
+.contact-tile .btn{ width:100%; justify-content:center }
+
+/* variantes de cor (opcional) */
+.btn.whatsapp{ background:#25D366; border-color:transparent; color:#001; }
+.btn.linkedin{ background:#0077B5; border-color:transparent; }
   </style>
 </head>
 <body>
@@ -314,38 +385,41 @@
 <section id="contact">
   <div class="container">
     <h2 class="section-title" data-i18n="contact.title">Contato</h2>
-    <div class="contact-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
 
+    <div class="contact-tiles">
       <!-- Email -->
-      <div class="contact-card" style="text-align: center; padding: 20px;">
-        <h3>Me envie um e-mail</h3>
-        <p class="muted">Clique abaixo para abrir seu cliente de e-mail</p>
-        <a class="btn primary" href="mailto:carloshegomes@outlook.com">
-          📧 carloshegomes@outlook.com
+      <article class="contact-tile">
+        <div class="contact-icon" aria-hidden="true">📧</div>
+        <h3 data-i18n="contact.email.title">Me envie um e-mail</h3>
+        <p class="muted" data-i18n="contact.email.desc">Clique abaixo para abrir seu cliente de e-mail.</p>
+        <a class="btn primary" href="mailto:carloshegomes@outlook.com" data-i18n="contact.email.cta">
+          carloshegomes@outlook.com
         </a>
-      </div>
+      </article>
 
       <!-- WhatsApp -->
-      <div class="contact-card" style="text-align: center; padding: 20px;">
-        <h3>Me chame no WhatsApp</h3>
-        <p class="muted">Converse comigo diretamente pelo app</p>
-        <a class="btn primary" style="background-color: #25D366;" href="https://wa.me/5511981648739" target="_blank">
-          💬 +55 11 98164-8739
+      <article class="contact-tile">
+        <div class="contact-icon" aria-hidden="true">💬</div>
+        <h3 data-i18n="contact.whatsapp.title">Me chame no WhatsApp</h3>
+        <p class="muted" data-i18n="contact.whatsapp.desc">Converse comigo diretamente pelo app.</p>
+        <a class="btn whatsapp" href="https://wa.me/5511981648739" target="_blank" rel="noopener" data-i18n="contact.whatsapp.cta">
+          +55 11 98164-8739
         </a>
-      </div>
+      </article>
 
       <!-- LinkedIn -->
-      <div class="contact-card" style="text-align: center; padding: 20px;">
-        <h3>Me envie uma mensagem no LinkedIn</h3>
-        <p class="muted">Acesse meu perfil profissional</p>
-        <a class="btn primary" style="background-color: #0077B5;" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank">
-          🔗 linkedin.com/in/carlos-he-gomes
+      <article class="contact-tile">
+        <div class="contact-icon" aria-hidden="true">🔗</div>
+        <h3 data-i18n="contact.linkedin.title">Me envie uma mensagem no LinkedIn</h3>
+        <p class="muted" data-i18n="contact.linkedin.desc">Acesse meu perfil profissional.</p>
+        <a class="btn linkedin" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" data-i18n="contact.linkedin.cta">
+          linkedin.com/in/carlos-he-gomes
         </a>
-      </div>
-
+      </article>
     </div>
   </div>
 </section>
+
 
 
   <!-- MODAL -->
@@ -459,7 +533,19 @@
         "about.h.values": "Valores",
         "about.values": "Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.",
         "about.h.stack": "Stack",
-        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos."
+        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, integração com sistemas corporativos.",
+
+        "contact.email.title": "Me envie um e-mail",
+        "contact.email.desc": "Clique abaixo para abrir seu cliente de e-mail.",
+        "contact.email.cta": "carloshegomes@outlook.com",
+        
+        "contact.whatsapp.title": "Me chame no WhatsApp",
+        "contact.whatsapp.desc": "Converse comigo diretamente pelo app.",
+        "contact.whatsapp.cta": "+55 11 98164-8739",
+        
+        "contact.linkedin.title": "Me envie uma mensagem no LinkedIn",
+        "contact.linkedin.desc": "Acesse meu perfil profissional.",
+        "contact.linkedin.cta": "linkedin.com/in/carlos-he-gomes"
       },
       en:{
         "nav.home":"Home","nav.projects":"Projects","nav.about":"About","nav.career":"Career","nav.contact":"Contact",
@@ -520,7 +606,20 @@
         "about.h.values": "Values",
         "about.values": "I believe technology should serve the human experience, prioritizing simplicity, speed, and clarity in delivery. My goal is to create real impact through intelligent, scalable, and user-focused solutions.",
         "about.h.stack": "Stack",
-        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, corporate systems integration."
+        "about.stack": "Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), SQLite, Metabase, corporate systems integration.",
+
+        "contact.email.title": "Send me an email",
+        "contact.email.desc": "Click below to open your email client.",
+        "contact.email.cta": "carloshegomes@outlook.com",
+        
+        "contact.whatsapp.title": "Message me on WhatsApp",
+        "contact.whatsapp.desc": "Chat with me directly in the app.",
+        "contact.whatsapp.cta": "+55 11 98164-8739",
+        
+        "contact.linkedin.title": "Send me a message on LinkedIn",
+        "contact.linkedin.desc": "Visit my professional profile.",
+        "contact.linkedin.cta": "linkedin.com/in/carlos-he-gomes"
+
       }
     };
     let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('pt') ? 'pt' : 'en');
@@ -689,6 +788,7 @@
   </script>
 </body>
 </html>
+
 
 
 
