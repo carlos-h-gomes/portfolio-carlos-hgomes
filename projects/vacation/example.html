@@ -1,0 +1,50 @@
+<!doctype html><meta charset="utf-8"><title>Vacation & Leave Manager — Example</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a3f;--muted:#9fb0ff;--ink:#e6ecff;--acc:#6d8eff;--acc2:#8a5cff;--ok:#41d1a7;--warn:#ffcf5c;--bad:#ff6d8e}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b1020,#0a0e22);color:var(--ink)}
+.wrap{max-width:1200px;margin:auto;padding:22px}
+h1{font-size:clamp(22px,4vw,36px);margin:8px 0 12px}
+h2{font-size:clamp(18px,3vw,22px);margin:16px 0 8px;color:var(--muted)}
+.panel{background:#ffffff10;border:1px solid #ffffff22;border-radius:14px;box-shadow:0 10px 30px #00000044;padding:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#ffffff10;border:1px solid #ffffff22;border-radius:12px;padding:12px}
+.kpi .v{font-weight:800;font-size:1.3rem}
+.kpi .k{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.btn{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:12px;border:1px solid #ffffff33;background:#ffffff10;color:var(--ink);text-decoration:none}
+.btn.primary{border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+.table{width:100%;border-collapse:separate;border-spacing:0 8px}
+.table th{color:#aab6ff;text-align:left;font-weight:600;font-size:.9rem;padding:6px 8px}
+.table td{background:#ffffff0f;border:1px solid #ffffff1f;border-left:0;border-right:0;padding:10px 8px}
+.badge{padding:4px 8px;border-radius:999px;font-size:.78rem;border:1px solid #ffffff33;background:#ffffff12}
+.badge.ok{color:#0fe0b0;border-color:#0fe0b033;background:#0fe0b012}
+.badge.warn{color:#ffd479;border-color:#ffd47933;background:#ffd47912}
+.badge.bad{color:#ff7d9a;border-color:#ff7d9a33;background:#ff7d9a12}
+.code{font-family:ui-monospace,Consolas,monospace;background:#0f1433;border:1px solid #28306a;border-radius:10px;padding:10px;overflow:auto}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.sub{color:var(--muted)}
+hr{border:0;border-top:1px solid #ffffff1f;margin:16px 0}
+.note{color:#a4b3ff;font-size:.9rem}
+svg{max-width:100%}
+
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.c{background:#ffffff0f;border:1px solid #ffffff22;border-radius:10px;padding:8px;min-height:72px}
+.c .n{font-weight:700;margin-bottom:6px}
+.badge{display:inline-block;margin-top:4px}
+</style>
+<div class="wrap">
+  <a class="btn" href="/"><span>←</span>Voltar ao Portfólio</a>
+  <h1>Vacation & Leave Manager</h1>
+  <p class="sub">Calendário global, regras por squads e validações.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="v">12</div><div class="k">Squads</div></div>
+    <div class="kpi"><div class="v">84</div><div class="k">Colaboradores</div></div>
+    <div class="kpi"><div class="v">7</div><div class="k">Folgas hoje</div></div>
+    <div class="kpi"><div class="v">3</div><div class="k">Conflitos</div></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <h2>Calendário — Agosto</h2>
+    <div class="cal"><div class='c'><div class='n'>S</div></div><div class='c'><div class='n'>T</div></div><div class='c'><div class='n'>Q</div></div><div class='c'><div class='n'>Q</div></div><div class='c'><div class='n'>S</div></div><div class='c'><div class='n'>S</div></div><div class='c'><div class='n'>D</div></div><div class='c'><div class='n'>1</div></div><div class='c'><div class='n'>2</div></div><div class='c'><div class='n'>3</div><span class='badge warn'>Férias</span></div><div class='c'><div class='n'>4</div><span class='badge warn'>Férias</span></div><div class='c'><div class='n'>5</div><span class='badge warn'>Férias</span></div><div class='c'><div class='n'>6</div></div><div class='c'><div class='n'>7</div></div><div class='c'><div class='n'>8</div></div><div class='c'><div class='n'>9</div></div><div class='c'><div class='n'>10</div></div><div class='c'><div class='n'>11</div></div><div class='c'><div class='n'>12</div><span class='badge ok'>Home Office</span></div><div class='c'><div class='n'>13</div></div><div class='c'><div class='n'>14</div></div><div class='c'><div class='n'>15</div></div><div class='c'><div class='n'>16</div></div><div class='c'><div class='n'>17</div></div><div class='c'><div class='n'>18</div></div><div class='c'><div class='n'>19</div><span class='badge ok'>Home Office</span></div><div class='c'><div class='n'>20</div></div><div class='c'><div class='n'>21</div></div><div class='c'><div class='n'>22</div></div><div class='c'><div class='n'>23</div><span class='badge bad'>Folga crítica</span></div><div class='c'><div class='n'>24</div><span class='badge bad'>Folga crítica</span></div><div class='c'><div class='n'>25</div></div><div class='c'><div class='n'>26</div></div><div class='c'><div class='n'>27</div></div><div class='c'><div class='n'>28</div></div><div class='c'><div class='n'>29</div></div><div class='c'><div class='n'>30</div></div></div>
+  </div>
+</div>
