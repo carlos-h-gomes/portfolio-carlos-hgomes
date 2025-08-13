@@ -308,6 +308,27 @@
    Só garante um respiro maior entre os cards no mobile */
 #contact .grid{gap:18px}
 
+/* ===== Anti-overflow mobile ===== */
+html, body{ overflow-x: hidden; }
+
+/* flex-items podem causar overflow se não puderem encolher */
+.nav-inner > *, .controls, .brand,
+.grid > *, .card, .footer-full__inner > *,
+.ff-col, .ff-actions, .ff-contact { min-width: 0; }
+
+/* links/strings longos quebram corretamente */
+a, .desc, .ff-chip, .actions a, .contact-tile .btn {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* imagens e SVGs nunca extrapolam */
+img, svg, video { max-width: 100%; height: auto; }
+
+/* evita “sombra” criar área clicável fora do viewport */
+.nav-inner, .grid, .footer-full__inner { overflow-x: clip; }
+
+
 /* ===== FOOTER STRIP (faixa inferior) ===== */
 .footer-strip{
   margin-top:40px;
@@ -1032,3 +1053,4 @@ if (themeBtnFooter){
   </script>
 </body>
 </html>
+
