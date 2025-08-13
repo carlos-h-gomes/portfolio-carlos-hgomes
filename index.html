@@ -258,69 +258,43 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <h2 class="section-title" data-i18n="contact.title">Contato</h2>
-    <p class="section-sub">LinkedIn • Email • WhatsApp</p>
-    <div class="contact-grid">
+    <div class="contact-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
 
-      <!-- Card de formulário usando mailto -->
-      <div class="contact-card">
-        <form onsubmit="sendEmail(event)">
-          <div style="display:grid;gap:10px">
-            <input class="in" type="text" name="name" placeholder="Seu nome" required />
-            <input class="in" type="email" name="email" placeholder="Seu e-mail" required />
-            <textarea class="in" name="message" placeholder="Sua mensagem" required></textarea>
-            <button class="btn primary" type="submit" data-i18n="contact.send">Enviar mensagem</button>
-          </div>
-        </form>
-        <p class="muted" style="margin-top:10px" data-i18n="contact.note">
-          Ao enviar, seu cliente de e-mail será aberto.
-        </p>
+      <!-- Email -->
+      <div class="contact-card" style="text-align: center; padding: 20px;">
+        <h3>Me envie um e-mail</h3>
+        <p class="muted">Clique abaixo para abrir seu cliente de e-mail</p>
+        <a class="btn primary" href="mailto:carloshegomes@outlook.com">
+          📧 carloshegomes@outlook.com
+        </a>
       </div>
 
-      <!-- Card de links diretos -->
-      <div class="contact-card">
-        <h3>Links</h3>
-        <p class="muted">
-          <a href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank">
-            linkedin.com/in/carlos-he-gomes
-          </a>
-        </p>
-        <p class="muted">
-          <a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a>
-        </p>
-        <p class="muted">
-          <a href="https://wa.me/5511981648739" target="_blank">
-            WhatsApp: +55 11 98164-8739
-          </a>
-        </p>
-        <p class="muted">
-          <a href="#projects" data-i18n="cta.viewProjects">Ver projetos</a>
-        </p>
+      <!-- WhatsApp -->
+      <div class="contact-card" style="text-align: center; padding: 20px;">
+        <h3>Me chame no WhatsApp</h3>
+        <p class="muted">Converse comigo diretamente pelo app</p>
+        <a class="btn primary" style="background-color: #25D366;" href="https://wa.me/5511981648739" target="_blank">
+          💬 +55 11 98164-8739
+        </a>
       </div>
+
+      <!-- LinkedIn -->
+      <div class="contact-card" style="text-align: center; padding: 20px;">
+        <h3>Me envie uma mensagem no LinkedIn</h3>
+        <p class="muted">Acesse meu perfil profissional</p>
+        <a class="btn primary" style="background-color: #0077B5;" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank">
+          🔗 linkedin.com/in/carlos-he-gomes
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
 
-<script>
-  function sendEmail(event) {
-    event.preventDefault();
-    const form = event.target;
-    const name = encodeURIComponent(form.name.value);
-    const email = encodeURIComponent(form.email.value);
-    const message = encodeURIComponent(form.message.value);
-    const subject = `Contato via Portfólio — ${name}`;
-    const body = `Nome: ${name}%0AEmail: ${email}%0A%0AMensagem:%0A${message}`;
-    window.location.href = `mailto:carloshegomes@outlook.com?subject=${subject}&body=${body}`;
-  }
-</script>
-
-
-  <footer class="footer">
-    <div>Portfólio — Carlos Gomes • <span id="year"></span></div>
-  </footer>
 
   <!-- MODAL -->
 <div id="previewModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:9999">
@@ -597,6 +571,7 @@
   </script>
 </body>
 </html>
+
 
 
 
