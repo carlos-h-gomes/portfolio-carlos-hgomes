@@ -26,7 +26,7 @@ Custom **Generative AI assistant** for auditing customer service interactions, d
 
 ### 📊 [BI Analytics Platform](#)  
 End-to-end **business intelligence** platform replacing costly third-party solutions, centralizing operational metrics and automating reporting.  
-**Tech Stack:** Python, Flask, API Integrations, SQLite, Metabase  
+**Tech Stack:** Python, Flask, API Integrations, Postgres, Supsert  
 **Highlights:** Cost reduction | API-driven ingestion | Real-time analytics
 
 ---
