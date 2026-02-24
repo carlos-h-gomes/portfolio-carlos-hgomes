@@ -1,91 +1,76 @@
-<h1 align="center">🌟 Portfolio | Carlos Gomes</h1>
+<h1 align="center">Portfolio | Carlos Henrique Gomes</h1>
 
 <p align="center">
-  🚀 Generative AI | Process Automation | Data Analytics | Integrations  
-  🌐 <a href="https://carlos-h-gomes.github.io/portfolio-carlos-hgomes/" target="_blank">Access Online Portfolio</a>
+  Process Automation • Integrations • AI • Data Pipelines • Support Operations<br/>
+  <a href="https://carlos-h-gomes.github.io/portfolio-carlos-hgomes/" target="_blank">Access Online Portfolio</a>
 </p>
 
 ---
 
-## ✨ About Me
+## About
 
-💡 **IT Professional** with 10+ years of experience, specializing in **Generative AI**, **Process Automation**, **Data Analytics**, and **System Integrations**.  
-⚡ I transform complex challenges into **scalable, impactful, and human-centered solutions** — using AI, low-code/no-code tools, and creative problem-solving.  
-🛠️ Strong expertise in **prompt engineering** and AI solution design to achieve measurable results without necessarily writing full applications from scratch.
+Technology professional with **12+ years of experience** in **process automation**, **systems integration (APIs/Webhooks)**, **back-end development**, and **operations optimization**.
 
----
+My work is focused on building scalable solutions for support operations, internal teams, and e-commerce workflows — combining **Python**, **APIs**, **workflow orchestration (n8n)**, **data pipelines**, and **Generative AI (LLMs)** to reduce manual effort and improve decision-making.
 
-## 🚀 Featured Projects
-
-### 🔍 [Quality AI Assistant](#)  
-Custom **Generative AI assistant** for auditing customer service interactions, detecting improvement opportunities, and suggesting actionable insights.  
-**Tech Stack:** Python, OpenAI GPT, API Integrations  
-**Highlights:** Automated quality analysis | Sentiment detection | Improvement recommendations
+### Core stack
+- **Back-end:** Python, Flask, FastAPI, SQLAlchemy, PostgreSQL
+- **Integrations:** REST APIs, Webhooks, JSON, Celery, Redis, n8n, Docker
+- **Data & BI:** ETL / Data Pipelines, Apache Superset, KPIs, Dashboards
+- **AI:** GPT / Gemini, Prompt Engineering, Summarization, QA Automation, AI-assisted triage
 
 ---
 
-### 📊 [BI Analytics Platform](#)  
-End-to-end **business intelligence** platform replacing costly third-party solutions, centralizing operational metrics and automating reporting.  
-**Tech Stack:** Python, Flask, API Integrations, Postgres, Supsert  
-**Highlights:** Cost reduction | API-driven ingestion | Real-time analytics
+## Featured Projects
+
+### ProcessSurge *(Founder | Independent Project)*
+B2B initiative focused on **automation, integrations, and AI for operations and customer support**.  
+Includes solution design, technical architecture, self-hosted stack, and business model structuring.
+
+### ProcessSurge | Cart Recovery
+Abandoned cart recovery automation for e-commerce operations (WhatsApp / Email), with:
+- event-driven flows
+- communication sequences
+- opt-in/opt-out logic
+- orchestration using Webhooks, Redis/Celery, and n8n
+
+### ProcessSurge | Surge Assist
+AI-assisted support operations solution for:
+- ticket classification and prioritization
+- context summarization
+- heuristics + LLM workflow for triage and QA support
+
+### Other portfolio projects
+- **Quality AI Assistant** — AI-based interaction auditing and recommendations
+- **BI Analytics Platform** — API-driven BI and dashboards
+- **Customer Onboarding Portal** — guided onboarding flows and forms
+- **BotFlow Orchestrator** — visual chatbot flow management
+- **Client Health Monitor** — churn risk and action plans
+- **Vacation & Leave Manager** — operational leave management
+- **Utility APIs** — task automation APIs
 
 ---
 
-### 🛠️ [Customer Onboarding Portal](#)  
-Interactive onboarding site guiding clients through setup and configuration, integrating dynamic forms, guided steps, and branding customization.  
-**Tech Stack:** Python (Flask), HTML/CSS/JS  
-**Highlights:** Guided navigation | File uploads & customization | Multi-product architecture
+## Experience (Current)
+
+### Hi Platform — Automation and Integration Specialist (2021–Present)
+- APIs and back-end services for data ingestion and normalization
+- Integrations with REST APIs, Webhooks, Celery/Redis, and n8n
+- Data pipelines with Meta API (WhatsApp template metrics / CTR)
+- Executive dashboards in Apache Superset
+- Generative AI in support workflows (summarization, sentiment, QA)
 
 ---
 
-### 🤖 [BotFlow Orchestrator](#)  
-Visual **chatbot flow manager** capable of importing, editing, and exporting decision trees for multiple platforms.  
-**Tech Stack:** Python, Draw.io/YEd Integration, API Connectors  
-**Highlights:** Automated flow import/export | Multi-format support | Grouped visual editing
+## Contact
+
+- **LinkedIn:** <a href="https://www.linkedin.com/in/carlos-he-gomes">linkedin.com/in/carlos-he-gomes</a>  
+- **Email:** carloshegomes@outlook.com  
+- **WhatsApp:** +55 11 98164-8739
 
 ---
 
-### 🗓️ [Vacation & Leave Manager](https://github.com/carlos-h-gomes/gerenciador_ferias)  
-Complete platform to manage vacations, time off, and holidays — with dashboards, rules, and squad-based logic.  
-**Tech Stack:** Python, Flask, HTML, CSS  
-**Highlights:** Global calendar | Squad management | Rules engine
-
----
-
-### 🚦 [Customer Health Dashboard](https://github.com/carlos-h-gomes/farol_cx)  
-Tool for churn risk monitoring, action plans, and visual indicators for customer success teams.  
-**Tech Stack:** Python, Flask, HTML, CSS, JSON  
-**Highlights:** Score tracking | Timelines | Cross-team collaboration
-
----
-
-### 🔧 [Utility APIs](https://github.com/carlos-h-gomes/apis_utilitarias)  
-Collection of APIs to automate tasks like text formatting, validations, email sending, and OCR processing.  
-**Tech Stack:** Python, Flask, JSON  
-**Highlights:** CEP validation | Date calculations | Sentiment analysis | Document reading
-
----
-
-## 📊 Skills & Technologies
-
-<p>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="Python" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" height="40" alt="Flask" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="40" alt="HTML5" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="40" alt="CSS3" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="40" alt="GitHub" />
-  <img src="https://img.icons8.com/color/48/000000/chatgpt.png" height="40" alt="ChatGPT" />
-</p>
-
----
-
-## 📫 Contact
-
-- 🌐 [LinkedIn](https://www.linkedin.com/in/carlos-he-gomes)  
-- 📧 **carloshegomes@outlook.com**  
-
----
-
-<p align="center">
-  <i>“Technology should enhance the human experience — and that’s exactly where I deliver my best work.”</i>
-</p>
+## Notes for this repository
+- The portfolio homepage is in `index.html`
+- Project previews are in `/projects/<slug>/`
+- CV files are in `/docs/` (replace with updated PDFs when needed)
