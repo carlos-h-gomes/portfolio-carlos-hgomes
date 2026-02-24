@@ -69,8 +69,3 @@ AI-assisted support operations solution for:
 - **WhatsApp:** +55 11 98164-8739
 
 ---
-
-## Notes for this repository
-- The portfolio homepage is in `index.html`
-- Project previews are in `/projects/<slug>/`
-- CV files are in `/docs/` (replace with updated PDFs when needed)
