@@ -1,15 +1,38 @@
 [
   {
-    "slug": "projects",
-    "title": "Projects",
-    "short": "Projeto Projects — visualização e detalhes.",
+    "slug": "processsurge",
+    "title": "ProcessSurge",
+    "short": "Automação, integrações e IA para operações e atendimento.",
     "tags": [
-      "HTML",
-      "CSS",
-      "JS"
+      "Automation",
+      "AI",
+      "Integrations"
     ],
     "repo": "#",
-    "demo": "/projects/projects/embedded.html",
-    "thumb": "assets/img/projects.jpg"
+    "demo": "/projects/processsurge/embedded.html"
+  },
+  {
+    "slug": "cart-recovery",
+    "title": "ProcessSurge | Cart Recovery",
+    "short": "Recuperação de carrinho com réguas e orquestração por eventos.",
+    "tags": [
+      "VTEX",
+      "n8n",
+      "WhatsApp"
+    ],
+    "repo": "#",
+    "demo": "/projects/cart-recovery/embedded.html"
+  },
+  {
+    "slug": "surge-assist",
+    "title": "ProcessSurge | Surge Assist",
+    "short": "Triagem e priorização de tickets com heurísticas + LLMs.",
+    "tags": [
+      "LLMs",
+      "QA",
+      "Support"
+    ],
+    "repo": "#",
+    "demo": "/projects/surge-assist/embedded.html"
   }
 ]
