@@ -1,71 +1,90 @@
 <h1 align="center">Portfolio | Carlos Henrique Gomes</h1>
 
 <p align="center">
-  Process Automation • Integrations • AI • Data Pipelines • Support Operations<br/>
-  <a href="https://carlos-h-gomes.github.io/portfolio-carlos-hgomes/" target="_blank">Access Online Portfolio</a>
+  Automação • Integrações • IA • E-commerce • Atendimento<br/>
+  <a href="https://carlos-h-gomes.github.io/portfolio-carlos-hgomes/" target="_blank">🌐 Acessar Portfólio Online</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.processsurge.com/pt" target="_blank">🚀 ProcessSurge</a>
 </p>
 
 ---
 
-## About
+## Sobre
 
-Technology professional with **12+ years of experience** in **process automation**, **systems integration (APIs/Webhooks)**, **back-end development**, and **operations optimization**.
+Profissional de Tecnologia com mais de **12 anos de experiência** em automação de processos, integrações de sistemas (APIs/Webhooks), desenvolvimento back-end e otimização de operações.
 
-My work is focused on building scalable solutions for support operations, internal teams, and e-commerce workflows — combining **Python**, **APIs**, **workflow orchestration (n8n)**, **data pipelines**, and **Generative AI (LLMs)** to reduce manual effort and improve decision-making.
+Fundador da **ProcessSurge**, empresa que ajuda vendedores a crescer na internet com estrutura completa: loja online, integração com marketplaces, automação e atendimento com IA.
 
-### Core stack
-- **Back-end:** Python, Flask, FastAPI, SQLAlchemy, PostgreSQL
-- **Integrations:** REST APIs, Webhooks, JSON, Celery, Redis, n8n, Docker
-- **Data & BI:** ETL / Data Pipelines, Apache Superset, KPIs, Dashboards
-- **AI:** GPT / Gemini, Prompt Engineering, Summarization, QA Automation, AI-assisted triage
+### Stack principal
 
----
-
-## Featured Projects
-
-### ProcessSurge *(Founder | Independent Project)*
-B2B initiative focused on **automation, integrations, and AI for operations and customer support**.  
-Includes solution design, technical architecture, self-hosted stack, and business model structuring.
-
-### ProcessSurge | Cart Recovery
-Abandoned cart recovery automation for e-commerce operations (WhatsApp / Email), with:
-- event-driven flows
-- communication sequences
-- opt-in/opt-out logic
-- orchestration using Webhooks, Redis/Celery, and n8n
-
-### ProcessSurge | Surge Assist
-AI-assisted support operations solution for:
-- ticket classification and prioritization
-- context summarization
-- heuristics + LLM workflow for triage and QA support
-
-### Other portfolio projects
-- **Quality AI Assistant** — AI-based interaction auditing and recommendations
-- **BI Analytics Platform** — API-driven BI and dashboards
-- **Customer Onboarding Portal** — guided onboarding flows and forms
-- **BotFlow Orchestrator** — visual chatbot flow management
-- **Client Health Monitor** — churn risk and action plans
-- **Vacation & Leave Manager** — operational leave management
-- **Utility APIs** — task automation APIs
+| Área | Tecnologias |
+|---|---|
+| **Back-end** | Python, Flask, FastAPI, SQLAlchemy, PostgreSQL |
+| **Automação** | n8n, Docker, Redis, Celery, Webhooks, Jobs Agendados |
+| **IA & LLMs** | GPT-4o, Gemini, Claude, Prompt Engineering, RAG |
+| **Dados & BI** | Apache Superset, ETL Pipelines, KPIs, Meta Graph API |
+| **E-commerce** | Nuvemshop, VTEX, Shopify, Yampi |
+| **Marketplaces** | Mercado Livre, Shopee |
+| **Plataformas** | Chatwoot, Evolution API, EspoCRM, Seafile, EasyDocs |
+| **Outros** | Google Scripts, HTML/CSS/JS, REST APIs, WhatsApp Business API |
 
 ---
 
-## Experience (Current)
+## ProcessSurge
 
-### Hi Platform — Automation and Integration Specialist (2021–Present)
-- APIs and back-end services for data ingestion and normalization
-- Integrations with REST APIs, Webhooks, Celery/Redis, and n8n
-- Data pipelines with Meta API (WhatsApp template metrics / CTR)
-- Executive dashboards in Apache Superset
-- Generative AI in support workflows (summarization, sentiment, QA)
+**Fundador** | 2025 – Presente | [processsurge.com/pt](https://www.processsurge.com/pt)
+
+Ajudamos quem está começando a vender pela internet a crescer com estrutura. Criamos lojas e vitrines online, integramos com os principais marketplaces e ativamos automação, dados e atendimento com IA para que o vendedor foque só em vender.
+
+### Produtos
+
+**Cart Recovery**
+Recuperação de carrinho abandonado para e-commerce com réguas de comunicação via WhatsApp, opt-in/opt-out, orquestração por eventos usando Webhooks, Redis/Celery e n8n.
+
+**Surge Assist**
+Suporte com IA para triagem e priorização de tickets, sumarização de contexto e QA automatizado usando heurísticas e LLMs.
 
 ---
 
-## Contact
+## Outros Projetos
 
-- **LinkedIn:** <a href="https://www.linkedin.com/in/carlos-he-gomes">linkedin.com/in/carlos-he-gomes</a>  
-- **Email:** carloshegomes@outlook.com  
+| Projeto | Descrição |
+|---|---|
+| **BI Analytics + IA** | Plataforma onde a IA monta dashboards em tempo real a partir de qualquer base de dados |
+| **BotFlow Orchestrator** | Gerenciamento visual de fluxos de chatbot com orquestração de múltiplos bots |
+| **Client Health Monitor** | Monitoramento de saúde de clientes com risco de churn e planos de ação |
+| **Customer Onboarding Portal** | Fluxos guiados de onboarding e formulários inteligentes |
+| **Vacation & Leave Manager** | Gestão operacional de férias e ausências para times |
+| **Utility APIs** | APIs utilitárias para automação de tarefas recorrentes |
+
+---
+
+## Experiência
+
+### Hi Platform — Especialista de Automação e Integração (2021 – Presente)
+
+- Desenvolvimento de APIs e serviços back-end para ingestão e normalização de dados (Python, Flask, PostgreSQL)
+- Integrações via REST APIs, Webhooks, Celery/Redis e orquestração com n8n
+- Pipelines da Meta API com métricas de WhatsApp (CTR) e dashboards no Apache Superset
+- IA Generativa aplicada a QA, sumarização e triagem em fluxos de atendimento
+
+### Grupo Semar — Técnico de TI (2018 – 2021)
+
+- Suporte a redes, estações de trabalho e sistemas internos
+- Scripts em Python para inventário, backups e tarefas administrativas recorrentes
+- Padronização de rotinas e apoio à estabilidade operacional
+
+---
+
+## Formação
+
+- MBA em Gestão da Qualidade de Software
+- MBA em Inteligência Artificial & Big Data
+
+---
+
+## Contato
+
+- **LinkedIn:** [linkedin.com/in/carlos-he-gomes](https://www.linkedin.com/in/carlos-he-gomes)
+- **Email:** carloshegomes@outlook.com
 - **WhatsApp:** +55 11 98164-8739
-
----
