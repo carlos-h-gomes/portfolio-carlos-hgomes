@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Etapa: Cadastro de Usuários do Chat</h2>
+
+<p><strong>NOVOS CLIENTES</strong><br>
+<em>(Se sua empresa NÃO utiliza atualmente nenhum produto da HI Platform, este é seu modelo para preenchimento)</em></p>
+
+<details style="margin-bottom: 20px;">
+  <summary><strong>📌 Exemplo de preenchimento</strong></summary>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Perfil</th>
+        <th>Departamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>João da Silva</td><td>jsilva@hiplatfom.com</td><td>Operador</td><td>SAC</td></tr>
+      <tr><td>Maria Ferreira</td><td>mferreira@hiplatform.com</td><td>Supervisor</td><td>Financeiro</td></tr>
+      <tr><td>Sérgio Alves</td><td>salves@hiplatform.com</td><td>Administrador</td><td>Financeiro | Administrativo</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Perfil:</strong><br>
+  <span style="color:darkred">Operador:</span> usuário que faz atendimento no módulo operador.<br>
+  <span style="color:darkred">Supervisor:</span> usuário que tem acesso à consultas e relatórios no módulo supervisor.<br>
+  <span style="color:darkred">Administrador:</span> usuário que tem acesso a tudo e pode fazer configurações.</p>
+  <p><strong>Departamento(s):</strong> Os departamentos são os "Grupos" de atendimento Humanizado. <br>
+  Para mais de um, separe por <code> | </code> (barra vertical).</p>
+</details>
+
+<p><strong>Insira os dados dos usuários da plataforma: <span style="color:red">*</span> Base novo Cliente</strong></p>
+
+<form method="post">
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Perfil</th>
+        <th>Departamento(s)</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input name="nome" required></td>
+        <td><input type="email" name="email" required></td>
+        <td>
+          <select name="perfil" required>
+            <option>Operador</option>
+            <option>Supervisor</option>
+            <option>Administrador</option>
+          </select>
+        </td>
+        <td><input name="departamento" placeholder="Ex: Financeiro | Administrativo" required></td>
+        <td><button type="button" onclick="removerLinha(this)">🗑</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" onclick="adicionarLinha()">➕ Adicionar Usuário</button><br><br>
+  <button type="submit">Avançar →</button>
+</form>
+
+<script>
+  function adicionarLinha() {
+    const tabela = document.querySelector("#userTable tbody");
+    const novaLinha = tabela.rows[0].cloneNode(true);
+    novaLinha.querySelectorAll("input").forEach(input => input.value = "");
+    novaLinha.querySelector("select").value = "Operador";
+    tabela.appendChild(novaLinha);
+  }
+
+  function removerLinha(botao) {
+    const linha = botao.closest("tr");
+    if (linha.parentNode.rows.length > 1) linha.remove();
+  }
+</script>
+{% endblock %}

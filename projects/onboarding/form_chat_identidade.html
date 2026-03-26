@@ -1,0 +1,208 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Etapa: Identidade Visual do Chat</h2>
+
+<p><strong>🎨 Ajuste as cores desejadas:</strong><br>
+As alterações serão refletidas em tempo real no preview à direita.</p>
+
+<style>
+  .chat-preview {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start; /* garante alinhamento no topo */
+  }
+
+  .preview {
+    width: 320px;
+    background-color: var(--cor-fundo-janela, #ebebeb);
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    min-height: 500px;       /* altura mínima para igualar ao formulário */
+    max-height: 620px;       /* altura máxima para evitar estourar layout */
+    overflow-y: auto;        /* adiciona scroll se passar do limite */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .cabecalho {
+    background-color: var(--cor-fundo-cabecalho, #084057);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+  }
+  .cabecalho img {
+    max-height: 40px;
+  }
+  .msg-operador, .msg-cliente {
+    max-width: 80%;
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    position: relative;
+    border: 1px solid #ccc;
+  }
+  .msg-operador {
+    background-color: var(--cor-fundo-operador, #ffffff);
+    color: var(--cor-texto-operador, #084057);
+    margin-right: auto;
+    margin-left: 10px;
+    border-radius: 2px;
+  }
+  .msg-operador::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 12px;
+    border: 6px solid transparent;
+    border-right-color: var(--cor-fundo-operador, #ffffff);
+  }
+  .msg-cliente {
+    background-color: var(--cor-fundo-cliente, #ffffff);
+    color: var(--cor-texto-cliente, #000000);
+    margin-left: auto;
+    margin-right: 10px;
+    border-radius: 2px;
+  }
+  .msg-cliente::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 12px;
+    border: 6px solid transparent;
+    border-left-color: var(--cor-fundo-cliente, #ffffff);
+  }
+  .encerrado {
+    text-align: center;
+    font-size: 12px;
+    margin: 10px;
+    color: var(--cor-texto-geral, #084057);
+  }
+  .formulario {
+    flex: 1;
+    min-width: 300px;
+  }
+  .formulario table {
+    width: 100%;
+  }
+  .opcoes-widget {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .opcao-widget {
+    flex: 1 1 45%;  /* duas colunas, com folga */
+    min-width: 200px;
+  }
+  .opcao-widget img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  .opcao-widget em {
+    font-size: 13px;
+    color: #444;
+  }
+
+  .opcoes-widget img {
+    max-height: 80px;
+    display: block;
+    margin: 5px auto;
+    border: 1px solid #ccc;
+    padding: 4px;
+    background: #fff;
+  }
+</style>
+
+<div class="chat-preview">
+  <div class="formulario">
+    <form method="post" enctype="multipart/form-data">
+      <table>
+        <thead>
+          <tr><th>Elemento</th><th>Cor</th><th>Hexadecimal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Fundo Cabeçalho</td><td><input type="color" value="#084057" oninput="setCor('--cor-fundo-cabecalho', this.value)"></td><td><input name="hex_fundo_cabecalho" value="#084057" oninput="setCor('--cor-fundo-cabecalho', this.value)"></td></tr>
+          <tr><td>Fundo Diálogo Operador</td><td><input type="color" value="#ffffff" oninput="setCor('--cor-fundo-operador', this.value)"></td><td><input name="hex_fundo_operador" value="#ffffff" oninput="setCor('--cor-fundo-operador', this.value)"></td></tr>
+          <tr><td>Texto Diálogo Operador</td><td><input type="color" value="#084057" oninput="setCor('--cor-texto-operador', this.value)"></td><td><input name="hex_texto_operador" value="#084057" oninput="setCor('--cor-texto-operador', this.value)"></td></tr>
+          <tr><td>Fundo Diálogo Cliente</td><td><input type="color" value="#ffffff" oninput="setCor('--cor-fundo-cliente', this.value)"></td><td><input name="hex_fundo_cliente" value="#ffffff" oninput="setCor('--cor-fundo-cliente', this.value)"></td></tr>
+          <tr><td>Texto Diálogo Cliente</td><td><input type="color" value="#000000" oninput="setCor('--cor-texto-cliente', this.value)"></td><td><input name="hex_texto_cliente" value="#000000" oninput="setCor('--cor-texto-cliente', this.value)"></td></tr>
+          <tr><td>Textos Gerais</td><td><input type="color" value="#084057" oninput="setCor('--cor-texto-geral', this.value)"></td><td><input name="hex_texto_geral" value="#084057" oninput="setCor('--cor-texto-geral', this.value)"></td></tr>
+          <tr><td>Fundo da Janela</td><td><input type="color" value="#ebebeb" oninput="setCor('--cor-fundo-janela', this.value)"></td><td><input name="hex_fundo_janela" value="#ebebeb" oninput="setCor('--cor-fundo-janela', this.value)"></td></tr>
+        </tbody>
+      </table>
+
+      <br>
+      <label><strong>📁 Upload da Logomarca:</strong></label><br>
+      <input type="file" name="logo" accept="image/*" onchange="previewLogo(this)">
+      <p style="font-size: 13px;">
+        A logo deve ter 80px (altura) por 460px (largura), em <code>.png</code> ou <code>.psd</code> com fundo transparente.<br>
+        <span style="color: red;">Enviar também por e-mail.</span>
+      </p>
+
+      <div>
+        <label><strong>🔹 Formato do Widget:</strong></label><br><br>
+        <div class="opcoes-widget">
+          <label class="opcao-widget">
+            <input type="radio" name="formato" value="balao"> Balão<br>
+            <img src="/static/exemplo_balão.png" alt="Widget Balão">
+          </label>
+          <label class="opcao-widget">
+            <input type="radio" name="formato" value="circular"> Circular<br>
+            <img src="/static/Exemplo circular.png" alt="Widget Circular">
+          </label>
+          <label class="opcao-widget">
+            <input type="radio" name="formato" value="caixa"> Caixa<br>
+            <img src="/static/Exemplo caixa.png" alt="Widget Caixa">
+          </label>
+          <label class="opcao-widget">
+            <input type="radio" name="formato" value="oval"> Oval<br>
+            <img src="/static/Exemplo oval.png" alt="Widget Oval">
+          </label>
+          <label class="opcao-widget" style="flex-basis: 100%;">
+            <input type="radio" name="formato" value="personalizado"> Personalizado<br>
+            <em>Enviar imagem nas dimensões desejadas, fundo transparente e extensão png por email em anexo.</em>
+          </label>
+        </div>
+      </div>
+
+
+      <br>
+      <button type="submit">Avançar →</button>
+    </form>
+  </div>
+
+  <div class="preview" id="preview">
+    <div class="cabecalho" id="cabecalho-logo">
+      hi platform
+    </div>
+    <div class="msg-operador"><strong>Maria Luiza</strong> - 14:53<br>Olá! No que posso ajudar?</div>
+    <div class="msg-cliente"><strong>Ana</strong> - 14:53<br>Gostaria de tirar uma dúvida</div>
+    <div class="encerrado">────── CONEXÃO ENCERRADA ──────</div>
+  </div>
+</div>
+
+<script>
+  function setCor(variavel, valor) {
+    document.documentElement.style.setProperty(variavel, valor);
+  }
+
+  function previewLogo(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const cabecalho = document.getElementById('cabecalho-logo');
+      cabecalho.innerHTML = `<img src="${e.target.result}" alt="Logo">`;
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+{% endblock %}

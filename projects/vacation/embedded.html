@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Vacation — Preview</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b1020;color:#e6ecff}
+.wrap{padding:12px}
+select{padding:10px;border-radius:10px;border:1px solid #ffffff33;background:#121a3f;color:#e6ecff}
+iframe{width:100%;height:80vh;border:0;background:#000;margin-top:10px;border-top:1px solid #ffffff22}
+</style>
+<div class="wrap">
+  <label>Preview:
+    <select id="sel">
+      <option value="analitica_dashboard.html">analitica_dashboard.html</option><option value="base.html">base.html</option><option value="calendario.html">calendario.html</option><option value="datas_cadastro.html">datas_cadastro.html</option><option value="datas_editar.html">datas_editar.html</option><option value="ferias_editar.html">ferias_editar.html</option><option value="ferias_gerenciador.html">ferias_gerenciador.html</option><option value="hub.html">hub.html</option><option value="operacao_editar.html">operacao_editar.html</option><option value="operacao_gerenciador.html">operacao_gerenciador.html</option><option value="pessoas_cadastro.html">pessoas_cadastro.html</option><option value="pessoas_editar.html">pessoas_editar.html</option><option value="regras_cadastro.html">regras_cadastro.html</option><option value="regras_editar.html">regras_editar.html</option><option value="squads_cadastro.html">squads_cadastro.html</option><option value="times_cadastro.html">times_cadastro.html</option>
+    </select>
+  </label>
+  <iframe id="f" src="analitica_dashboard.html" title="preview"></iframe>
+</div>
+<script>
+const s=document.getElementById('sel'), f=document.getElementById('f');
+s.addEventListener('change',()=>f.src=s.value);
+</script>

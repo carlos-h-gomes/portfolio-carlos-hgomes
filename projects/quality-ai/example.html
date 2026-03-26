@@ -1,0 +1,71 @@
+<!doctype html><meta charset="utf-8"><title>Quality AI Assistant — Example</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a3f;--muted:#9fb0ff;--ink:#e6ecff;--acc:#6d8eff;--acc2:#8a5cff;--ok:#41d1a7;--warn:#ffcf5c;--bad:#ff6d8e}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b1020,#0a0e22);color:var(--ink)}
+.wrap{max-width:1200px;margin:auto;padding:22px}
+h1{font-size:clamp(22px,4vw,36px);margin:8px 0 12px}
+h2{font-size:clamp(18px,3vw,22px);margin:16px 0 8px;color:var(--muted)}
+.panel{background:#ffffff10;border:1px solid #ffffff22;border-radius:14px;box-shadow:0 10px 30px #00000044;padding:16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi{background:#ffffff10;border:1px solid #ffffff22;border-radius:12px;padding:12px}
+.kpi .v{font-weight:800;font-size:1.3rem}
+.kpi .k{color:var(--muted);font-size:.9rem}
+.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.table{width:100%;border-collapse:separate;border-spacing:0 8px}
+.table th{color:#aab6ff;text-align:left;font-weight:600;font-size:.9rem;padding:6px 8px}
+.table td{background:#ffffff0f;border:1px solid #ffffff1f;border-left:0;border-right:0;padding:10px 8px}
+.badge{padding:4px 8px;border-radius:999px;font-size:.78rem;border:1px solid #ffffff33;background:#ffffff12}
+.badge.ok{color:#0fe0b0;border-color:#0fe0b033;background:#0fe0b012}
+.badge.warn{color:#ffd479;border-color:#ffd47933;background:#ffd47912}
+.badge.bad{color:#ff7d9a;border-color:#ff7d9a33;background:#ff7d9a12}
+.code{font-family:ui-monospace,Consolas,monospace;background:#0f1433;border:1px solid #28306a;border-radius:10px;padding:10px;overflow:auto}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 14px}
+.sub{color:var(--muted)}
+hr{border:0;border-top:1px solid #ffffff1f;margin:16px 0}
+.note{color:#a4b3ff;font-size:.9rem}
+svg{max-width:100%}
+</style>
+<div class="wrap">
+  <h1>Quality AI Assistant</h1>
+  
+<p class="sub">Análise de qualidade com IA generativa: sentimento, checklist e recomendações.</p>
+<div class="kpis">
+  <div class="kpi"><div class="v">82</div><div class="k">QS (Quality Score)</div></div>
+  <div class="kpi"><div class="v">+17%</div><div class="k">Melhora mensal</div></div>
+  <div class="kpi"><div class="v">68%</div><div class="k">Resoluções na 1ª interação</div></div>
+  <div class="kpi"><div class="v">−31%</div><div class="k">Tempo médio</div></div>
+</div>
+<div class="grid" style="margin-top:14px">
+  <div class="panel">
+    <h2>Amostras auditadas</h2>
+    <table class="table">
+      <thead><tr><th>Ticket</th><th>Sentimento</th><th>Checklist</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>#8421</td><td><span class="badge ok">Positivo</span></td><td>8/10</td><td>Tom cordial; cumpriu SLA.</td></tr>
+        <tr><td>#8422</td><td><span class="badge warn">Neutro</span></td><td>6/10</td><td>Faltou confirmação de entendimento.</td></tr>
+        <tr><td>#8423</td><td><span class="badge bad">Negativo</span></td><td>5/10</td><td>Escalar antes da 2ª tentativa.</td></tr>
+        <tr><td>#8424</td><td><span class="badge ok">Positivo</span></td><td>9/10</td><td>Excelente sumarização final.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="panel">
+    <h2>Recomendações</h2>
+    <ul class="note">
+      <li>Padronizar abertura com confirmação de contexto.</li>
+      <li>Reforçar pedido de evidências para evitar retrabalho.</li>
+      <li>Respostas longas → usar bullets e CTA de próximo passo.</li>
+    </ul>
+    <hr/>
+    <h2>Distribuição por sentimento</h2>
+    <svg viewBox="0 0 640 220" role="img" aria-label="bar chart">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6d8eff"/><stop offset="100%" stop-color="#8a5cff"/></linearGradient></defs>
+<line x1="28" y1="192" x2="612" y2="192" stroke="#4a56a0" />
+<rect x="28.0" y="28.0" width="129.77777777777777" height="164.0" fill="url(#g)"/><text x="92.88888888888889" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">Pos</text>
+<rect x="222.66666666666666" y="75.37777777777778" width="129.77777777777777" height="116.62222222222222" fill="url(#g)"/><text x="287.55555555555554" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">Neu</text>
+<rect x="417.3333333333333" y="108.17777777777778" width="129.77777777777777" height="83.82222222222222" fill="url(#g)"/><text x="482.2222222222222" y="206" font-size="10" text-anchor="middle" fill="#aab6ff">Neg</text>
+</svg>
+  </div>
+</div>
+
+</div>

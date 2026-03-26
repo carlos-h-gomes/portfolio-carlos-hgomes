@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+  <h2>Bem-vindo ao Assistente de Configuração</h2>
+  <p>Clique no botão abaixo para iniciar o preenchimento.</p>
+  <a href="{{ url_for('formulario', etapa=etapas[0]) }}">
+    <button>Iniciar Coleta de Dados</button>
+  </a>
+{% endblock %}

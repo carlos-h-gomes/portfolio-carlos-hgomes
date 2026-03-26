@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Onboarding — Preview</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b1020;color:#e6ecff}
+.wrap{padding:12px}
+select{padding:10px;border-radius:10px;border:1px solid #ffffff33;background:#121a3f;color:#e6ecff}
+iframe{width:100%;height:80vh;border:0;background:#000;margin-top:10px;border-top:1px solid #ffffff22}
+</style>
+<div class="wrap">
+  <label>Preview:
+    <select id="sel">
+      <option value="form_chat_classificacoes.html">form_chat_classificacoes.html</option><option value="form_chat_frases.html">form_chat_frases.html</option><option value="form_chat_horario.html">form_chat_horario.html</option><option value="form_chat_identidade.html">form_chat_identidade.html</option><option value="form_chat_pesquisas.html">form_chat_pesquisas.html</option><option value="form_chat_usuarios.html">form_chat_usuarios.html</option><option value="layout.html">layout.html</option><option value="login_gp.html">login_gp.html</option><option value="resumo.html">resumo.html</option><option value="wizard_inicio.html">wizard_inicio.html</option>
+    </select>
+  </label>
+  <iframe id="f" src="form_chat_classificacoes.html" title="preview"></iframe>
+</div>
+<script>
+const s=document.getElementById('sel'), f=document.getElementById('f');
+s.addEventListener('change',()=>f.src=s.value);
+</script>
