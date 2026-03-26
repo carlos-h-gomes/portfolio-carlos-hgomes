@@ -3,962 +3,649 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portfolio | Carlos Henrique Gomes</title>
-  <meta name="description" content="Portfolio de Carlos Henrique Gomes — Automação de Processos, Integrações, IA, APIs e soluções orientadas a dados." />
+  <title>Carlos Henrique Gomes | Automação & IA</title>
+  <meta name="description" content="Portfólio de Carlos Henrique Gomes: Automação, Integrações, IA Generativa, APIs e soluções que geram impacto real." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg: #0b1020;
-      --bg-soft:#111735;
-      --card:#121a3f88;
-      --text:#e6ecff;
-      --muted:#9fb0ff;
-      --accent:#6d8eff;
-      --accent-2:#8a5cff;
-      --ring:#6d8eff33;
-      --ok:#41d1a7;
-      --warn:#ffcf5c;
-      --danger:#ff6d8e;
-      --shadow: 0 10px 25px rgba(0,0,0,.35);
-    }
-    .light{
-      --bg:#f7f9ff;
-      --bg-soft:#ffffff;
-      --card:#ffffffcc;
-      --text:#1c2240;
-      --muted:#5f6b98;
-      --accent:#365cff;
-      --accent-2:#7b35ff;
-      --ring:#365cff2e;
-      --ok:#0e9f6e;
-      --warn:#b7791f;
-      --danger:#e11d48;
-      --shadow: 0 10px 25px rgba(10, 30, 80, .12);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 80% -20%, #8a5cff22 0%, transparent 60%),
-        radial-gradient(800px 400px at -10% 10%, #6d8eff26 0%, transparent 55%),
-        linear-gradient(180deg, var(--bg) 0%, #0b1020 100%);
-      background-attachment: fixed;
-      scroll-behavior: smooth;
-    }
-    a{color:var(--accent);text-decoration:none}
-    a:hover{opacity:.9}
-
-    /* Navbar */
-    .nav{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(10,12,28,.75), rgba(10,12,28,.35));
-      border-bottom: 1px solid #ffffff12;
-    }
-    .nav-inner{
-      max-width:1100px;margin:auto;padding:14px 20px;display:flex;align-items:center;gap:14px;
-    }
-    .brand{
-      display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.3px
-    }
-    .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 16px var(--accent)}
-    .spacer{flex:1}
-    .nav a.btn, .btn{
-      padding:10px 14px;border:1px solid #ffffff22;border-radius:12px;background:#ffffff10;color:var(--text);
-      display:inline-flex;align-items:center;gap:8px;box-shadow:var(--shadow);transition:transform .12s ease, box-shadow .2s ease, background .2s ease
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px #00000044}
-    .btn.primary{border-color:transparent;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:white}
-    .btn.ghost{background:transparent;border:1px solid #ffffff22}
-    .controls{display:flex;gap:8px}
-
-    /* ===== MOBILE MENU: esconder links no mobile e mostrar hambúrguer ===== */
-    .nav-links{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    #menuBtn{display:none}
-    @media (max-width: 860px){
-      .nav-links{display:none}
-      #menuBtn{display:inline-flex}
-      .controls{display:none} /* controles vão para o menu móvel */
-    }
-
-    /* Hero */
-    .hero{
-      max-width:1100px;margin:0 auto;padding:64px 20px 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center
-    }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr; padding-top:40px}}
-    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:#ffffff10;border:1px solid #ffffff22;font-size:.88rem;color:var(--muted)}
-    .title{font-size:clamp(28px, 5vw, 46px);line-height:1.1;margin:14px 0 10px}
-    .subtitle{color:var(--muted);font-size:1.05rem}
-    .cta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-    .hero-card{
-      border-radius:18px;padding:22px; border:1px solid #ffffff20;background:linear-gradient(180deg, #ffffff15, #ffffff08);
-      box-shadow: var(--shadow)
-    }
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-    .metric{padding:14px;border-radius:12px;background:var(--card);border:1px solid #ffffff22;text-align:center}
-    .metric .n{font-weight:800;font-size:1.2rem}
-    .metric .k{color:var(--muted);font-size:.86rem}
-
-    /* Sections */
-    section{padding:56px 20px}
-    .container{max-width:1100px;margin:0 auto}
-    .section-title{font-size:1.8rem;margin:0 0 16px}
-    .section-sub{color:var(--muted);margin:0 0 28px}
-
-    /* Projects */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media (max-width: 1024px){ .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width: 680px){ .grid{grid-template-columns:1fr} }
-    .card{
-      border-radius:16px;background:var(--card);border:1px solid #ffffff24;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column
-    }
-    .thumb{
-      height:160px;background:
-        radial-gradient(450px 180px at 70% -20%, #6d8eff55 0%, transparent 60%),
-        radial-gradient(300px 160px at -10% 20%, #8a5cff55 0%, transparent 55%),
-        linear-gradient(180deg,#0f1538,#0b1020); display:flex; align-items:center; justify-content:center
-    }
-    .thumb svg{opacity:.8}
-    .content{padding:16px 16px 6px}
-    .pill{font-size:.76rem;color:var(--muted);border:1px dashed #ffffff33;border-radius:999px;padding:4px 10px;display:inline-block}
-    .card h3{margin:10px 0 8px}
-    .desc{color:var(--muted);font-size:.95rem}
-    .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-    .chip{font-size:.75rem;padding:6px 10px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff22}
-    .actions{display:flex;gap:8px;padding:12px 16px 16px;margin-top:auto}
-    .actions .btn{flex:1;justify-content:center}
-
-    /* About / Career — corrigido */
-    .timeline{position:relative; padding-left:22px}
-    .timeline:before{
-      content:""; position:absolute; left:8px; top:0; bottom:0;
-      width:2px; background:#ffffff22; border-radius:2px;
-    }
-    .t-item{position:relative; margin:14px 0 18px; padding-left:6px}
-    .t-item:before{
-      content:""; position:absolute; left:-8px; top:.6rem;
-      width:10px; height:10px; border-radius:50%;
-      background:linear-gradient(45deg,var(--accent),var(--accent-2));
-      box-shadow:0 0 10px var(--accent);
-    }
-    .t-title{font-weight:700}
-    .t-sub{color:var(--muted);font-size:.92rem}
-
-    /* Contact */
-    .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-    @media (max-width: 900px){ .contact-grid{grid-template-columns:1fr} }
-    .contact-card{border-radius:16px;background:var(--card);border:1px solid #ffffff24;box-shadow:var(--shadow);padding:18px}
-    .in{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #ffffff2e;background:#ffffff0a;color:var(--text);outline:none}
-    .in:focus{box-shadow:0 0 0 4px var(--ring);border-color:transparent}
-    textarea.in{min-height:120px;resize:vertical}
-    .muted{color:var(--muted)}
-    .footer{padding:30px 20px;color:var(--muted);text-align:center;border-top:1px solid #ffffff1a}
-
-    /* Active section link */
-    .nav-link{padding:8px 10px;border-radius:10px}
-    .nav-link.active{background:#ffffff14;border:1px solid #ffffff2a}
-
-    /* Contact tiles */
-    .contact-tiles{display:grid;grid-template-columns: repeat(3, 1fr);gap:18px}
-    @media (max-width: 768px){ .contact-tiles{grid-template-columns:1fr} }
-    .contact-tile{
-      position: relative;border-radius: 16px;background: var(--card);
-      border: 1px solid #ffffff22;box-shadow: var(--shadow);
-      padding: 22px 18px;overflow: hidden;transform-style: preserve-3d;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    }
-    .contact-tile:hover{transform: translateY(-4px) scale(1.01);box-shadow: 0 20px 40px rgba(0,0,0,.45);border-color: #ffffff44}
-    .contact-tile::before{
-      content:""; position:absolute; inset:-1px;border-radius:16px;
-      background: conic-gradient(from 0deg, rgba(141, 160, 255, .14), rgba(169, 120, 255, .18), rgba(141, 160, 255, .14));
-      mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
-      -webkit-mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
-      padding:1px;opacity:.65;animation: spin 6s linear infinite;pointer-events:none;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @media (prefers-reduced-motion: reduce){
-      .contact-tile::before{ animation: none; }
-      .contact-tile:hover{ transform:none; }
-    }
-    .contact-icon{
-      width:48px;height:48px;border-radius:999px;display:grid;place-items:center;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color:#fff;font-size:22px;line-height:1;box-shadow: 0 8px 24px rgba(0,0,0,.28);transition: transform .2s ease;
-      margin-bottom: 10px;
-    }
-    .card:hover .contact-icon{ transform: translateY(-2px) }
-    .contact-tile h3{ margin:6px 0 4px }
-    .contact-tile p{ margin:0 0 12px; color: var(--muted) }
-    .contact-tile .btn{ width:100%; justify-content:center }
-    .btn.whatsapp{ background:#25D366; border-color:transparent; color:#001; }
-    .btn.linkedin{ background:#0077B5; border-color:transparent; }
-
-    /* ======= MOBILE-FIRST & REFINOS ======= */
-    .container{padding-left:min(5vw,20px);padding-right:min(5vw,20px)}
-    @media (max-width: 900px){
-      .hero{grid-template-columns:1fr; gap:20px; padding:32px 16px 20px}
-      .title{font-size:clamp(24px, 6vw, 40px)}
-      .subtitle{font-size:1rem}
-      .cta .btn{width:100%; justify-content:center}
-      .metrics{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width: 520px){
-      .metrics{grid-template-columns:1fr}
-    }
-    @media (max-width: 860px){
-      .nav-inner{flex-wrap:nowrap; gap:10px}
-    }
-    @media (max-width: 900px){
-      section{padding:36px 0}
-      .section-title{font-size:1.5rem}
-      .section-sub{font-size:.98rem}
-    }
-    @media (max-width: 1024px){ .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width: 680px){
-      .grid{grid-template-columns:1fr}
-      .card{border-radius:14px}
-      .content{padding:14px}
-      .actions{padding:10px 14px 14px}
-    }
-    .thumb img{width:100%; height:160px; object-fit:cover; display:block}
-    @media (max-width: 520px){
-      .thumb{height:140px}
-      .thumb img{height:140px}
-      .timeline{padding-left:20px}
-      .t-item:before{left:-10px}
-    }
-
-    /* ===== Anti-overflow mobile ===== */
-    html, body{ overflow-x: hidden; }
-    .nav-inner > *, .controls, .brand,
-    .grid > *, .card, .footer-full__inner > *,
-    .ff-col, .ff-actions, .ff-contact { min-width: 0; }
-    a, .desc, .ff-chip, .actions a, .contact-tile .btn {
-      overflow-wrap: anywhere; word-break: break-word;
-    }
-    img, svg, video { max-width: 100%; height: auto; }
-    .nav-inner, .grid, .footer-full__inner { overflow-x: clip; }
-
-    /* ===== FOOTER STRIP ===== */
-    .footer-strip{
-      margin-top:40px;border-top:1px solid #ffffff1a;
-      background:
-        radial-gradient(500px 160px at 100% 0%, #8a5cff22 0%, transparent 60%),
-        radial-gradient(500px 160px at 0% 100%, #6d8eff22 0%, transparent 55%),
-        linear-gradient(180deg, #0d1230, #0a0f26);
-    }
-    .footer-strip.sticky{ position:sticky; bottom:0; z-index:40; }
-    .footer-strip__inner{
-      max-width:1100px; margin:0 auto; padding:10px 16px;
-      display:grid; grid-template-columns: 1.1fr 1fr 1.2fr; gap:10px; align-items:center;
-    }
-    .fs-left{display:flex; align-items:center; gap:10px; min-width:0}
-    .fs-left .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 16px var(--accent)}
-    .fs-muted{color:var(--muted); opacity:.9; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .fs-nav{display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap}
-    .fs-link{color:var(--text); opacity:.9}
-    .fs-link:hover{opacity:1; text-decoration:underline}
-    .fs-actions{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap}
-    .footer-strip__bar{border-top:1px solid #ffffff1a; color:var(--muted);display:flex; align-items:center; justify-content:space-between;padding:8px 16px; font-size:.92rem;}
-    @media (max-width: 960px){
-      .footer-strip__inner{grid-template-columns: 1fr; row-gap:10px}
-      .fs-left{justify-content:flex-start}
-      .fs-nav{justify-content:flex-start}
-      .fs-actions{justify-content:flex-start}
-    }
-    .footer-strip.sticky + * { scroll-margin-bottom: 80px; }
-
-    .footer-full{
-      width:100%;margin-top:56px;
-      background:
-        radial-gradient(800px 260px at 90% 0%, #8a5cff22 0%, transparent 60%),
-        radial-gradient(700px 260px at 0% 100%, #6d8eff22 0%, transparent 55%),
-        linear-gradient(180deg, #0c1233, #0a0f26 65%, #0a0f26 100%);
-      border-top:1px solid #ffffff1a;color:var(--text);
-    }
-    .footer-full__inner{
-      max-width:1100px;margin:0 auto;padding:28px 20px 34px;
-      display:grid;grid-template-columns: 1.1fr 1fr 1.2fr;gap:22px;align-items:flex-start;
-    }
-    .ff-col{display:flex;flex-direction:column;gap:10px}
-    .ff-title{margin:0 0 6px;font-size:.95rem;letter-spacing:.3px;color:var(--muted)}
-    .ff-link{color:var(--text);opacity:.9;margin:2px 0}
-    .ff-link:hover{opacity:1;text-decoration:underline}
-    .ff-muted{color:var(--muted);margin:6px 0 0}
-    .ff-copy{color:var(--muted);opacity:.9;margin:0}
-    .ff-actions{display:flex;flex-wrap:wrap;gap:8px}
-    .ff-contact{display:flex;flex-wrap:wrap;gap:8px}
-    .ff-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid #ffffff22;background:#ffffff10;}
-    .ff-chip:hover{background:#ffffff14}
-    @media (max-width: 980px){ .footer-full__inner{grid-template-columns:1fr 1fr; gap:18px} }
-    @media (max-width: 680px){ .footer-full__inner{grid-template-columns:1fr} }
-    .footer-full .brand{display:flex;align-items:center;gap:10px}
-    .footer-full .brand .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(45deg,var(--accent),var(--accent-2));box-shadow:0 0 16px var(--accent);}
-
-    /* ===== MOBILE MENU MODAL ===== */
-    #mobileMenu{
-      position:fixed; inset:0; display:none; z-index:9999;
-      background:rgba(0,0,0,.55);
-    }
-    #mobileMenu[aria-hidden="false"]{ display:block; }
-    .m-sheet{
-      position:absolute; right:0; top:0; bottom:0; width:min(90vw,420px);
-      background:var(--bg-soft); border-left:1px solid #ffffff22;
-      box-shadow: -10px 0 30px rgba(0,0,0,.4);
-      display:flex; flex-direction:column;
-      transform: translateX(100%); transition: transform .25s ease;
-    }
-    #mobileMenu[aria-hidden="false"] .m-sheet{ transform: translateX(0); }
-    .m-header{
-      display:flex; align-items:center; justify-content:space-between; gap:8px;
-      padding:14px 16px; border-bottom:1px solid #ffffff22; background:#121a3f88;
-    }
-    .m-content{
-      padding:16px; display:flex; flex-direction:column; gap:10px; overflow:auto;
-    }
-    .m-links a{padding:12px 10px;border-radius:12px;background:#ffffff0e;border:1px solid #ffffff1f;display:flex;align-items:center;gap:10px}
-    .m-links a:active{transform:translateY(1px)}
-    .m-controls{display:flex; gap:8px; margin-top:8px; flex-wrap:wrap}
+    :root{--bg:#050810;--bg2:#080d1a;--bgcard:rgba(255,255,255,.044);--text:#dde5f5;--muted:#4e5f80;--muted2:#8899bb;--a:#00c8f0;--a2:#9b55e8;--a3:#00e87a;--border:rgba(255,255,255,.08);--glow:rgba(0,200,240,.09);--shadow:0 20px 56px rgba(0,0,0,.52);--fh:'Manrope',sans-serif;--fb:'Manrope',sans-serif;--fm:'JetBrains Mono',monospace;--ease:all .28s cubic-bezier(.4,0,.2,1)}
+    .light{--bg:#f4f6fb;--bg2:#eaeef8;--bgcard:rgba(255,255,255,.85);--text:#0d1424;--muted:#6b7a9f;--muted2:#4b5675;--border:rgba(0,0,0,.09);--glow:rgba(0,100,220,.07);--shadow:0 14px 38px rgba(0,0,0,.11)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--fb);color:var(--text);background:var(--bg);line-height:1.65;overflow-x:hidden}
+    a{color:var(--a);text-decoration:none}
+    img,svg{max-width:100%}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:linear-gradient(var(--a),var(--a2));border-radius:3px}
+    /* CURSOR */
+    .cur{position:fixed;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(0,200,240,.65);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s;mix-blend-mode:difference}
+    .cur-dot{position:fixed;width:4px;height:4px;border-radius:50%;background:var(--a);pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+    @media(hover:none){.cur,.cur-dot{display:none}}
+    /* NAV */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;backdrop-filter:blur(22px) saturate(180%);background:rgba(5,8,16,.9);border-bottom:1px solid var(--border);transition:var(--ease)}
+    .light .nav{background:rgba(244,246,251,.92)}
+    .navi{max-width:1200px;margin:0 auto;padding:0 24px;height:62px;display:flex;align-items:center;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1rem;flex-shrink:0;letter-spacing:-.3px}
+    .brand-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--a),var(--a2));display:grid;place-items:center;font-size:1.05rem;box-shadow:0 0 20px rgba(0,200,240,.28);animation:pulseLogo 3.5s ease-in-out infinite}
+    @keyframes pulseLogo{0%,100%{box-shadow:0 0 20px rgba(0,200,240,.22)}50%{box-shadow:0 0 38px rgba(0,200,240,.45)}}
+    .sp{flex:1}
+    .navlinks{display:flex;align-items:center;gap:2px}
+    .nl{padding:7px 13px;border-radius:8px;font-size:.875rem;color:var(--muted2);transition:var(--ease);font-weight:500}
+    .nl:hover,.nl.active{color:var(--text);background:var(--bgcard)}
+    .nvctrls{display:flex;align-items:center;gap:8px}
+    .bicon{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--bgcard);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:var(--ease);font-size:.85rem;font-family:var(--fb);font-weight:700}
+    .bicon:hover{border-color:var(--a);background:var(--glow)}
+    .bpill{padding:9px 18px;border-radius:100px;border:none;cursor:pointer;font-family:var(--fb);font-weight:700;font-size:.84rem;background:linear-gradient(135deg,var(--a),var(--a2));color:#000;transition:var(--ease);white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center;gap:6px;letter-spacing:-.1px}
+    .bpill:hover{transform:translateY(-2px);box-shadow:0 6px 26px rgba(0,200,240,.4);color:#000}
+    .hamburger{display:none}
+    @media(max-width:820px){.navlinks{display:none}.hamburger{display:grid}}
+    /* MOBILE NAV */
+    #mobnav{position:fixed;inset:0;z-index:9998;display:none;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:rgba(5,8,16,.97);backdrop-filter:blur(20px)}
+    #mobnav.open{display:flex}
+    .mnl{font-size:2rem;font-weight:700;color:var(--muted2);transition:var(--ease);letter-spacing:-.5px}
+    .mnl:hover{color:var(--a)}
+    /* HERO */
+    .hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;padding-top:62px}
+    #hcanvas{position:absolute;inset:0;z-index:0;width:100%;height:100%}
+    .hero-in{max-width:1200px;margin:0 auto;padding:80px 24px;position:relative;z-index:1;width:100%;display:grid;grid-template-columns:1.25fr .75fr;gap:52px;align-items:center}
+    @media(max-width:900px){.hero-in{grid-template-columns:1fr;padding:48px 20px;gap:36px}}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 13px;border-radius:100px;border:1px solid rgba(0,200,240,.28);background:rgba(0,200,240,.06);font-family:var(--fm);font-size:.75rem;color:var(--a);margin-bottom:20px;animation:fadeUp .55s ease both}
+    .bdot{width:7px;height:7px;border-radius:50%;background:var(--a3);box-shadow:0 0 8px var(--a3);animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+    .hero-title{font-size:clamp(32px,4.8vw,58px);font-weight:800;line-height:1.1;margin-bottom:20px;animation:fadeUp .55s .08s ease both;letter-spacing:-.6px}
+    .hl{color:var(--a)}
+    .cblink{display:inline-block;width:2.5px;height:.8em;background:var(--a);margin-left:2px;vertical-align:middle;animation:cblink .8s step-end infinite}
+    @keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
+    .hero-sub{color:var(--muted2);font-size:1.02rem;max-width:510px;margin-bottom:30px;animation:fadeUp .55s .16s ease both;font-weight:400}
+    .hero-cta{display:flex;gap:10px;flex-wrap:wrap;animation:fadeUp .55s .24s ease both;margin-bottom:40px}
+    .bprim{padding:12px 24px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--a),var(--a2));color:#000;font-weight:700;font-family:var(--fb);font-size:.9rem;cursor:pointer;transition:var(--ease);display:inline-flex;align-items:center;gap:7px;text-decoration:none;letter-spacing:-.1px}
+    .bprim:hover{transform:translateY(-2px);box-shadow:0 10px 34px rgba(0,200,240,.4);color:#000}
+    .bout{padding:12px 24px;border-radius:10px;border:1px solid var(--border);background:var(--bgcard);color:var(--text);font-weight:600;font-family:var(--fb);font-size:.9rem;cursor:pointer;transition:var(--ease);display:inline-flex;align-items:center;gap:7px;text-decoration:none;letter-spacing:-.1px}
+    .bout:hover{border-color:var(--a);background:var(--glow);transform:translateY(-2px);color:var(--text)}
+    .hero-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;animation:fadeUp .55s .32s ease both}
+    @media(max-width:480px){.hero-metrics{grid-template-columns:1fr 1fr}}
+    .mcrd{border-radius:14px;border:1px solid var(--border);background:var(--bgcard);backdrop-filter:blur(20px);padding:16px 12px;text-align:center;transition:var(--ease)}
+    .mcrd:hover{border-color:var(--a);background:var(--glow);transform:translateY(-3px)}
+    .mn{font-size:1.8rem;font-weight:800;color:var(--a);display:block;letter-spacing:-1px}
+    .mk{font-size:.77rem;color:var(--muted);font-weight:500}
+    .hcard{border-radius:20px;border:1px solid var(--border);background:var(--bgcard);backdrop-filter:blur(28px);padding:26px;box-shadow:var(--shadow);animation:fadeRight .7s .28s ease both;position:relative;overflow:hidden}
+    .hcard::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:conic-gradient(from 0deg at 50% 50%,transparent,rgba(0,200,240,.04),transparent 30%,rgba(155,85,232,.05),transparent 60%);animation:rotateConic 10s linear infinite;pointer-events:none}
+    @keyframes rotateConic{to{transform:rotate(360deg)}}
+    .hcard-in{position:relative;z-index:1}
+    .hcard-lbl{font-family:var(--fm);font-size:.74rem;color:var(--a);margin-bottom:14px;display:flex;align-items:center;gap:6px;opacity:.9}
+    .hcard-lbl::before{content:'//';color:var(--muted);margin-right:2px}
+    .hcard-item{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid var(--border);transition:var(--ease)}
+    .hcard-item:last-child{border-bottom:none}
+    .hcard-item:hover{padding-left:5px}
+    .hii{width:36px;height:36px;border-radius:9px;flex-shrink:0;display:grid;place-items:center;font-size:1rem;background:rgba(0,200,240,.07);border:1px solid rgba(0,200,240,.14)}
+    .hit{font-size:.85rem;color:var(--muted2);line-height:1.4}
+    .hit strong{color:var(--text);display:block;font-size:.82rem;margin-bottom:2px;font-weight:600}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeRight{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
+    /* SECTIONS */
+    section{padding:84px 24px}
+    .container{max-width:1200px;margin:0 auto}
+    .bg2{background:var(--bg2)}
+    .slbl{font-family:var(--fm);font-size:.72rem;color:var(--a);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:10px;opacity:.9}
+    .slbl::before{content:'';width:18px;height:1px;background:var(--a)}
+    .stitle{font-size:clamp(24px,3.6vw,40px);font-weight:800;line-height:1.12;margin-bottom:12px;letter-spacing:-.5px}
+    .ssub{color:var(--muted2);max-width:560px;margin-bottom:44px;font-size:.97rem}
+    /* PROCESSSURGE */
+    .ps-wrap{padding:0 24px;margin:0 auto 84px;max-width:1248px}
+    .psbanner{border-radius:22px;background:linear-gradient(135deg,rgba(0,200,240,.07),rgba(155,85,232,.07));border:1px solid rgba(0,200,240,.2);padding:48px;position:relative;overflow:hidden}
+    .psinner{display:flex;align-items:center;gap:40px;position:relative;z-index:1}
+    @media(max-width:768px){.psinner{flex-direction:column}.psbanner{padding:28px 22px}}
+    .ps-mascot{width:155px;flex-shrink:0;filter:drop-shadow(0 10px 28px rgba(0,200,240,.28));animation:psFloat 4s ease-in-out infinite}
+    @keyframes psFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+    @media(max-width:600px){.ps-mascot{width:100px}}
+    .pscont{flex:1}
+    .pslbl{font-family:var(--fm);font-size:.72rem;color:var(--a);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;opacity:.9}
+    .pstitle{font-size:2rem;font-weight:800;color:var(--text);margin-bottom:11px;letter-spacing:-.5px}
+    .pstitle span{color:var(--a)}
+    .psdesc{color:var(--muted2);font-size:.95rem;max-width:460px;margin-bottom:18px}
+    .pschips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}
+    .pschip{padding:4px 12px;border-radius:100px;font-size:.74rem;background:rgba(0,200,240,.07);border:1px solid rgba(0,200,240,.2);color:var(--a);font-family:var(--fm)}
+    .pscta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .psmeta{display:flex;flex-direction:column;gap:14px;flex-shrink:0}
+    .psmitem{display:flex;flex-direction:column;gap:3px}
+    .psmk{font-family:var(--fm);font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px}
+    .psmv{font-size:.97rem;font-weight:700;color:var(--text)}
+    /* PROJECTS */
+    .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:1024px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:640px){.pgrid{grid-template-columns:1fr}}
+    .pcrd{border-radius:18px;border:1px solid var(--border);background:var(--bgcard);overflow:hidden;transition:var(--ease);display:flex;flex-direction:column}
+    .pcrd:hover{border-color:rgba(0,200,240,.34);transform:translateY(-8px);box-shadow:0 28px 56px rgba(0,0,0,.42)}
+    .pcrd.featured{border-color:rgba(0,200,240,.18);background:linear-gradient(135deg,rgba(0,200,240,.04),rgba(155,85,232,.04))}
+    .cthumb{height:170px;background:linear-gradient(135deg,rgba(0,200,240,.07),rgba(155,85,232,.1));display:flex;align-items:center;justify-content:center;font-size:3.2rem}
+    .cbody{padding:18px;flex:1;display:flex;flex-direction:column}
+    .ctags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+    .ctag{padding:3px 9px;border-radius:100px;font-size:.68rem;font-family:var(--fm);background:var(--bgcard);border:1px solid var(--border);color:var(--muted2)}
+    .ctitle{font-size:1.05rem;font-weight:700;margin-bottom:7px;letter-spacing:-.2px}
+    .cdesc{color:var(--muted2);font-size:.86rem;margin-bottom:14px;flex:1}
+    .cacts{display:flex;gap:8px}
+    .bcrd{flex:1;padding:9px 13px;border-radius:9px;font-size:.8rem;font-weight:600;font-family:var(--fb);cursor:pointer;transition:var(--ease);text-align:center;border:1px solid var(--border);background:var(--bgcard);color:var(--text);display:flex;align-items:center;justify-content:center;gap:5px;text-decoration:none}
+    .bcrd:hover{border-color:var(--a);color:var(--a);background:var(--glow)}
+    .bcrd.p{background:linear-gradient(135deg,var(--a),var(--a2));border-color:transparent;color:#000}
+    .bcrd.p:hover{box-shadow:0 6px 20px rgba(0,200,240,.38);transform:translateY(-1px);color:#000}
+    /* SKILLS */
+    .skillcats{display:flex;flex-direction:column;gap:32px}
+    .scat-title{font-family:var(--fm);font-size:.74rem;color:var(--a);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;opacity:.9}
+    .scat-title::after{content:'';flex:1;height:1px;background:var(--border)}
+    .stags{display:flex;flex-wrap:wrap;gap:9px}
+    .stag{padding:8px 15px;border-radius:10px;border:1px solid var(--border);background:var(--bgcard);font-size:.84rem;font-weight:500;color:var(--text);transition:var(--ease);cursor:default;display:flex;align-items:center;gap:7px}
+    .stag:hover{border-color:var(--a);background:var(--glow);color:var(--a);transform:translateY(-2px)}
+    .stag .si{font-size:1rem}
+    /* ABOUT */
+    .agrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:768px){.agrid{grid-template-columns:1fr}}
+    .about-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:36px}
+    @media(max-width:640px){.about-hero{grid-template-columns:1fr;gap:20px}}
+    .about-photo-wrap{position:relative;flex-shrink:0}
+    .about-photo{width:170px;height:200px;border-radius:18px;object-fit:cover;object-position:top center;border:2px solid rgba(0,200,240,.22);box-shadow:0 0 36px rgba(0,200,240,.14),0 16px 40px rgba(0,0,0,.4);display:block}
+    @media(max-width:640px){.about-photo{width:120px;height:150px}}
+    .about-photo-badge{position:absolute;bottom:-10px;right:-10px;background:linear-gradient(135deg,var(--a),var(--a2));color:#000;font-family:var(--fm);font-size:.65rem;font-weight:700;padding:5px 10px;border-radius:100px;white-space:nowrap}
+    .about-intro{font-size:1rem;color:var(--muted2);line-height:1.78}
+    .about-intro strong{color:var(--text);font-weight:700}
+    .acrd{border-radius:18px;border:1px solid var(--border);background:var(--bgcard);padding:24px;transition:var(--ease)}
+    .acrd:hover{border-color:var(--a);background:var(--glow);transform:translateY(-3px)}
+    .acrd.gl{background:linear-gradient(135deg,rgba(0,200,240,.06),rgba(155,85,232,.06));border-color:rgba(0,200,240,.16)}
+    .aicon{font-size:1.8rem;margin-bottom:12px}
+    .atitle{font-size:1rem;font-weight:700;margin-bottom:10px;letter-spacing:-.2px}
+    .acrd p,.acrd li{color:var(--muted2);font-size:.88rem;line-height:1.75}
+    .acrd ul{padding-left:16px}
+    .acrd li{margin-bottom:5px}
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:32px}
+    .timeline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--a),var(--a2) 60%,transparent)}
+    .ti{position:relative;margin-bottom:46px;opacity:0;transform:translateX(-14px);transition:opacity .5s ease,transform .5s ease}
+    .ti.vis{opacity:1;transform:translateX(0)}
+    .tdot{position:absolute;left:-29px;top:5px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--a2));box-shadow:0 0 18px rgba(0,200,240,.5)}
+    .tdot::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(0,200,240,.26);animation:ping 2.8s ease-in-out infinite}
+    @keyframes ping{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2.1)}}
+    .tperiod{font-family:var(--fm);font-size:.74rem;color:var(--a);margin-bottom:5px;opacity:.9}
+    .ttitle{font-size:1.18rem;font-weight:700;margin-bottom:3px;letter-spacing:-.3px}
+    .tco{color:var(--muted2);font-size:.9rem;margin-bottom:9px;font-weight:500}
+    .tdesc{color:var(--muted2);font-size:.87rem;margin-bottom:10px}
+    .tlist{list-style:none;padding:0}
+    .tlist li{padding:5px 0 5px 14px;color:var(--muted2);font-size:.85rem;border-left:2px solid var(--border);margin-bottom:5px;transition:var(--ease)}
+    .tlist li:hover{border-left-color:var(--a);color:var(--text);padding-left:18px}
+    /* CONTACT */
+    .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:768px){.cgrid{grid-template-columns:1fr}}
+    .ccrd{border-radius:18px;border:1px solid var(--border);background:var(--bgcard);padding:26px;transition:var(--ease);display:flex;flex-direction:column;align-items:flex-start;position:relative;overflow:hidden}
+    .ccrd:hover{transform:translateY(-5px);border-color:var(--a)}
+    .ccrd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a),var(--a2));transform:scaleX(0);transition:var(--ease);transform-origin:left}
+    .ccrd:hover::before{transform:scaleX(1)}
+    .cicon{width:50px;height:50px;border-radius:14px;margin-bottom:14px;display:grid;place-items:center;font-size:1.4rem;background:rgba(0,200,240,.09);border:1px solid rgba(0,200,240,.16)}
+    .ccrd h3{font-size:1.03rem;margin-bottom:7px;font-weight:700;letter-spacing:-.2px}
+    .ccrd p{color:var(--muted2);font-size:.86rem;margin-bottom:18px;flex:1}
+    .bwa{background:linear-gradient(135deg,#25D366,#128C7E)!important;border-color:transparent!important}
+    .bli{background:linear-gradient(135deg,#0077B5,#004471)!important;border-color:transparent!important}
+    /* FOOTER */
+    .footer{border-top:1px solid var(--border);padding:40px 24px;text-align:center;color:var(--muted);background:var(--bg2)}
+    .flinks{display:flex;justify-content:center;gap:22px;margin-bottom:14px;flex-wrap:wrap}
+    .flink{color:var(--muted2);font-size:.85rem;transition:var(--ease);font-weight:500}
+    .flink:hover{color:var(--a)}
+    /* CHATBOT */
+    #chatBtn{position:fixed;bottom:26px;right:26px;z-index:9000;width:62px;height:62px;border-radius:50%;border:none;cursor:pointer;background:transparent;display:flex;align-items:center;justify-content:center;padding:0;transition:var(--ease);animation:chatBounce 3.5s ease-in-out infinite}
+    @keyframes chatBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    #chatBtn:hover{animation:none;transform:scale(1.08)}
+    #chatBtn img{width:62px;height:62px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,200,240,.44);box-shadow:0 6px 28px rgba(0,200,240,.42)}
+    .ctip{position:absolute;right:72px;top:50%;transform:translateY(-50%);background:var(--bg2);border:1px solid var(--border);backdrop-filter:blur(16px);padding:7px 12px;border-radius:9px;font-size:.77rem;color:var(--text);white-space:nowrap;font-family:var(--fb);opacity:0;transition:var(--ease);pointer-events:none}
+    #chatBtn:hover .ctip{opacity:1}
+    #chatPanel{position:fixed;bottom:102px;right:26px;z-index:8999;width:370px;max-height:545px;border-radius:20px;border:1px solid rgba(0,200,240,.2);background:rgba(6,10,20,.97);backdrop-filter:blur(30px);box-shadow:0 28px 72px rgba(0,0,0,.65),0 0 32px rgba(0,200,240,.1);display:none;flex-direction:column;overflow:hidden;transform-origin:bottom right}
+    #chatPanel.open{display:flex;animation:scaleIn .22s ease}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+    @media(max-width:480px){#chatPanel{width:calc(100vw - 28px);right:14px}}
+    .chat-hdr{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;background:linear-gradient(135deg,rgba(0,200,240,.05),rgba(155,85,232,.05))}
+    .chat-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;overflow:hidden;border:1.5px solid rgba(0,200,240,.38)}
+    .chat-av img{width:100%;height:100%;object-fit:cover}
+    .chat-info{flex:1}
+    .chat-name{font-weight:700;font-size:.88rem;letter-spacing:-.2px}
+    .chat-status{font-size:.7rem;color:var(--a3);display:flex;align-items:center;gap:5px}
+    .chat-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--a3);box-shadow:0 0 7px var(--a3);animation:blink 2s infinite}
+    #chatClose{width:28px;height:28px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:.95rem;display:grid;place-items:center;transition:var(--ease)}
+    #chatClose:hover{border-color:var(--a);color:var(--text)}
+    #chatMsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px}
+    #chatMsgs::-webkit-scrollbar{width:3px}#chatMsgs::-webkit-scrollbar-thumb{background:var(--border)}
+    .cmsg{max-width:88%;padding:9px 13px;border-radius:13px;font-size:.84rem;line-height:1.58;animation:msgPop .28s ease}
+    @keyframes msgPop{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+    .cmsg.bot{background:rgba(0,200,240,.07);border:1px solid rgba(0,200,240,.15);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+    .cmsg.user{background:linear-gradient(135deg,rgba(0,200,240,.15),rgba(155,85,232,.15));color:var(--text);align-self:flex-end;border-bottom-right-radius:4px;margin-left:auto}
+    .ctyping{display:flex;gap:5px;padding:11px 13px;align-items:center;background:rgba(0,200,240,.07);border:1px solid rgba(0,200,240,.15);border-radius:13px;border-bottom-left-radius:4px;align-self:flex-start;max-width:64px}
+    .ctyping span{width:5px;height:5px;border-radius:50%;background:var(--a);animation:tdot 1.2s infinite}
+    .ctyping span:nth-child(2){animation-delay:.2s}.ctyping span:nth-child(3){animation-delay:.4s}
+    @keyframes tdot{0%,80%,100%{transform:scale(.8);opacity:.4}40%{transform:scale(1.2);opacity:1}}
+    .csugg{padding:7px 14px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;border-top:1px solid var(--border)}
+    .csug{padding:4px 11px;border-radius:100px;font-size:.73rem;background:rgba(0,200,240,.06);border:1px solid rgba(0,200,240,.18);color:var(--a);cursor:pointer;transition:var(--ease);font-family:var(--fb);white-space:nowrap}
+    .csug:hover{background:rgba(0,200,240,.13)}
+    .chat-irow{padding:10px 14px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;background:rgba(0,0,0,.2)}
+    #chatInput{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;padding:9px 13px;color:var(--text);font-family:var(--fb);font-size:.84rem;outline:none;transition:var(--ease);resize:none;max-height:80px}
+    #chatInput:focus{border-color:var(--a);background:rgba(0,200,240,.04)}
+    #chatSend{width:38px;height:38px;border-radius:9px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--a),var(--a2));color:#000;font-size:1rem;display:grid;place-items:center;transition:var(--ease);flex-shrink:0}
+    #chatSend:hover{box-shadow:0 4px 18px rgba(0,200,240,.42);transform:scale(1.05)}
+    /* MODAL */
+    #modal{position:fixed;inset:0;z-index:9990;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.72);backdrop-filter:blur(10px)}
+    #modal.open{display:flex;animation:fadeIn .2s ease}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    .modal-in{width:min(1100px,95vw);height:min(82vh,900px);background:var(--bg);border:1px solid var(--border);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 36px 90px rgba(0,0,0,.8);animation:scaleIn .22s ease}
+    .modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border);background:var(--bgcard);flex-shrink:0}
+    .modal-title{font-weight:700;font-size:.9rem}
+    .modal-acts{display:flex;gap:8px}
+    .modal-btn{padding:7px 13px;border-radius:9px;font-size:.78rem;font-family:var(--fb);font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--bgcard);color:var(--text);transition:var(--ease);text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+    .modal-btn:hover{border-color:var(--a);color:var(--a)}
+    #modalFrame{flex:1;border:0;background:#000}
+    /* REVEAL */
+    .rev{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+    .rev.vis{opacity:1;transform:translateY(0)}
+    .rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+    /* NOISE */
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    @media(max-width:820px){.nvctrls .bpill{display:none}}
+    @media(max-width:600px){section{padding:56px 16px}.ps-wrap{padding:0 16px;margin-bottom:56px}}
   </style>
 </head>
 <body>
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <button id="menuBtn" class="btn" aria-label="Abrir menu" aria-haspopup="dialog" aria-controls="mobileMenu">☰</button>
-      <div class="brand">
-        <span class="dot"></span> <span id="brandName">Carlos Henrique Gomes</span>
-      </div>
-      <div class="spacer"></div>
+<div class="cur" id="cur"></div>
+<div class="cur-dot" id="curDot"></div>
 
-      <!-- links que somem no mobile -->
-      <div class="nav-links" role="navigation" aria-label="Principal">
-        <a class="nav-link" href="#home" data-i18n="nav.home">Início</a>
-        <a class="nav-link" href="#about" data-i18n="nav.about">Sobre mim</a>
-        <a class="nav-link" href="#career" data-i18n="nav.career">Carreira</a>
-        <a class="nav-link" href="#contact" data-i18n="nav.contact">Contato</a>
-      </div>
-
-      <div class="controls">
-        <button id="langBtn" class="btn ghost" aria-label="Language">EN</button>
-        <button id="themeBtn" class="btn" aria-label="Theme">🌙</button>
-        <a class="btn primary" href="#projects" data-i18n="cta.viewProjects">Ver projetos</a>
-      </div>
+<nav class="nav">
+  <div class="navi">
+    <div class="brand"><div class="brand-logo">⚡</div><span>Carlos H. Gomes</span></div>
+    <div class="sp"></div>
+    <div class="navlinks">
+      <a class="nl" href="#home">Início</a><a class="nl" href="#processsurge">ProcessSurge</a>
+      <a class="nl" href="#projects">Projetos</a><a class="nl" href="#skills">Skills</a>
+      <a class="nl" href="#career">Carreira</a><a class="nl" href="#contact">Contato</a>
     </div>
-  </nav>
+    <div class="nvctrls">
+      <button class="bicon" id="langBtn">EN</button>
+      <button class="bicon" id="themeBtn">☀️</button>
+      <button class="bicon hamburger" id="hamburger">☰</button>
+    </div>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <header id="home" class="hero">
+<div id="mobnav">
+  <a class="mnl" href="#home" onclick="closeMob()">Início</a>
+  <a class="mnl" href="#processsurge" onclick="closeMob()">ProcessSurge</a>
+  <a class="mnl" href="#projects" onclick="closeMob()">Projetos</a>
+  <a class="mnl" href="#skills" onclick="closeMob()">Skills</a>
+  <a class="mnl" href="#career" onclick="closeMob()">Carreira</a>
+  <a class="mnl" href="#contact" onclick="closeMob()">Contato</a>
+  <button onclick="closeMob()" style="background:none;border:1px solid var(--border);color:var(--muted);padding:11px 22px;border-radius:100px;cursor:pointer;font-size:.95rem;font-family:var(--fb)">✕ Fechar</button>
+</div>
+
+<header id="home" class="hero">
+  <canvas id="hcanvas"></canvas>
+  <div class="hero-in">
     <div>
-      <span class="tag" data-i18n="hero.tag">IA Generativa • Automação • Integrações</span>
-      <h1 class="title" data-i18n="hero.title">Crio soluções de IA e automação que simplificam operações e geram impacto real.</h1>
-      <p class="subtitle" data-i18n="hero.subtitle">
-        Especialista em engenharia de prompts e desenho de fluxos com IA — foco em ganhos operacionais, experiência do cliente e escalabilidade.
-      </p>
-      <div class="cta">
-        <a class="btn primary" href="docs/Curriculo_Carlos_Henrique_Gomes.pdf" data-i18n="hero.btnCvPt">📄 Baixar CV (PT)</a>
-        <a class="btn" href="docs/Carlos_Henrique_Gomes_CV_EN.pdf" data-i18n="hero.btnCvEn">📄 Download CV (EN)</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener">LinkedIn</a>
+      <div class="hero-badge"><span class="bdot"></span><span id="hbadge">Disponível para novos projetos</span></div>
+      <h1 class="hero-title" id="htitle">Soluções de <span class="hl">Automação & IA</span><br>que geram impacto real<span class="cblink"></span></h1>
+      <p class="hero-sub" id="hsub">Especialista em automação de processos, integrações (APIs/Webhooks) e IA Generativa. Focado em escalar operações, reduzir trabalho manual e gerar inteligência real para o negócio.</p>
+      <div class="hero-cta">
+        <a class="bprim" href="docs/Curriculo_Carlos_Henrique_Gomes.pdf" download id="hcvpt">📄 Baixar CV (PT)</a>
+        <a class="bout" href="docs/Carlos_Henrique_Gomes_CV_EN.pdf" download id="hcven">📄 CV (EN)</a>
+        <a class="bout" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener">🔗 LinkedIn</a>
       </div>
-
-      <div class="metrics">
-        <div class="metric"><div class="n">12+</div><div class="k" data-i18n="m.years">anos em TI</div></div>
-        <div class="metric"><div class="n">80%</div><div class="k" data-i18n="m.gain">redução média de tempo</div></div>
-        <div class="metric"><div class="n">B2B</div><div class="k" data-i18n="m.focus">foco em impacto</div></div>
+      <div class="hero-metrics">
+        <div class="mcrd"><span class="mn" data-count="12">0</span><span class="mk" id="mky">anos em TI</span></div>
+        <div class="mcrd"><span class="mn" data-count="80" data-suffix="%">0</span><span class="mk" id="mkg">redução de tempo</span></div>
+        <div class="mcrd"><span class="mn" style="color:var(--a)">B2B</span><span class="mk" id="mkf">foco em operações</span></div>
       </div>
     </div>
-    <div class="hero-card">
-      <div class="pill" data-i18n="hero.card.title">O que eu faço</div>
-      <ul>
-        <li data-i18n="hero.card.li1">Automatizo processos com IA generativa e APIs</li>
-        <li data-i18n="hero.card.li2">Desenho fluxos de bots, qualidade e onboarding</li>
-        <li data-i18n="hero.card.li3">Transformo dados em indicadores e decisões</li>
-      </ul>
-    </div>
-  </header>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <h2 class="section-title" data-i18n="projects.title">Projetos em destaque</h2>
-      <div id="projectsGrid" class="grid"></div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title" data-i18n="about.title">Sobre mim</h2>
-
-    <p class="section-sub" data-i18n="about.sub">
-      Profissional de Tecnologia com mais de 12 anos de experiência em automação de processos, integrações de sistemas (APIs/Webhooks), desenvolvimento back-end e otimização de operações. Atuação focada em soluções escaláveis, orquestração de fluxos e uso de IA Generativa (LLMs) para ganho de produtividade, qualidade e inteligência operacional.
-    </p>
-
-      <div class="grid">
-        <div class="card" style="padding:18px">
-          <h3 data-i18n="about.h.skills">Principais habilidades</h3>
-          <ul class="muted">
-            <li data-i18n="about.li1">Prompt engineering e estratégia de IA</li>
-            <li data-i18n="about.li2">Desenho e otimização de fluxos conversacionais</li>
-            <li data-i18n="about.li3">Integração de APIs e automações de processos</li>
-            <li data-i18n="about.li4">Geração e ajuste de código Python via IA</li>
-            <li data-i18n="about.li5">Dashboards e indicadores para tomada de decisão</li>
-          </ul>
-        </div>
-
-        <div class="card" style="padding:18px">
-          <h3 data-i18n="about.h.values">Valores</h3>
-          <p class="muted" data-i18n="about.values">
-            Acredito que tecnologia deve servir à experiência humana, priorizando simplicidade, velocidade e clareza
-            na entrega. Meu objetivo é gerar impacto real por meio de soluções inteligentes, escaláveis e focadas no usuário.
-          </p>
-        </div>
-
-        <div class="card" style="padding:18px">
-          <h3 data-i18n="about.h.stack">Stack</h3>
-          <p class="muted" data-i18n="about.stack">
-            Python, Flask, HTML/CSS/JS, REST APIs, LLMs (OpenAI, Gemini), Postgres, Superset, integração com sistemas corporativos.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAREER -->
-  <section id="career">
-    <div class="container">
-      <h2 class="section-title" data-i18n="career.title">Carreira</h2>
-
-      <div class="timeline">
-
-        <!-- Hi Platform -->
-        <div class="t-item">
-          <div class="t-title">
-            Hi Platform — <span class="muted">
-              <span data-i18n="career.hi.role">Analista de Customer Care</span> | 
-              <span data-i18n="career.hi.period">2021–Atual</span>
-            </span>
-          </div>
-          <div class="t-sub" data-i18n="career.hi.sum">
-            IA generativa aplicada a rotinas, otimização de fluxos de chatbot, integrações via API e desenvolvimento de soluções internas para automação e analytics.
-          </div>
-          <ul class="muted" style="margin-top:8px; padding-left:18px">
-            <li data-i18n="career.hi.li1">Criação e manutenção de fluxos conversacionais otimizados para bots e assistentes virtuais.</li>
-            <li data-i18n="career.hi.li2">Automatização de processos internos, reduzindo tempo de execução e erros operacionais.</li>
-            <li data-i18n="career.hi.li3">Dashboards e relatórios customizados para acompanhamento de métricas.</li>
-          </ul>
-        </div>
-
-        <!-- Grupo Semar -->
-        <div class="t-item">
-          <div class="t-title">
-            Grupo Semar — <span class="muted">
-              <span data-i18n="career.semar.role">Técnico de TI</span> |
-              <span data-i18n="career.semar.period">2018–2021</span>
-            </span>
-          </div>
-          <div class="t-sub" data-i18n="career.semar.sum">
-            Suporte a infraestrutura de TI e implantação de ferramentas para agilizar workflows e automatizar tarefas manuais.
-          </div>
-          <ul class="muted" style="margin-top:8px; padding-left:18px">
-            <li data-i18n="career.semar.li1">Atendimento e suporte técnico a usuários e sistemas corporativos.</li>
-            <li data-i18n="career.semar.li2">Implantação de soluções que reduziram etapas manuais em processos internos.</li>
-            <li data-i18n="career.semar.li3">Manutenção preventiva e corretiva de equipamentos e redes.</li>
-          </ul>
-        </div>
-
-        <!-- Formação -->
-        <div class="t-item">
-          <div class="t-title" data-i18n="career.edu.title">Formação Acadêmica</div>
-          <ul class="muted" style="margin-top:8px; padding-left:18px">
-            <li data-i18n="career.edu.li1">MBA em Gestão da Qualidade de Software.</li>
-            <li data-i18n="career.edu.li2">MBA em Inteligência Artificial & Big Data (em andamento).</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <h2 class="section-title" data-i18n="contact.title">Contato</h2>
-
-      <div class="grid">
-        <!-- Email -->
-        <article class="card" style="padding:18px;display:flex;flex-direction:column">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-            <div class="contact-icon">📧</div>
-            <h3 style="margin:0" data-i18n="contact.email.title">Me envie um e-mail</h3>
-          </div>
-          <p class="muted" data-i18n="contact.email.desc">Clique abaixo para abrir seu cliente de e-mail.</p>
-          <div class="actions" style="margin-top:auto;padding:0">
-            <a class="btn primary" href="mailto:carloshegomes@outlook.com" data-i18n="contact.email.cta" style="width:100%;justify-content:center">
-              carloshegomes@outlook.com
-            </a>
-          </div>
-        </article>
-
-        <!-- WhatsApp -->
-        <article class="card" style="padding:18px;display:flex;flex-direction:column">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-            <div class="contact-icon">💬</div>
-            <h3 style="margin:0" data-i18n="contact.whatsapp.title">Me chame no WhatsApp</h3>
-          </div>
-          <p class="muted" data-i18n="contact.whatsapp.desc">Converse comigo diretamente pelo app.</p>
-          <div class="actions" style="margin-top:auto;padding:0">
-            <a class="btn" href="https://wa.me/5511981648739" target="_blank" rel="noopener" data-i18n="contact.whatsapp.cta" style="width:100%;justify-content:center;background:#25D366;border-color:transparent;color:#001">
-              +55 11 98164-8739
-            </a>
-          </div>
-        </article>
-
-        <!-- LinkedIn -->
-        <article class="card" style="padding:18px;display:flex;flex-direction:column">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
-            <div class="contact-icon">🔗</div>
-            <h3 style="margin:0" data-i18n="contact.linkedin.title">Me envie uma mensagem no LinkedIn</h3>
-          </div>
-          <p class="muted" data-i18n="contact.linkedin.desc">Acesse meu perfil profissional.</p>
-          <div class="actions" style="margin-top:auto;padding:0">
-            <a class="btn" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" data-i18n="contact.linkedin.cta" style="width:100%;justify-content:center;background:#0077B5;border-color:transparent">
-              linkedin.com/in/carlos-he-gomes
-            </a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODAL (projetos) -->
-  <div id="previewModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:9998">
-    <div style="width:min(1100px,95vw);height:min(80vh,900px);background:#0b1020;border:1px solid #ffffff22;border-radius:16px;box-shadow:0 20px 60px #00000066;display:flex;flex-direction:column;overflow:hidden">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid #ffffff22;background:#121a3f88">
-        <strong id="modalTitle" style="color:#e6ecff">Preview</strong>
-        <div style="display:flex;gap:8px">
-          <a id="modalOpenTab" class="btn" style="text-decoration:none;padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#ffffff10;color:#e6ecff" target="_blank" data-i18n="btn.openNewTab">Abrir em nova aba</a>
-          <button type="button" onclick="closePreview()" class="btn" style="padding:8px 12px;border-radius:10px;border:1px solid #ffffff22;background:#ffffff10;color:#e6ecff" data-i18n="btn.close">Fechar</button>
-        </div>
-      </div>
-      <iframe id="modalFrame" src="" style="flex:1;border:0;background:#000"></iframe>
-    </div>
-  </div>
-
-  <footer class="footer-full" role="contentinfo">
-
-      <div class="footer-full__inner">
-        <div class="ff-col">
-          <div class="brand"></div>
-          <p class="ff-copy">© <span id="year"></span> • Carlos Henrique Gomes</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- MOBILE MENU MODAL -->
-  <div id="mobileMenu" aria-hidden="true" role="dialog" aria-label="Menu">
-    <div class="m-sheet">
-      <div class="m-header">
-        <div class="brand"><span class="dot"></span><strong>Carlos Henrique Gomes</strong></div>
-        <button id="menuClose" class="btn" aria-label="Fechar menu">✕</button>
-      </div>
-      <div class="m-content">
-        <nav class="m-links" aria-label="Navegação móvel">
-          <a href="#home" class="m-item" data-i18n="nav.home">Início</a>
-          <a href="#about" class="m-item" data-i18n="nav.about">Sobre mim</a>
-          <a href="#career" class="m-item" data-i18n="nav.career">Carreira</a>
-          <a href="#contact" class="m-item" data-i18n="nav.contact">Contato</a>
-        </nav>
-        <div class="m-controls">
-          <button id="langBtnMobile" class="btn ghost" aria-label="Language">EN</button>
-          <button id="themeBtnMobile" class="btn" aria-label="Theme">🌙</button>
-          <a class="btn primary" href="#projects" data-i18n="cta.viewProjects">Ver projetos</a>
-        </div>
+    <div class="hcard">
+      <div class="hcard-in">
+        <div class="hcard-lbl" id="hclbl">O que eu faço</div>
+        <div class="hcard-item"><div class="hii">🔗</div><div class="hit"><strong id="hc1t">Integrações & APIs</strong><span id="hc1d">REST APIs, Webhooks, n8n, jobs agendados</span></div></div>
+        <div class="hcard-item"><div class="hii">🤖</div><div class="hit"><strong id="hc2t">IA Generativa</strong><span id="hc2d">LLMs para QA, sumarização e triagem</span></div></div>
+        <div class="hcard-item"><div class="hii">⚡</div><div class="hit"><strong id="hc3t">Automação</strong><span id="hc3d">Fluxos escaláveis com Python & Docker</span></div></div>
+        <div class="hcard-item"><div class="hii">📊</div><div class="hit"><strong id="hc4t">Analytics</strong><span id="hc4d">Dashboards, KPIs e pipelines de dados</span></div></div>
       </div>
     </div>
   </div>
+</header>
 
-  <script>
-    /* =========================
-       NAV HIGHLIGHT + YEAR
-    ==========================*/
-    const links = document.querySelectorAll('.nav-link');
-    const sections = [...document.querySelectorAll('section, header')];
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          links.forEach(l=>l.classList.remove('active'));
-          const id = e.target.getAttribute('id');
-          const active = document.querySelector(`.nav a[href="#${id}"]`);
-          if(active) active.classList.add('active');
-        }
-      });
-    }, {rootMargin:'-40% 0px -50% 0px', threshold: .1});
-    sections.forEach(s=>obs.observe(s));
+<div class="ps-wrap">
+  <div id="processsurge" class="psbanner rev">
+    <div class="psinner">
+      <img class="ps-mascot" src="carlinhos-welcome.png" alt="Carlinhos">
+      <div class="pscont">
+        <div class="pslbl" id="pslbl">Fundador & Arquiteto de Soluções</div>
+        <div class="pstitle">Process<span>Surge</span></div>
+        <p class="psdesc" id="psdesc">Ajudamos quem está começando a vender pela internet a crescer com estrutura. Criamos lojas e vitrines online, integramos com os principais marketplaces e ativamos automação, dados e atendimento com IA para que o vendedor foque só em vender.</p>
+        <div class="pschips"><span class="pschip">Automação</span><span class="pschip">Integrações</span><span class="pschip">IA Generativa</span><span class="pschip">n8n</span><span class="pschip">Python</span><span class="pschip">B2B SaaS</span></div>
+        <div class="pscta">
+          <a class="bprim" href="https://www.processsurge.com/pt" target="_blank" rel="noopener" id="psctabtn">🌐 Visitar ProcessSurge</a>
+          <a class="bout" href="#projects" id="psproj">Ver projetos →</a>
+        </div>
+      </div>
+      <div class="psmeta">
+        <div class="psmitem"><span class="psmk" id="psrl">Função</span><span class="psmv" id="psrv">Founder</span></div>
+        <div class="psmitem"><span class="psmk" id="pssl">Desde</span><span class="psmv">2025</span></div>
+        <div class="psmitem"><span class="psmk" id="psfl">Foco</span><span class="psmv" id="psfv">B2B SaaS</span></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+<section id="projects">
+  <div class="container">
+    <div class="slbl" id="splbl">Projetos</div>
+    <h2 class="stitle rev" id="stitlep">Projetos em destaque</h2>
+    <p class="ssub rev rd1" id="ssubp">Produtos e iniciativas com foco em automação, IA, integrações e operação.</p>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
 
-    /* =========================
-       THEME (sincronizado)
-    ==========================*/
-    const themeBtn = document.getElementById('themeBtn');
-    const themeBtnFooter = document.getElementById('themeBtnFooter');
-    const themeBtnMobile = document.getElementById('themeBtnMobile');
+<section id="skills" class="bg2">
+  <div class="container">
+    <div class="slbl" id="sskbl">Habilidades</div>
+    <h2 class="stitle rev" id="stitles">Stack & Tecnologias</h2>
+    <p class="ssub rev rd1" id="ssubs">Ferramentas e tecnologias que uso no dia a dia para construir soluções de alto impacto.</p>
+    <div class="skillcats rev rd2">
+      <div><div class="scat-title" id="scbe">Back-end & APIs</div><div class="stags"><span class="stag"><span class="si">🐍</span>Python</span><span class="stag"><span class="si">⚡</span>FastAPI</span><span class="stag"><span class="si">🌶️</span>Flask</span><span class="stag"><span class="si">🐘</span>PostgreSQL</span><span class="stag"><span class="si">🔗</span>SQLAlchemy</span><span class="stag"><span class="si">📡</span>REST APIs</span><span class="stag"><span class="si">🪝</span>Webhooks</span><span class="stag"><span class="si">🔴</span>Redis</span><span class="stag"><span class="si">🌿</span>Celery</span></div></div>
+      <div><div class="scat-title" id="scau">Automação & Orquestração</div><div class="stags"><span class="stag"><span class="si">⚡</span>n8n</span><span class="stag"><span class="si">🐳</span>Docker</span><span class="stag"><span class="si">🔄</span>Jobs Agendados</span><span class="stag"><span class="si">🤖</span>Chatbot Flows</span><span class="stag"><span class="si">📮</span>WhatsApp API</span><span class="stag"><span class="si">🔀</span>Orquestração</span></div></div>
+      <div><div class="scat-title" id="scai">IA & LLMs</div><div class="stags"><span class="stag"><span class="si">🧠</span>ChatGPT / GPT-4o</span><span class="stag"><span class="si">💎</span>Gemini</span><span class="stag"><span class="si">🤖</span>Claude (Anthropic)</span><span class="stag"><span class="si">✏️</span>Prompt Engineering</span><span class="stag"><span class="si">🔍</span>RAG</span><span class="stag"><span class="si">📝</span>Sumarização</span><span class="stag"><span class="si">🎯</span>Triagem Automática</span><span class="stag"><span class="si">✅</span>QA com IA</span></div></div>
+      <div><div class="scat-title" id="scda">Dados & Analytics</div><div class="stags"><span class="stag"><span class="si">📊</span>Apache Superset</span><span class="stag"><span class="si">🔄</span>ETL Pipelines</span><span class="stag"><span class="si">📈</span>KPIs & Dashboards</span><span class="stag"><span class="si">📱</span>Meta Graph API</span><span class="stag"><span class="si">📉</span>WhatsApp CTR</span><span class="stag"><span class="si">📋</span>Google Scripts</span></div></div>
+      <div><div class="scat-title" id="scec">E-commerce & Marketplaces</div><div class="stags"><span class="stag"><span class="si">🛍️</span>Nuvemshop</span><span class="stag"><span class="si">🛒</span>VTEX</span><span class="stag"><span class="si">🟢</span>Shopify</span><span class="stag"><span class="si">🟡</span>Yampi</span><span class="stag"><span class="si">🟠</span>Mercado Livre</span><span class="stag"><span class="si">🟣</span>Shopee</span></div></div>
+      <div><div class="scat-title" id="scsw">Plataformas & SaaS</div><div class="stags"><span class="stag"><span class="si">💬</span>Chatwoot</span><span class="stag"><span class="si">📞</span>Evolution API</span><span class="stag"><span class="si">👥</span>EspoCRM</span><span class="stag"><span class="si">📁</span>Seafile</span><span class="stag"><span class="si">📄</span>EasyDocs</span><span class="stag"><span class="si">🌐</span>HTML/CSS/JS</span></div></div>
+    </div>
+  </div>
+</section>
 
-    const savedTheme = localStorage.getItem('theme');
-    if(savedTheme === 'light'){ document.body.classList.add('light'); }
-    function setThemeLabels(){
-      const isLight = document.body.classList.contains('light');
-      const icon = isLight ? '🌙' : '☀️';
-      [themeBtn, themeBtnFooter, themeBtnMobile].forEach(b=> b && (b.textContent = icon));
-    }
-    function toggleTheme(){
-      document.body.classList.toggle('light');
-      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
-      setThemeLabels();
-    }
-    setThemeLabels();
-    [themeBtn, themeBtnFooter, themeBtnMobile].forEach(b=> b && b.addEventListener('click', toggleTheme));
+<section id="about">
+  <div class="container">
+    <div class="slbl" id="sabl">Sobre</div>
+    <h2 class="stitle rev" id="stitlea">Sobre mim</h2>
+    <div class="about-hero rev rd1">
+      <div class="about-photo-wrap">
+        <img class="about-photo" src="carlos-photo.png" alt="Carlos Henrique Gomes">
+        <span class="about-photo-badge">12+ anos em TI</span>
+      </div>
+      <p class="about-intro" id="ssuba">Profissional de Tecnologia com <strong>mais de 12 anos de experiência</strong> em automação de processos, integrações de sistemas (APIs/Webhooks), desenvolvimento back-end e otimização de operações. Fundador da <strong>ProcessSurge</strong>, focado em soluções escaláveis, orquestração de fluxos e uso de <strong>IA Generativa</strong> para ganho real de produtividade e inteligência operacional.</p>
+    </div>
+    <div class="agrid">
+      <div class="acrd rev"><div class="aicon">🛠️</div><div class="atitle" id="ask">Principais Habilidades</div><ul><li>Automação de processos e integração de sistemas</li><li>APIs REST, Webhooks, jobs e orquestração com n8n</li><li>Back-end com Python, Flask/FastAPI e PostgreSQL</li><li>Pipelines de dados, KPIs e dashboards (Superset)</li><li>IA Generativa (GPT/Gemini) para QA, sumarização e triagem</li></ul></div>
+      <div class="acrd rev rd1"><div class="aicon">🎯</div><div class="atitle" id="avt">Valores</div><p id="avd">Tecnologia deve gerar impacto real no negócio: menos operação manual, mais previsibilidade, qualidade e escala. Soluções simples para problemas complexos, com foco total em resultado.</p></div>
+      <div class="acrd rev rd2"><div class="aicon">🎓</div><div class="atitle" id="aet">Formação</div><ul><li>MBA em Gestão da Qualidade de Software</li><li>MBA em Inteligência Artificial & Big Data</li></ul></div>
+      <div class="acrd gl rev rd3"><div class="aicon">💼</div><div class="atitle" id="ast">Stack Principal</div><p style="font-family:var(--fm);font-size:.76rem;line-height:2.1;color:var(--a)">Python · Flask · FastAPI · PostgreSQL<br>SQLAlchemy · REST APIs · Webhooks<br>n8n · Docker · Redis / Celery<br>Apache Superset · GPT · Gemini · RAG</p></div>
+    </div>
+  </div>
+</section>
 
-    /* =========================
-       i18n dicionário completo
-    ==========================*/
-    const i18n = {
-      pt:{
-        "nav.home":"Início","nav.projects":"Projetos","nav.about":"Sobre mim","nav.career":"Carreira","nav.contact":"Contato",
-        "cta.viewProjects":"Ver projetos",
-        "hero.tag":"Automação • Integrações • IA • APIs",
-        "hero.title":"Desenvolvo soluções de automação e IA para escalar operações e gerar impacto real.",
-        "hero.subtitle":"Especialista em automação de processos, integrações e IA aplicada a operações, atendimento, e-commerce e times internos.",
-        "hero.btnCvPt":"📄 Baixar CV (PT)","hero.btnCvEn":"📄 Download CV (EN)",
-        "m.years":"anos em TI","m.gain":"redução de tempo","m.focus":"foco em operações",
-        "hero.card.title":"O que eu faço",
-        "hero.card.li1":"Crio integrações com APIs, webhooks e jobs agendados",
-        "hero.card.li2":"Orquestro fluxos com n8n, Docker e serviços internos",
-        "hero.card.li3":"Aplico LLMs em QA, suporte, triagem e analytics",
-        "projects.title":"Projetos em destaque",
-        "projects.sub":"Produtos e iniciativas com foco em automação, IA, integrações e operação.",
-        "about.title":"Sobre mim",
-        "about.sub":"Profissional de Tecnologia com mais de 12 anos de experiência em automação de processos, integração de sistemas (APIs/Webhooks), desenvolvimento back-end e otimização de operações. Atuação focada em soluções escaláveis, orquestração de fluxos e uso de IA Generativa (LLMs) para produtividade, qualidade e inteligência operacional.",
-        "about.h.skills":"Principais habilidades",
-        "about.li1":"Automação de processos e integração de sistemas",
-        "about.li2":"APIs REST, Webhooks, jobs e orquestração com n8n",
-        "about.li3":"Back-end com Python, Flask/FastAPI e PostgreSQL",
-        "about.li4":"Pipelines de dados, KPIs e dashboards (Superset)",
-        "about.li5":"IA Generativa (GPT/Gemini) para QA, sumarização e triagem",
-        "about.h.values":"Valores",
-        "about.values":"Tecnologia deve gerar impacto real no negócio: menos operação manual, mais previsibilidade, qualidade e escala.",
-        "about.h.stack":"Stack",
-        "about.stack":"Python, Flask, FastAPI, PostgreSQL, SQLAlchemy, REST APIs, Webhooks, n8n, Docker, Redis/Celery, Apache Superset, LLMs (GPT/Gemini).",
-        "career.title":"Carreira",
-        "career.hi.role":"Especialista de Automação e Integração",
-        "career.hi.period":"Set/2021 – Atual",
-        "career.hi.sum":"Desenvolvimento de APIs, integrações e automações para operações e atendimento, com foco em escala, confiabilidade e ganhos operacionais.",
-        "career.hi.li1":"APIs e serviços back-end para ingestão/normalização de dados com Python, Flask, SQLAlchemy e PostgreSQL.",
-        "career.hi.li2":"Integrações via REST APIs, Webhooks, Celery/Redis e orquestração com n8n.",
-        "career.hi.li3":"Pipelines da Meta API, métricas de WhatsApp (CTR), dashboards no Superset e IA aplicada a QA/sumarização.",
-        "career.semar.role":"Técnico de TI",
-        "career.semar.period":"Jun/2018 – Ago/2021",
-        "career.semar.sum":"Suporte à infraestrutura corporativa e automação de rotinas técnicas para reduzir tarefas manuais.",
-        "career.semar.li1":"Suporte a redes, estações de trabalho e sistemas internos.",
-        "career.semar.li2":"Scripts em Python para inventário, backups e tarefas administrativas recorrentes.",
-        "career.semar.li3":"Padronização de rotinas e apoio à estabilidade operacional.",
-        "career.edu.title":"Formação Acadêmica",
-        "career.edu.li1":"MBA em Gestão da Qualidade de Software.",
-        "career.edu.li2":"MBA em Inteligência Artificial & Big Data.",
-        "contact.title":"Contato","contact.send":"Enviar mensagem","contact.note":"Este formulário é um mock. Personalize a ação via e-mail/API.",
-        "btn.page":"Página","btn.example":"Abrir exemplo","btn.openNewTab":"Abrir em nova aba","btn.close":"Fechar",
-        "contact.email.title":"Me envie um e-mail",
-        "contact.email.desc":"Clique abaixo para abrir seu cliente de e-mail.",
-        "contact.email.cta":"carloshegomes@outlook.com",
-        "contact.whatsapp.title":"Me chame no WhatsApp",
-        "contact.whatsapp.desc":"Converse comigo diretamente pelo app.",
-        "contact.whatsapp.cta":"+55 11 98164-8739",
-        "contact.linkedin.title":"Me envie uma mensagem no LinkedIn",
-        "contact.linkedin.desc":"Acesse meu perfil profissional.",
-        "contact.linkedin.cta":"linkedin.com/in/carlos-he-gomes"
-      },
-      en:{
-        "nav.home":"Home","nav.projects":"Projects","nav.about":"About","nav.career":"Career","nav.contact":"Contact",
-        "cta.viewProjects":"View projects",
-        "hero.tag":"Automation • Integrations • AI • APIs",
-        "hero.title":"I build automation and AI solutions to scale operations and drive real business impact.",
-        "hero.subtitle":"Automation, integrations, and AI specialist focused on operations, customer support, e-commerce, and internal process efficiency.",
-        "hero.btnCvPt":"📄 Download CV (PT)","hero.btnCvEn":"📄 Download CV (EN)",
-        "m.years":"years in IT","m.gain":"time reduction","m.focus":"operations-focused",
-        "hero.card.title":"What I do",
-        "hero.card.li1":"Build integrations with APIs, webhooks, and scheduled jobs",
-        "hero.card.li2":"Orchestrate workflows with n8n, Docker, and internal services",
-        "hero.card.li3":"Apply LLMs to QA, support triage, summarization, and analytics",
-        "projects.title":"Featured Projects",
-        "projects.sub":"Products and initiatives focused on automation, AI, integrations, and operations.",
-        "about.title":"About me",
-        "about.sub":"Technology professional with 12+ years of experience in process automation, systems integration (APIs/Webhooks), back-end development, and operations optimization. Focused on scalable solutions, workflow orchestration, and Generative AI (LLMs) to improve productivity, quality, and operational intelligence.",
-        "about.h.skills":"Key skills",
-        "about.li1":"Process automation and systems integration",
-        "about.li2":"REST APIs, Webhooks, jobs, and n8n orchestration",
-        "about.li3":"Back-end development with Python, Flask/FastAPI, and PostgreSQL",
-        "about.li4":"Data pipelines, KPIs, and dashboards (Superset)",
-        "about.li5":"Generative AI (GPT/Gemini) for QA, summarization, and triage",
-        "about.h.values":"Values",
-        "about.values":"Technology should create real business impact: less manual work, more predictability, quality, and scale.",
-        "about.h.stack":"Stack",
-        "about.stack":"Python, Flask, FastAPI, PostgreSQL, SQLAlchemy, REST APIs, Webhooks, n8n, Docker, Redis/Celery, Apache Superset, LLMs (GPT/Gemini).",
-        "career.title":"Career",
-        "career.hi.role":"Automation and Integration Specialist",
-        "career.hi.period":"Sep/2021 – Present",
-        "career.hi.sum":"Development of APIs, integrations, and automation for support and operations, focused on scalability, reliability, and operational efficiency.",
-        "career.hi.li1":"APIs and back-end services for data ingestion/normalization with Python, Flask, SQLAlchemy, and PostgreSQL.",
-        "career.hi.li2":"Integrations via REST APIs, Webhooks, Celery/Redis, and workflow orchestration with n8n.",
-        "career.hi.li3":"Meta API pipelines, WhatsApp CTR metrics, Superset dashboards, and AI for QA/summarization.",
-        "career.semar.role":"IT Technician",
-        "career.semar.period":"Jun/2018 – Aug/2021",
-        "career.semar.sum":"Corporate IT infrastructure support and automation of technical routines to reduce manual work.",
-        "career.semar.li1":"Support for networks, workstations, and internal systems.",
-        "career.semar.li2":"Python scripts for inventory, backups, and recurring administrative tasks.",
-        "career.semar.li3":"Routine standardization and operational stability support.",
-        "career.edu.title":"Education",
-        "career.edu.li1":"MBA in Software Quality Management.",
-        "career.edu.li2":"MBA in Artificial Intelligence & Big Data.",
-        "contact.title":"Contact","contact.send":"Send message","contact.note":"This form is a mock. Connect it to email/API if needed.",
-        "btn.page":"Page","btn.example":"Open preview","btn.openNewTab":"Open in new tab","btn.close":"Close",
-        "contact.email.title":"Send me an email",
-        "contact.email.desc":"Click below to open your email client.",
-        "contact.email.cta":"carloshegomes@outlook.com",
-        "contact.whatsapp.title":"Message me on WhatsApp",
-        "contact.whatsapp.desc":"Chat with me directly in the app.",
-        "contact.whatsapp.cta":"+55 11 98164-8739",
-        "contact.linkedin.title":"Send me a message on LinkedIn",
-        "contact.linkedin.desc":"Visit my professional profile.",
-        "contact.linkedin.cta":"linkedin.com/in/carlos-he-gomes"
-      }
-    };
+<section id="career" class="bg2">
+  <div class="container">
+    <div class="slbl" id="scbl">Experiência</div>
+    <h2 class="stitle rev" id="stitlc">Carreira</h2>
+    <div class="timeline">
+      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp1">Set/2021 – Atual</div><div class="ttitle" id="tt1">Especialista de Automação e Integração</div><div class="tco">Hi Platform</div><div class="tdesc" id="td1">Desenvolvimento de APIs, integrações e automações para operações e atendimento, com foco em escala e ganhos operacionais.</div><ul class="tlist"><li>APIs e serviços back-end para ingestão e normalização de dados (Python, Flask, PostgreSQL).</li><li>Integrações via REST APIs, Webhooks, Celery/Redis e orquestração com n8n.</li><li>Pipelines da Meta API, métricas de WhatsApp (CTR), dashboards no Superset e IA aplicada a QA.</li></ul></div>
+      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp2">Jun/2018 – Ago/2021</div><div class="ttitle" id="tt2">Técnico de TI</div><div class="tco">Grupo Semar</div><div class="tdesc" id="td2">Suporte à infraestrutura corporativa e automação de rotinas técnicas.</div><ul class="tlist"><li>Suporte a redes, estações de trabalho e sistemas internos.</li><li>Scripts em Python para inventário, backups e tarefas recorrentes.</li><li>Padronização de rotinas e apoio à estabilidade operacional.</li></ul></div>
+      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp3">2025 – Atual</div><div class="ttitle" id="tt3">Fundador da ProcessSurge</div><div class="tco"><a href="https://www.processsurge.com/pt" target="_blank" rel="noopener" style="color:var(--a)">processsurge.com</a></div><div class="tdesc" id="td3">Empresa focada em ajudar vendedores que estão começando na internet. Do zero: loja online, marketplaces, automação e atendimento com IA.</div><ul class="tlist"><li>Criação de lojas e vitrines online integradas aos principais marketplaces.</li><li>Produtos: Cart Recovery, Surge Assist, BI Analytics, BotFlow, Client Health Monitor.</li><li>Stack: Python, n8n, Docker, LLMs, PostgreSQL, Redis, Apache Superset.</li></ul></div>
+    </div>
+  </div>
+</section>
 
-    /* =========================
-       Idioma (sincronizado)
-    ==========================*/
-    let currentLang = localStorage.getItem('lang') || (navigator.language?.startsWith('pt') ? 'pt' : 'en');
-    const langBtn = document.getElementById('langBtn');
-    const langBtnMobile = document.getElementById('langBtnMobile');
+<section id="contact">
+  <div class="container">
+    <div class="slbl" id="sccbl">Contato</div>
+    <h2 class="stitle rev" id="stitlec">Vamos conversar?</h2>
+    <p class="ssub rev rd1" id="ssubc">Aberto a projetos, parcerias e oportunidades. Entre em contato pelo canal de sua preferência.</p>
+    <div class="cgrid">
+      <div class="ccrd rev"><div class="cicon">📧</div><h3 id="cet">E-mail</h3><p id="ced">Clique abaixo para abrir seu cliente de e-mail e me enviar uma mensagem diretamente.</p><a class="bprim" href="mailto:carloshegomes@outlook.com" style="width:100%;justify-content:center">carloshegomes@outlook.com</a></div>
+      <div class="ccrd rev rd1"><div class="cicon">💬</div><h3 id="cwt">WhatsApp</h3><p id="cwd">Converse comigo diretamente pelo app. Respondo rápido!</p><a class="bprim bwa" href="https://wa.me/5511981648739" target="_blank" rel="noopener" style="width:100%;justify-content:center;color:#fff">+55 11 98164-8739</a></div>
+      <div class="ccrd rev rd2"><div class="cicon">🔗</div><h3 id="clt">LinkedIn</h3><p id="cld">Acesse meu perfil profissional e me envie uma mensagem por lá.</p><a class="bprim bli" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" style="width:100%;justify-content:center;color:#fff">linkedin.com/in/carlos-he-gomes</a></div>
+    </div>
+  </div>
+</section>
 
-    function applyLang(lang){
-      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
-      if (langBtn) langBtn.textContent = lang === 'pt' ? 'EN' : 'PT';
-      if (langBtnMobile) langBtnMobile.textContent = lang === 'pt' ? 'EN' : 'PT';
-      document.querySelectorAll('[data-i18n]').forEach(el=>{
-        const key = el.dataset.i18n;
-        if(i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
-      });
-      localStorage.setItem('lang', lang);
-      currentLang = lang;
-      renderProjects(); // re-render cards conforme idioma
-    }
-    function initLang(){ applyLang(currentLang); }
-    initLang();
-    [langBtn, langBtnMobile].forEach(b => b && b.addEventListener('click', ()=> applyLang(currentLang === 'pt' ? 'en' : 'pt')));
+<footer class="footer">
+  <div class="flinks">
+    <a class="flink" href="#home">Início</a>
+    <a class="flink" href="#projects">Projetos</a>
+    <a class="flink" href="https://www.processsurge.com/pt" target="_blank">ProcessSurge ↗</a>
+    <a class="flink" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank">LinkedIn</a>
+    <a class="flink" href="mailto:carloshegomes@outlook.com">E-mail</a>
+  </div>
+  <p>© <span id="yr"></span> Carlos Henrique Gomes · Todos os direitos reservados.</p>
+</footer>
 
-    /* =========================
-       Projetos (render robusto)
-    ==========================*/
-    function getLangSafe(){
-      try { return localStorage.getItem('lang') || (navigator.language?.startsWith('pt') ? 'pt' : 'en'); }
-      catch(_) { return 'pt'; }
-    }
+<button id="chatBtn" onclick="toggleChat()">
+  <img src="carlinhos-head.png" alt="Carlinhos">
+  <span class="ctip" id="ctip">Pergunte sobre mim!</span>
+</button>
 
-    const PROJECTS = [
-      { slug:'processsurge', title:'ProcessSurge', pill:'B2B • Automation • AI',
-        desc_pt:'Projeto independente focado em automação de processos, integrações e IA para operações e atendimento.',
-        desc_en:'Independent project focused on process automation, integrations, and AI for operations and customer support.',
-        chips:['Automation','Integrations','AI'] },
-      { slug:'cart-recovery', title:'ProcessSurge | Cart Recovery', pill:'E-commerce • WhatsApp • Recovery',
-        desc_pt:'Recuperação de carrinho com réguas de comunicação, opt-in/opt-out e orquestração por eventos.',
-        desc_en:'Abandoned cart recovery automation with messaging sequences, opt-in/opt-out logic, and event orchestration.',
-        chips:['VTEX','n8n','Redis/Celery'] },
-      { slug:'surge-assist', title:'ProcessSurge | Surge Assist', pill:'Support • AI • Triage',
-        desc_pt:'Classificação e priorização de tickets com heurísticas + LLMs para triagem e QA assistidos.',
-        desc_en:'Ticket classification and prioritization with heuristics + LLMs for assisted triage and QA.',
-        chips:['LLMs','QA','Support Ops'] },
-      { slug:'quality-ai', title:'Quality AI Assistant', pill:'AI • Quality • CX',
-        desc_pt:'Assistente generativo para auditoria de interações, com análise de sentimento e recomendações.',
-        desc_en:'Generative assistant for auditing interactions with sentiment and recommendations.',
-        chips:['Python','OpenAI','APIs'] },
-      { slug:'bi-analytics', title:'BI Analytics Platform', pill:'BI • Analytics',
-        desc_pt:'Plataforma de BI com ingestão via APIs e dashboards quase em tempo real.',
-        desc_en:'BI platform with API ingestion and near real-time dashboards.',
-        chips:['Python','Flask','Superset'] },
-      { slug:'onboarding', title:'Customer Onboarding Portal', pill:'Onboarding • UX',
-        desc_pt:'Portal com formulários dinâmicos, etapas guiadas e personalização visual.',
-        desc_en:'Portal with dynamic forms, guided steps and branding.',
-        chips:['Flask','HTML','CSS/JS'] },
-      { slug:'botflow', title:'BotFlow Orchestrator', pill:'Bots • Flows',
-        desc_pt:'Orquestrador visual para fluxos multi-plataforma com import/export.',
-        desc_en:'Visual orchestrator with multi-platform import/export.',
-        chips:['Python','Draw.io/YEd','Connectors'] },
-      { slug:'client-health', title:'Client Health Monitor', pill:'CS • Retention',
-        desc_pt:'Risco de churn, plano de ação e indicadores visuais.',
-        desc_en:'Churn risk, action plan and visual indicators.',
-        chips:['Python','Flask','JSON'] },
-      { slug:'vacation', title:'Vacation & Leave Manager', pill:'Ops • HR',
-        desc_pt:'Gestão de férias/folgas com calendário global, regras por squads e painéis.',
-        desc_en:'Vacation/leave management with global calendar, squad rules and dashboards.',
-        chips:['Python','Flask','HTML/CSS'] },
-      { slug:'utility-apis', title:'Utility APIs', pill:'Ops • APIs',
-        desc_pt:'Coleção de APIs para automações: OCR, validações, formatação e integrações.',
-        desc_en:'API collection for automation: OCR, validations, formatting and integrations.',
-        chips:['Python','Flask','REST'] }
-    ];
+<div id="chatPanel">
+  <div class="chat-hdr">
+    <div class="chat-av"><img src="carlinhos-head.png" alt="Carlinhos"></div>
+    <div class="chat-info">
+      <div class="chat-name" id="cname">Carlinhos · Assistente</div>
+      <div class="chat-status" id="cstatus">Online agora</div>
+    </div>
+    <button id="chatClose" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chatMsgs"></div>
+  <div class="csugg" id="csuggs">
+    <button class="csug" onclick="sendSugg(this)">Suas skills?</button>
+    <button class="csug" onclick="sendSugg(this)">ProcessSurge</button>
+    <button class="csug" onclick="sendSugg(this)">Experiência com IA?</button>
+    <button class="csug" onclick="sendSugg(this)">Contato</button>
+  </div>
+  <div class="chat-irow">
+    <textarea id="chatInput" placeholder="Pergunte algo..." rows="1" onkeydown="onChatKey(event)"></textarea>
+    <button id="chatSend" onclick="sendChat()">➤</button>
+  </div>
+</div>
 
-    function projectCard(p){
-      const lang = getLangSafe();
-      const desc = lang === 'pt' ? p.desc_pt : p.desc_en;
-      const thumbPath = `projects/${p.slug}/thumbnail.png`;
-      // Tenta pegar label traduzido; se não existir, usa fallback seguro.
-      const btnText = (i18n[lang]?.['btn.example']) || (lang === 'pt' ? 'Abrir exemplo' : 'Open example');
-      return `
-        <article class="card">
-          <div class="thumb" aria-hidden="true">
-            <img src="${thumbPath}" alt="${p.title}" loading="lazy"
-                 onerror="this.closest('.thumb').innerHTML='<svg width=96 height=96 viewBox=\\'0 0 24 24\\' fill=\\'none\\'><path d=\\'M4 6h16M4 12h16M4 18h16\\' stroke=\\'white\\' opacity=\\.8 stroke-width=\\'2\\'/></svg>';">
-          </div>
-          <div class="content">
-            <span class="pill">${p.pill}</span>
-            <h3>${p.title}</h3>
-            <p class="desc">${desc}</p>
-            <div class="chips">${p.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
-          </div>
-          <div class="actions">
-            <button class="btn primary" onclick="openPreview('${p.title}','${p.slug}')">${btnText}</button>
-          </div>
-        </article>`;
-    }
+<div id="modal">
+  <div class="modal-in">
+    <div class="modal-hdr">
+      <span class="modal-title" id="modalTitle">Preview</span>
+      <div class="modal-acts">
+        <a id="modalTab" class="modal-btn" target="_blank">🔗 <span id="modalTabTxt">Nova aba</span></a>
+        <button onclick="closeModal()" class="modal-btn">✕ <span id="modalCloseTxt">Fechar</span></button>
+      </div>
+    </div>
+    <iframe id="modalFrame" src=""></iframe>
+  </div>
+</div>
 
-    function renderProjects(){
-      try{
-        const grid = document.getElementById('projectsGrid');
-        if(!grid) return;
-        grid.innerHTML = PROJECTS.map(projectCard).join('');
-      }catch(err){
-        console.error('Erro ao renderizar projetos:', err);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', renderProjects);
-
-    /* =========================
-       Preview (projetos)
-    ==========================*/
-    function closePreview(){
-      const m = document.getElementById('previewModal');
-      const f = document.getElementById('modalFrame');
-      if (!m) return;
-      m.style.display = 'none';
-      f.src = '';
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', __escClosePreview);
-      m.removeEventListener('click', __backdropClosePreview);
-    }
-    function __escClosePreview(e){ if(e.key === 'Escape') closePreview(); }
-    function __backdropClosePreview(e){ if(e.target.id === 'previewModal') closePreview(); }
-
-    async function openPreview(title, slug){
-      const m = document.getElementById('previewModal');
-      const f = document.getElementById('modalFrame');
-      const t = document.getElementById('modalTitle');
-      const a = document.getElementById('modalOpenTab');
-      t.textContent = title || 'Preview';
-
-      const v = Date.now();
-      const base = `projects/${slug}`;
-      const exampleURL  = `${base}/example.html?v=${v}`;
-      const embeddedURL = `${base}/embedded.html?v=${v}`;
-
-      async function resolveUrl(u){
-        try{ const r = await fetch(u, { method: 'GET', cache: 'no-store' }); return r.ok ? u : null; }
-        catch(_){ return null; }
-      }
-      const url = (await resolveUrl(exampleURL)) || (await resolveUrl(embeddedURL)) || embeddedURL;
-
-      f.src = url;
-      a.href = url;
-
-      m.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-
-      window.addEventListener('keydown', __escClosePreview);
-      m.addEventListener('click', __backdropClosePreview);
-    }
-    window.closePreview = closePreview;
-    window.openPreview = openPreview;
-
-    /* =========================
-       Footer: Topo
-    ==========================*/
-    function scrollTopSmooth(){
-  const root = document.scrollingElement || document.documentElement || document.body;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  try{
-    root.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
-  }catch(_){
-    // fallback bem amplo
-    root.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }
-}
-
-const toTopBtn = document.getElementById('toTopBtn');
-toTopBtn?.addEventListener('click', (e)=>{
-  e.preventDefault();
-  scrollTopSmooth();
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),curDot=document.getElementById('curDot');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;curDot.style.left=mx+'px';curDot.style.top=my+'px'});
+(function a(){cx+=(mx-cx)*.13;cy+=(my-cy)*.13;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button,.stag,.pcrd').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='40px';cur.style.height='40px';cur.style.opacity='.38'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='20px';cur.style.height='20px';cur.style.opacity='1'});
 });
+/* CANVAS */
+const canvas=document.getElementById('hcanvas'),ctx=canvas.getContext('2d');
+let parts=[];
+function resizeC(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
+resizeC();window.addEventListener('resize',resizeC);
+class P{constructor(){this.r()}r(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-.5)*.38;this.vy=(Math.random()-.5)*.38;this.s=Math.random()*1.5+.3;this.o=Math.random()*.35+.07;this.c=Math.random()>.5?'0,200,240':'155,85,232'}update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height)this.r()}draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fillStyle=`rgba(${this.c},${this.o})`;ctx.fill()}}
+for(let i=0;i<80;i++)parts.push(new P());
+function drawLines(){for(let i=0;i<parts.length;i++)for(let j=i+1;j<parts.length;j++){const dx=parts[i].x-parts[j].x,dy=parts[i].y-parts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.moveTo(parts[i].x,parts[i].y);ctx.lineTo(parts[j].x,parts[j].y);ctx.strokeStyle=`rgba(0,200,240,${(1-d/120)*.065})`;ctx.lineWidth=.4;ctx.stroke()}}}
+(function ap(){ctx.clearRect(0,0,canvas.width,canvas.height);drawLines();parts.forEach(p=>{p.update();p.draw()});requestAnimationFrame(ap)})();
+/* COUNTER */
+function animCount(el,to,sfx){let v=0,s=to/55,t=setInterval(()=>{v+=s;if(v>=to){v=to;clearInterval(t)}el.textContent=Math.floor(v)+(sfx||'+')},26)}
+let cntDone=false;
+new IntersectionObserver(en=>{if(en[0].isIntersecting&&!cntDone){cntDone=true;document.querySelectorAll('.mn[data-count]').forEach(el=>animCount(el,+el.dataset.count,el.dataset.suffix||''))}},{threshold:.5}).observe(document.querySelector('.hero-metrics'));
+/* REVEAL */
+const revObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{rootMargin:'-8% 0px',threshold:.08});
+document.querySelectorAll('.rev').forEach(el=>revObs.observe(el));
+const tiObs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{rootMargin:'-4% 0px',threshold:.08});
+document.querySelectorAll('.ti').forEach(el=>tiObs.observe(el));
+/* NAV ACTIVE */
+const nlEls=document.querySelectorAll('.nl');
+[document.querySelector('header'),...document.querySelectorAll('section[id]')].filter(Boolean).forEach(s=>{
+  new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){nlEls.forEach(l=>l.classList.remove('active'));const lk=document.querySelector(`.nl[href="#${e.target.id}"]`);if(lk)lk.classList.add('active')}})},{rootMargin:'-40% 0px -50% 0px',threshold:.1}).observe(s);
+});
+/* THEME */
+const thBtn=document.getElementById('themeBtn');
+if(localStorage.getItem('theme')==='light'){document.body.classList.add('light');thBtn.textContent='🌙';}else thBtn.textContent='☀️';
+thBtn.addEventListener('click',()=>{document.body.classList.toggle('light');thBtn.textContent=document.body.classList.contains('light')?'🌙':'☀️';localStorage.setItem('theme',document.body.classList.contains('light')?'light':'dark')});
+/* MOBILE */
+document.getElementById('hamburger').addEventListener('click',()=>{document.getElementById('mobnav').classList.add('open');document.body.style.overflow='hidden'});
+function closeMob(){document.getElementById('mobnav').classList.remove('open');document.body.style.overflow=''}
+/* YEAR */
+document.getElementById('yr').textContent=new Date().getFullYear();
+/* I18N */
+const i18n={
+  pt:{hbadge:'Disponível para novos projetos',
+    htitle:'Soluções de <span class="hl">Automação & IA</span><br>que geram impacto real<span class="cblink"></span>',
+    hsub:'Especialista em automação de processos, integrações (APIs/Webhooks) e IA Generativa. Focado em escalar operações, reduzir trabalho manual e gerar inteligência real para o negócio.',
+    hcvpt:'📄 Baixar CV (PT)',hcven:'📄 CV (EN)',
+    hcvpt_href:'docs/Curriculo_Carlos_Henrique_Gomes.pdf',hcven_href:'docs/Carlos_Henrique_Gomes_CV_EN.pdf',
+    navCvBtn_href:'docs/Curriculo_Carlos_Henrique_Gomes.pdf',
+    mky:'anos em TI',mkg:'redução de tempo',mkf:'foco em operações',
+    hclbl:'O que eu faço',hc1t:'Integrações & APIs',hc1d:'REST APIs, Webhooks, n8n, jobs agendados',
+    hc2t:'IA Generativa',hc2d:'LLMs para QA, sumarização e triagem',
+    hc3t:'Automação',hc3d:'Fluxos escaláveis com Python & Docker',
+    hc4t:'Analytics',hc4d:'Dashboards, KPIs e pipelines de dados',
+    pslbl:'Fundador & Arquiteto de Soluções',psdesc:'Ajudamos quem está começando a vender pela internet a crescer com estrutura. Criamos lojas e vitrines online, integramos com os principais marketplaces e ativamos automação, dados e atendimento com IA para que o vendedor foque só em vender.',
+    psctabtn:'🌐 Visitar ProcessSurge',psproj:'Ver projetos →',psrl:'Função',psrv:'Founder',pssl:'Desde',psfl:'Foco',psfv:'B2B SaaS',
+    splbl:'Projetos',stitlep:'Projetos em destaque',ssubp:'Produtos e iniciativas com foco em automação, IA, integrações e operação.',
+    sskbl:'Habilidades',stitles:'Stack & Tecnologias',ssubs:'Ferramentas e tecnologias que uso no dia a dia.',
+    scbe:'Back-end & APIs',scau:'Automação & Orquestração',scai:'IA & LLMs',scda:'Dados & Analytics',scec:'E-commerce & Marketplaces',scsw:'Plataformas & SaaS',
+    sabl:'Sobre',stitlea:'Sobre mim',
+    ssuba:'Profissional de Tecnologia com <strong>mais de 12 anos de experiência</strong> em automação, integrações e desenvolvimento back-end. Fundador da <strong>ProcessSurge</strong>, empresa que ajuda vendedores a crescer na internet com loja online, marketplaces, automação e atendimento com IA.',
+    ask:'Principais Habilidades',avt:'Valores',avd:'Tecnologia deve gerar impacto real no negócio: menos operação manual, mais previsibilidade, qualidade e escala.',
+    aet:'Formação',ast:'Stack Principal',
+    scbl:'Experiência',stitlc:'Carreira',
+    tp1:'Set/2021 – Atual',tt1:'Especialista de Automação e Integração',td1:'Desenvolvimento de APIs, integrações e automações para operações e atendimento.',
+    tp2:'Jun/2018 – Ago/2021',tt2:'Técnico de TI',td2:'Suporte à infraestrutura corporativa e automação de rotinas técnicas.',
+    tp3:'2025 – Atual',tt3:'Fundador da ProcessSurge',td3:'Empresa focada em ajudar quem está começando a vender online. Do zero: loja, marketplaces, automação e atendimento com IA.',
+    sccbl:'Contato',stitlec:'Vamos conversar?',ssubc:'Aberto a projetos, parcerias e oportunidades.',
+    cet:'E-mail',ced:'Clique abaixo para abrir seu cliente de e-mail.',
+    cwt:'WhatsApp',cwd:'Converse comigo diretamente pelo app. Respondo rápido!',
+    clt:'LinkedIn',cld:'Acesse meu perfil profissional.',
+    cname:'Carlinhos · Assistente',cstatus:'Online agora',ctip:'Pergunte sobre mim!',
+    modalTabTxt:'Nova aba',modalCloseTxt:'Fechar'},
+  en:{hbadge:'Available for new projects',
+    htitle:'<span class="hl">Automation & AI</span> solutions<br>that drive real business impact<span class="cblink"></span>',
+    hsub:'Automation, systems integration (APIs/Webhooks), and Generative AI specialist. Focused on scaling operations, reducing manual work and generating real intelligence for businesses.',
+    hcvpt:'📄 Download CV (PT)',hcven:'📄 CV (EN)',
+    hcvpt_href:'docs/Curriculo_Carlos_Henrique_Gomes.pdf',hcven_href:'docs/Carlos_Henrique_Gomes_CV_EN.pdf',
+    navCvBtn_href:'docs/Carlos_Henrique_Gomes_CV_EN.pdf',
+    mky:'years in IT',mkg:'time reduction',mkf:'operations-focused',
+    hclbl:'What I do',hc1t:'Integrations & APIs',hc1d:'REST APIs, Webhooks, n8n, scheduled jobs',
+    hc2t:'Generative AI',hc2d:'LLMs for QA, summarization and triage',
+    hc3t:'Automation',hc3d:'Scalable flows with Python & Docker',
+    hc4t:'Analytics',hc4d:'Dashboards, KPIs and data pipelines',
+    pslbl:'Founder & Solution Architect',psdesc:'We help those starting to sell online grow with the right structure. We build online stores, integrate with the main marketplaces, and activate automation, data and AI-powered support so sellers can focus on what matters.',
+    psctabtn:'🌐 Visit ProcessSurge',psproj:'View projects →',psrl:'Role',psrv:'Founder',pssl:'Since',psfl:'Focus',psfv:'B2B SaaS',
+    splbl:'Projects',stitlep:'Featured Projects',ssubp:'Products and initiatives focused on automation, AI, integrations, and operations.',
+    sskbl:'Skills',stitles:'Stack & Technologies',ssubs:'Tools and technologies I use daily to build high-impact solutions.',
+    scbe:'Back-end & APIs',scau:'Automation & Orchestration',scai:'AI & LLMs',scda:'Data & Analytics',scec:'E-commerce & Marketplaces',scsw:'Platforms & SaaS',
+    sabl:'About',stitlea:'About me',
+    ssuba:'Technology professional with <strong>12+ years of experience</strong> in automation, integrations and back-end development. Founder of <strong>ProcessSurge</strong>, a company that helps sellers grow online with stores, marketplace integrations, automation and AI-powered support.',
+    ask:'Main Skills',avt:'Values',avd:'Technology must generate real business impact: less manual operation, more predictability, quality and scale.',
+    aet:'Education',ast:'Main Stack',
+    scbl:'Experience',stitlc:'Career',
+    tp1:'Sep/2021 – Present',tt1:'Automation & Integration Specialist',td1:'API development, integrations and automations for operations and support.',
+    tp2:'Jun/2018 – Aug/2021',tt2:'IT Technician',td2:'Corporate IT infrastructure support and technical automation.',
+    tp3:'2025 – Present',tt3:'Founder at ProcessSurge',td3:'Company focused on helping people who are starting to sell online. From scratch: store, marketplaces, automation and AI-powered support.',
+    sccbl:'Contact',stitlec:"Let's talk?",ssubc:'Open to projects, partnerships and opportunities.',
+    cet:'E-mail',ced:'Click below to open your email client and send me a message.',
+    cwt:'WhatsApp',cwd:'Chat with me directly. I reply fast!',
+    clt:'LinkedIn',cld:'Visit my professional profile and send me a message.',
+    cname:"Carlinhos · Assistant",cstatus:'Online now',ctip:'Ask me about him!',
+    modalTabTxt:'New tab',modalCloseTxt:'Close'}
+};
+let lang=localStorage.getItem('lang')||'pt';
+const langBtn=document.getElementById('langBtn');
+langBtn.textContent=lang==='pt'?'EN':'PT';
+function applyLang(){
+  const t=i18n[lang];
+  Object.keys(t).forEach(k=>{
+    if(k.endsWith('_href')){const el=document.getElementById(k.replace('_href',''));if(el)el.setAttribute('href',t[k]);return}
+    const el=document.getElementById(k);if(!el)return;
+    if(['htitle','ssuba'].includes(k))el.innerHTML=t[k];else el.textContent=t[k];
+  });
+}
+applyLang();
+langBtn.addEventListener('click',()=>{lang=lang==='pt'?'en':'pt';localStorage.setItem('lang',lang);langBtn.textContent=lang==='pt'?'EN':'PT';applyLang();renderProjects()});
+/* PROJECTS */
+const projs=[
+  {icon:'🚀',tPt:'ProcessSurge',tEn:'ProcessSurge',dPt:'Ajudamos vendedores a crescer na internet com estrutura completa: loja online, integração com marketplaces, automação e atendimento com IA.',dEn:'We help sellers grow online with full structure: online store, marketplace integration, automation and AI-powered customer support.',tags:['Automation','AI','Integrations','n8n','Python'],demo:'projects/processsurge/embedded.html',ext:'https://www.processsurge.com/pt',featured:true},
+  {icon:'🛒',tPt:'Cart Recovery',tEn:'Cart Recovery',dPt:'Recuperação de carrinho com réguas de comunicação, opt-in/out e orquestração via Webhooks, Redis/Celery e n8n.',dEn:'Cart recovery with communication rules, opt-in/out logic and orchestration via Webhooks, Redis/Celery and n8n.',tags:['Nuvemshop','VTEX','n8n','WhatsApp'],pricing:'https://www.processsurge.com/pt/pricing'},
+  {icon:'🎯',tPt:'Surge Assist',tEn:'Surge Assist',dPt:'Suporte com IA para triagem de tickets, sumarização de contexto e QA automatizado com heurísticas e LLMs.',dEn:'AI-powered support for ticket triage, context summarization and automated QA using heuristics and LLMs.',tags:['LLMs','QA','Support','GPT'],pricing:'https://www.processsurge.com/pt/pricing'},
+  {icon:'📊',tPt:'BI Analytics + IA',tEn:'BI Analytics + AI',dPt:'Plataforma de inteligência de dados onde a IA monta dashboards em tempo real a partir de qualquer base de dados.',dEn:'Data intelligence platform where AI builds dashboards in real time from any data source.',tags:['Superset','GPT','PostgreSQL','Python'],demo:'projects/bi-analytics/demo.html'},
+  {icon:'🤖',tPt:'BotFlow Orchestrator',tEn:'BotFlow Orchestrator',dPt:'Gerenciamento visual de fluxos de chatbot com orquestração de múltiplos bots e regras de negócio.',dEn:'Visual chatbot flow management with multi-bot orchestration and business rules.',tags:['Chatwoot','EvolutionAPI','Flask','Python'],demo:'projects/botflow/example.html'},
+  {icon:'❤️',tPt:'Client Health Monitor',tEn:'Client Health Monitor',dPt:'Monitoramento de saúde de clientes com indicadores de risco de churn e planos de ação.',dEn:'Client health monitoring with churn risk indicators and action plans.',tags:['Analytics','CRM','EspoCRM','Python'],demo:'projects/client-health/demo.html'}
+];
+function renderProjects(){
+  const grid=document.getElementById('pgrid');grid.innerHTML='';
+  const demoLbl=lang==='pt'?'🔍 Ver demo':'🔍 View demo';
+  const siteLbl=lang==='pt'?'🌐 Site':'🌐 Website';
+  const pricingLbl=lang==='pt'?'💰 Ver planos':'💰 View plans';
+  projs.forEach((p,i)=>{
+    const title=lang==='pt'?p.tPt:p.tEn,desc=lang==='pt'?p.dPt:p.dEn;
+    const tags=p.tags.map(t=>`<span class="ctag">${t}</span>`).join('');
+    let acts='';
+    if(p.demo) acts+=`<button class="bcrd p" onclick="openModal('${p.demo}','${title}')">${demoLbl}</button>`;
+    if(p.pricing) acts+=`<a class="bcrd p" href="${p.pricing}" target="_blank" rel="noopener">${pricingLbl}</a>`;
+    if(p.ext) acts+=`<a class="bcrd" href="${p.ext}" target="_blank" rel="noopener">${siteLbl}</a>`;
+    const el=document.createElement('div');
+    el.className='pcrd rev'+(p.featured?' featured':'');
+    el.style.transitionDelay=`${i*.07}s`;
+    el.innerHTML=`<div class="cthumb">${p.icon}</div><div class="cbody"><div class="ctags">${tags}</div><div class="ctitle">${title}</div><div class="cdesc">${desc}</div><div class="cacts">${acts}</div></div>`;
+    grid.appendChild(el);revObs.observe(el);
+  });
+}
+renderProjects();
+/* MODAL */
+function openModal(src,title){document.getElementById('modal').classList.add('open');document.getElementById('modalFrame').src=src;document.getElementById('modalTitle').textContent=title;document.getElementById('modalTab').href=src;document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal').classList.remove('open');document.getElementById('modalFrame').src='';document.body.style.overflow=''}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
 
-    /* =========================
-       MENU MOBILE
-    ==========================*/
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuBtn = document.getElementById('menuBtn');
-    const menuClose = document.getElementById('menuClose');
-
-    function openMenu(){
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', onMenuEsc);
-      mobileMenu.addEventListener('click', onMenuBackdrop);
-      menuClose?.focus();
-    }
-    function closeMenu(){
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', onMenuEsc);
-      mobileMenu.removeEventListener('click', onMenuBackdrop);
-      menuBtn?.focus();
-    }
-    function onMenuEsc(e){ if (e.key === 'Escape') closeMenu(); }
-    function onMenuBackdrop(e){ if (e.target === mobileMenu) closeMenu(); }
-
-    menuBtn?.addEventListener('click', openMenu);
-    menuClose?.addEventListener('click', closeMenu);
-    document.querySelectorAll('#mobileMenu .m-links a').forEach(a=>{
-      a.addEventListener('click', closeMenu);
-    });
-
-    /* =========================
-       Sincroniza applyLang
-    ==========================*/
-    const _applyLangRef = applyLang;
-    applyLang = function(lang){
-      _applyLangRef(lang);
-      // rótulos dos botões de idioma (header e menu móvel) já atualizados dentro de applyLang
-      renderProjects(); // reforço
-    };
-  </script>
+/* BOT LOCAL — funciona offline, sem API key.
+   Responde perguntas sobre o Carlos via base de conhecimento.
+   Para habilitar IA real (Claude), configure um backend/proxy
+   que receba POSTs e encaminhe à API da Anthropic com sua chave secreta. */
+const KB=[
+  {kw:['skill','habilidade','tecnologia','stack','usa','sabe','domina','conhece','ferramenta','linguagem'],
+   pt:'🛠️ **Stack do Carlos:**\n\n**Back-end:** Python, Flask, FastAPI, PostgreSQL, SQLAlchemy\n**Automação:** n8n, Docker, Redis, Celery, Webhooks\n**IA:** GPT-4, Gemini, Prompt Engineering, RAG\n**Analytics:** Apache Superset, ETL Pipelines, Meta Graph API\n**Integrações:** REST APIs, WhatsApp Business API, VTEX',
+   en:'🛠️ **Carlos\'s Stack:**\n\n**Back-end:** Python, Flask, FastAPI, PostgreSQL, SQLAlchemy\n**Automation:** n8n, Docker, Redis, Celery, Webhooks\n**AI:** GPT-4, Gemini, Prompt Engineering, RAG\n**Analytics:** Apache Superset, ETL Pipelines, Meta Graph API'},
+  {kw:['processsurge','process surge','surge','startup','empresa','negócio','company','business','fundou','criou','founder'],
+   pt:'🚀 **ProcessSurge** é a empresa fundada pelo Carlos em 2025.\n\nAjudamos quem está começando a vender pela internet a crescer com estrutura. Criamos lojas online, integramos marketplaces (Nuvemshop, Shopee, Mercado Livre) e ativamos automação e atendimento com IA.\n\n🌐 processsurge.com/pt',
+   en:'🚀 **ProcessSurge** is the company Carlos founded in 2025.\n\nWe help people starting to sell online grow with structure: online stores, marketplace integrations (Nuvemshop, Shopee, Mercado Livre), automation and AI-powered support.\n\n🌐 processsurge.com/pt'},
+  {kw:['ia','inteligência artificial','llm','gpt','gemini','prompt','ai','machine learning','rag','modelo'],
+   pt:'🤖 Carlos tem experiência avançada em **IA Generativa**:\n\n• Prompt Engineering e design de fluxos com LLMs\n• RAG (Retrieval-Augmented Generation)\n• QA automatizado com GPT/Gemini\n• Sumarização de contexto para atendimento\n• Triagem de tickets com heurísticas + LLMs\n• MBA em IA & Big Data',
+   en:'🤖 Carlos has advanced experience in **Generative AI**:\n\n• Prompt Engineering and LLM flow design\n• RAG (Retrieval-Augmented Generation)\n• Automated QA with GPT/Gemini\n• Context summarization for support\n• Ticket triage with heuristics + LLMs\n• MBA in AI & Big Data'},
+  {kw:['experiência','cargo','trabalho','carreira','emprego','hi platform','semar','experience','career','job','anos'],
+   pt:'💼 **Experiência do Carlos:**\n\n**ProcessSurge** (2025–Atual) | Founder\n\n**Hi Platform** (Set/2021–Atual)\nEspecialista de Automação e Integração\n• APIs, Webhooks, n8n, Celery/Redis\n• Pipelines Meta API + dashboards Superset\n• IA para QA e sumarização\n\n**Grupo Semar** (2018–2021)\nTécnico de TI',
+   en:'💼 **Carlos\'s experience:**\n\n**ProcessSurge** (2025–Present) | Founder\n\n**Hi Platform** (Sep/2021–Present)\nAutomation & Integration Specialist\n• APIs, Webhooks, n8n, Celery/Redis\n• Meta API pipelines + Superset dashboards\n• AI for QA and summarization\n\n**Grupo Semar** (2018–2021)\nIT Technician'},
+  {kw:['projeto','project','produto','product','cart','recovery','botflow','analytics','assist','health','vacation','portfólio'],
+   pt:'📂 **Projetos do Carlos:**\n\n🚀 ProcessSurge: Plataforma B2B de automação e IA\n🛒 Cart Recovery: Abandono de carrinho (VTEX + n8n)\n🎯 Surge Assist: Triagem de tickets com LLMs\n📊 BI Analytics: Dashboards por API\n🤖 BotFlow Orchestrator: Orquestração de chatbots\n❤️ Client Health Monitor: Risco de churn',
+   en:'📂 **Carlos\'s projects:**\n\n🚀 ProcessSurge: B2B automation & AI platform\n🛒 Cart Recovery: Cart abandonment (VTEX + n8n)\n🎯 Surge Assist: LLM-powered ticket triage\n📊 BI Analytics: API-driven dashboards\n🤖 BotFlow Orchestrator: Chatbot flow orchestration\n❤️ Client Health Monitor: Churn risk monitoring'},
+  {kw:['contato','contact','email','whatsapp','linkedin','falar','conversar','contratar','hire','disponível'],
+   pt:'📬 **Contato do Carlos:**\n\n📧 carloshegomes@outlook.com\n💬 WhatsApp: +55 11 98164-8739\n🔗 linkedin.com/in/carlos-he-gomes\n\nAberto a projetos, parcerias e oportunidades! 🚀',
+   en:'📬 **Reach Carlos:**\n\n📧 carloshegomes@outlook.com\n💬 WhatsApp: +55 11 98164-8739\n🔗 linkedin.com/in/carlos-he-gomes\n\nOpen to projects, partnerships and opportunities! 🚀'},
+  {kw:['formação','educação','mba','faculdade','estudo','education','degree','graduação'],
+   pt:'🎓 **Formação do Carlos:**\n\n• MBA em Gestão da Qualidade de Software\n• MBA em Inteligência Artificial & Big Data\n\nBase técnica sólida combinada com visão estratégica de negócios.',
+   en:'🎓 **Carlos\'s education:**\n\n• MBA in Software Quality Management\n• MBA in Artificial Intelligence & Big Data\n\nSolid technical foundation combined with strategic business vision.'},
+  {kw:['n8n','docker','automação','automatiza','workflow','orquestração','automation','pipeline'],
+   pt:'⚡ Carlos é especialista em **orquestração de fluxos**:\n\n• n8n para automações low-code complexas\n• Docker para stack self-hosted\n• Redis + Celery para processamento assíncrono\n• Pipelines end-to-end sem intervenção manual',
+   en:'⚡ Carlos specializes in **workflow orchestration**:\n\n• n8n for complex low-code automations\n• Docker for self-hosted stack\n• Redis + Celery for async processing\n• End-to-end pipelines without manual intervention'},
+  {kw:['python','flask','fastapi','postgresql','api','backend','back-end','banco','database','rest'],
+   pt:'🐍 **Back-end com Carlos:**\n\n• Python (Flask, FastAPI) para APIs robustas e escaláveis\n• PostgreSQL + SQLAlchemy para modelagem de dados\n• Ingestão e normalização de dados\n• Integração com sistemas corporativos',
+   en:'🐍 **Carlos\'s back-end work:**\n\n• Python (Flask, FastAPI) for robust, scalable APIs\n• PostgreSQL + SQLAlchemy for data modeling\n• Data ingestion and normalization\n• Enterprise systems integration'}
+];
+const fallback={pt:'Boa pergunta! 😊 Para detalhes, fale diretamente com o Carlos:\n\n📧 carloshegomes@outlook.com\n💬 +55 11 98164-8739',en:"Good question! 😊 For details, reach Carlos directly:\n\n📧 carloshegomes@outlook.com\n💬 +55 11 98164-8739"};
+const welcome={pt:'Oi! 👋 Sou o **Carlinhos**, mascote da ProcessSurge. Posso contar sobre as skills, projetos e experiência do Carlos. Como posso ajudar?',en:"Hi! 👋 I'm **Carlinhos**, ProcessSurge's mascot. I can tell you about Carlos's skills, projects and experience. How can I help?"};
+let chatOpen=false;
+function botReply(msg){const m=msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');for(const e of KB){if(e.kw.some(k=>m.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,''))))return lang==='pt'?e.pt:e.en}return fallback[lang]}
+function toggleChat(){chatOpen=!chatOpen;const p=document.getElementById('chatPanel');if(chatOpen){p.classList.add('open');if(!document.querySelector('#chatMsgs .cmsg'))addMsg(welcome[lang],'bot');setTimeout(()=>document.getElementById('chatInput').focus(),100)}else p.classList.remove('open')}
+function addMsg(txt,type){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className=`cmsg ${type}`;d.innerHTML=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
+function addTyping(){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='ctyping';d.innerHTML='<span></span><span></span><span></span>';m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
+function sendChat(){const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;inp.value='';addMsg(msg,'user');document.getElementById('csuggs').style.display='none';const ty=addTyping();setTimeout(()=>{ty.remove();addMsg(botReply(msg),'bot')},480+Math.random()*260)}
+function sendSugg(btn){document.getElementById('chatInput').value=btn.textContent;sendChat()}
+function onChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat()}}
+</script>
 </body>
 </html>
-
-
-
-
-
-
