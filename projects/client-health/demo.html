@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Health Monitor · ProcessSurge</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--bg:#060a14;--bg2:#0b1122;--card:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--a:#00c8f0;--a2:#9b55e8;--text:#dde5f5;--muted:#5e6d8f;--muted2:#8899bb;--ok:#00e87a;--warn:#f0a500;--danger:#f05060;--info:#4fa8f5}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  /* TOPBAR */
+  .topbar{background:rgba(6,10,20,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;height:54px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+  .logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.95rem}
+  .logo-dot{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f05060,#f0a500);display:grid;place-items:center;font-size:.85rem}
+  .tsp{flex:1}
+  .tbtn{padding:6px 14px;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text);transition:.2s;font-family:inherit}
+  .tbtn:hover{border-color:var(--a);color:var(--a)}
+  .tbtn.primary{background:linear-gradient(135deg,var(--a),var(--a2));border-color:transparent;color:#000}
+  /* LAYOUT */
+  .layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 54px)}
+  @media(max-width:768px){.layout{grid-template-columns:1fr}.sidebar{display:none}}
+  .sidebar{background:var(--bg2);border-right:1px solid var(--border);padding:20px 0}
+  .sgroup-lbl{font-size:.67rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:6px 16px 4px;font-family:monospace}
+  .sitem{padding:9px 16px;display:flex;align-items:center;gap:9px;font-size:.84rem;cursor:pointer;transition:.2s;color:var(--muted2)}
+  .sitem:hover{background:rgba(255,255,255,.04);color:var(--text)}
+  .sitem.active{background:rgba(0,200,240,.08);color:var(--a);border-right:2px solid var(--a)}
+  .sitem .si{font-size:1rem;width:18px;text-align:center}
+  .main{padding:22px}
+  /* KPIs */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+  @media(max-width:900px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;transition:.2s}
+  .kpi:hover{border-color:var(--a);transform:translateY(-2px)}
+  .kpi-lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .kpi-val{font-size:1.8rem;font-weight:800;letter-spacing:-1px}
+  .kpi-delta{font-size:.74rem;margin-top:4px}
+  .ok-c{color:var(--ok)}.warn-c{color:var(--warn)}.danger-c{color:var(--danger)}
+  /* SECTION HEADER */
+  .sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .sec-title{font-size:.94rem;font-weight:700}
+  .sec-sub{font-size:.76rem;color:var(--muted);margin-top:2px}
+  /* HEALTH TABLE */
+  .health-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:22px}
+  table{width:100%;border-collapse:collapse}
+  th{padding:10px 16px;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;text-align:left;border-bottom:1px solid var(--border);font-weight:600;background:rgba(255,255,255,.02)}
+  td{padding:10px 16px;font-size:.82rem;color:var(--muted2);border-bottom:1px solid rgba(255,255,255,.04)}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:rgba(255,255,255,.02);color:var(--text)}
+  .health-bar-wrap{width:90px;height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden}
+  .health-bar{height:100%;border-radius:4px;transition:width .6s ease}
+  .pill{padding:2px 9px;border-radius:100px;font-size:.68rem;font-weight:600;white-space:nowrap}
+  .pill.ok{background:rgba(0,232,122,.12);color:var(--ok)}
+  .pill.warn{background:rgba(240,165,0,.12);color:var(--warn)}
+  .pill.danger{background:rgba(240,80,96,.12);color:var(--danger)}
+  .pill.info{background:rgba(79,168,245,.12);color:var(--info)}
+  /* ACTIONS CARDS */
+  .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+  @media(max-width:900px){.cards-grid{grid-template-columns:1fr}}
+  .act-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;transition:.2s;position:relative;overflow:hidden}
+  .act-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--bar-c)}
+  .act-card:hover{transform:translateY(-3px)}
+  .act-client{font-size:.78rem;color:var(--muted);margin-bottom:4px}
+  .act-title{font-size:.9rem;font-weight:700;margin-bottom:8px}
+  .act-desc{font-size:.8rem;color:var(--muted2);line-height:1.55;margin-bottom:14px}
+  .act-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .act-due{font-size:.72rem;color:var(--muted)}
+  .act-btns{display:flex;gap:6px}
+  .abtn{padding:5px 12px;border-radius:7px;font-size:.74rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--muted2);transition:.2s;font-family:inherit}
+  .abtn:hover{border-color:var(--a);color:var(--a)}
+  .abtn.primary{background:linear-gradient(135deg,var(--a),var(--a2));border-color:transparent;color:#000}
+  /* KANBAN */
+  .kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+  @media(max-width:900px){.kanban{grid-template-columns:1fr}}
+  .kcol{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px}
+  .kcol-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+  .kcol-title{font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:7px}
+  .kcount{padding:2px 8px;border-radius:100px;font-size:.67rem;background:rgba(255,255,255,.08);color:var(--muted2)}
+  .kcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;transition:.2s;cursor:pointer}
+  .kcard:hover{border-color:var(--a);transform:translateX(3px)}
+  .kcard-client{font-size:.68rem;color:var(--muted);margin-bottom:3px}
+  .kcard-title{font-size:.82rem;font-weight:600;margin-bottom:6px}
+  .kcard-footer{display:flex;align-items:center;justify-content:space-between}
+  .kcard-due{font-size:.68rem;color:var(--muted)}
+  /* COMMENT */
+  .comment-area{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:22px}
+  .cmt-list{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+  .cmt{display:flex;gap:10px}
+  .cmt-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--a2));display:grid;place-items:center;font-size:.8rem;flex-shrink:0;font-weight:700;color:#000}
+  .cmt-body{flex:1;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:10px 13px}
+  .cmt-author{font-size:.75rem;font-weight:700;margin-bottom:3px}
+  .cmt-text{font-size:.82rem;color:var(--muted2);line-height:1.5}
+  .cmt-time{font-size:.68rem;color:var(--muted);margin-top:4px}
+  .cmt-input-row{display:flex;gap:8px}
+  .cmt-input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;padding:9px 13px;color:var(--text);font-size:.83rem;outline:none;font-family:inherit;transition:.2s}
+  .cmt-input:focus{border-color:var(--a)}
+  /* RANKING */
+  .rank-list{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:22px}
+  .rank-item{padding:12px 16px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,.04);transition:.2s}
+  .rank-item:last-child{border-bottom:none}
+  .rank-item:hover{background:rgba(255,255,255,.02)}
+  .rank-num{font-size:.75rem;font-weight:800;color:var(--muted);width:20px;text-align:center}
+  .rank-name{flex:1;font-size:.86rem;font-weight:600}
+  .rank-score{font-size:.82rem;font-weight:700;color:var(--ok)}
+  .rank-bar-w{width:120px;height:6px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+  .rank-bar{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--a),var(--a2))}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo"><div class="logo-dot">❤️</div>Client Health Monitor</div>
+  <div class="tsp"></div>
+  <span style="font-size:.78rem;color:var(--muted)">Olá, <strong style="color:var(--text)">Carlos</strong></span>
+  <button class="tbtn primary" onclick="alert('Exportaria um relatório PDF completo de saúde dos clientes.')">📥 Exportar Relatório</button>
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sgroup-lbl">Monitoramento</div>
+    <div class="sitem active"><span class="si">📊</span>Visão Geral</div>
+    <div class="sitem"><span class="si">👥</span>Clientes</div>
+    <div class="sitem"><span class="si">🎯</span>Planos de Ação</div>
+    <div class="sitem"><span class="si">📋</span>Kanban</div>
+    <div class="sgroup-lbl" style="margin-top:12px">Análise</div>
+    <div class="sitem"><span class="si">📈</span>Tendências</div>
+    <div class="sitem"><span class="si">🏆</span>Ranking</div>
+    <div class="sitem"><span class="si">💬</span>Comentários</div>
+    <div class="sgroup-lbl" style="margin-top:12px">Admin</div>
+    <div class="sitem"><span class="si">⚙️</span>Configurações</div>
+    <div class="sitem"><span class="si">👤</span>Administração</div>
+  </aside>
+
+  <main class="main">
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-lbl">Total de Clientes</div><div class="kpi-val ok-c">42</div><div class="kpi-delta ok-c">+3 este mês</div></div>
+      <div class="kpi"><div class="kpi-lbl">Saúde Média</div><div class="kpi-val ok-c">74%</div><div class="kpi-delta ok-c">▲ 6pts vs mês anterior</div></div>
+      <div class="kpi"><div class="kpi-lbl">Em Risco de Churn</div><div class="kpi-val danger-c">5</div><div class="kpi-delta danger-c">↑ 2 novos alertas</div></div>
+      <div class="kpi"><div class="kpi-lbl">Ações Abertas</div><div class="kpi-val warn-c">12</div><div class="kpi-delta warn-c">4 com prazo próximo</div></div>
+    </div>
+
+    <!-- CLIENT TABLE -->
+    <div class="sec-hdr">
+      <div><div class="sec-title">Saúde dos Clientes</div><div class="sec-sub">Monitoramento em tempo real por conta</div></div>
+      <button class="tbtn" onclick="alert('Abrindo formulário de novo cliente...')">+ Novo Cliente</button>
+    </div>
+    <div class="health-wrap">
+      <table>
+        <thead><tr><th>Cliente</th><th>Plano</th><th>Saúde</th><th>Score</th><th>Último contato</th><th>Status</th><th></th></tr></thead>
+        <tbody id="clientTable"></tbody>
+      </table>
+    </div>
+
+    <!-- ACTION PLANS -->
+    <div class="sec-hdr">
+      <div><div class="sec-title">Planos de Ação Ativos</div><div class="sec-sub">Ações abertas com responsável e prazo</div></div>
+      <button class="tbtn primary" onclick="alert('Criando novo plano de ação...')">+ Novo Plano</button>
+    </div>
+    <div class="cards-grid" id="actCards"></div>
+
+    <!-- KANBAN -->
+    <div class="sec-hdr"><div><div class="sec-title">Kanban de Planos</div><div class="sec-sub">Arraste e solte para atualizar status</div></div></div>
+    <div class="kanban">
+      <div class="kcol">
+        <div class="kcol-hdr"><div class="kcol-title">🔴 <span>Em Aberto</span></div><span class="kcount">4</span></div>
+        <div class="kcard"><div class="kcard-client">Grupo Omega</div><div class="kcard-title">Revisar integração de API após atualização</div><div class="kcard-footer"><span class="kcard-due">Prazo: 28/03</span><span class="pill danger">Urgente</span></div></div>
+        <div class="kcard"><div class="kcard-client">TechFlow LTDA</div><div class="kcard-title">Onboarding do novo time de atendimento</div><div class="kcard-footer"><span class="kcard-due">Prazo: 02/04</span><span class="pill warn">Normal</span></div></div>
+        <div class="kcard"><div class="kcard-client">Loja Nexus</div><div class="kcard-title">Mapear motivos de cancelamento</div><div class="kcard-footer"><span class="kcard-due">Prazo: 05/04</span><span class="pill warn">Normal</span></div></div>
+        <div class="kcard"><div class="kcard-client">MegaStar E-com</div><div class="kcard-title">Ativar fluxo de reengajamento via WhatsApp</div><div class="kcard-footer"><span class="kcard-due">Prazo: 10/04</span><span class="pill info">Planejado</span></div></div>
+      </div>
+      <div class="kcol">
+        <div class="kcol-hdr"><div class="kcol-title">🟡 <span>Em Andamento</span></div><span class="kcount">5</span></div>
+        <div class="kcard"><div class="kcard-client">Industrias Verde</div><div class="kcard-title">Configurar dashboard personalizado no Superset</div><div class="kcard-footer"><span class="kcard-due">Prazo: 30/03</span><span class="pill warn">Em andamento</span></div></div>
+        <div class="kcard"><div class="kcard-client">BestBuy Digital</div><div class="kcard-title">Treinar equipe para uso do Chatwoot</div><div class="kcard-footer"><span class="kcard-due">Prazo: 01/04</span><span class="pill info">Em andamento</span></div></div>
+        <div class="kcard"><div class="kcard-client">Supermercados SR</div><div class="kcard-title">Revisão mensal de KPIs de atendimento</div><div class="kcard-footer"><span class="kcard-due">Prazo: 31/03</span><span class="pill info">Em andamento</span></div></div>
+        <div class="kcard"><div class="kcard-client">Alpha Solutions</div><div class="kcard-title">Automatizar relatório semanal via n8n</div><div class="kcard-footer"><span class="kcard-due">Prazo: 04/04</span><span class="pill info">Em andamento</span></div></div>
+        <div class="kcard"><div class="kcard-client">Grupo Omega</div><div class="kcard-title">Migrar base de contatos para EspoCRM</div><div class="kcard-footer"><span class="kcard-due">Prazo: 07/04</span><span class="pill warn">Em andamento</span></div></div>
+      </div>
+      <div class="kcol">
+        <div class="kcol-hdr"><div class="kcol-title">🟢 <span>Concluídos</span></div><span class="kcount">8</span></div>
+        <div class="kcard"><div class="kcard-client">Marca XYZ</div><div class="kcard-title">Implantação do fluxo de NPS automatizado</div><div class="kcard-footer"><span class="kcard-due">Concluído em 18/03</span><span class="pill ok">Feito</span></div></div>
+        <div class="kcard"><div class="kcard-client">TechFlow LTDA</div><div class="kcard-title">Setup do bot de atendimento no Chatwoot</div><div class="kcard-footer"><span class="kcard-due">Concluído em 15/03</span><span class="pill ok">Feito</span></div></div>
+        <div class="kcard"><div class="kcard-client">Loja Nexus</div><div class="kcard-title">Integração VTEX + Evolution API ativa</div><div class="kcard-footer"><span class="kcard-due">Concluído em 10/03</span><span class="pill ok">Feito</span></div></div>
+      </div>
+    </div>
+
+    <!-- RANKING -->
+    <div class="sec-hdr"><div><div class="sec-title">Ranking de Saúde</div><div class="sec-sub">Top 6 clientes por score de engajamento</div></div></div>
+    <div class="rank-list">
+      <div class="rank-item"><div class="rank-num">1</div><div class="rank-name">Industrias Verde</div><div class="rank-bar-w"><div class="rank-bar" style="width:96%"></div></div><div class="rank-score">96</div></div>
+      <div class="rank-item"><div class="rank-num">2</div><div class="rank-name">Alpha Solutions</div><div class="rank-bar-w"><div class="rank-bar" style="width:91%"></div></div><div class="rank-score">91</div></div>
+      <div class="rank-item"><div class="rank-num">3</div><div class="rank-name">BestBuy Digital</div><div class="rank-bar-w"><div class="rank-bar" style="width:88%"></div></div><div class="rank-score">88</div></div>
+      <div class="rank-item"><div class="rank-num">4</div><div class="rank-name">Marca XYZ</div><div class="rank-bar-w"><div class="rank-bar" style="width:82%"></div></div><div class="rank-score">82</div></div>
+      <div class="rank-item"><div class="rank-num">5</div><div class="rank-name">Supermercados SR</div><div class="rank-bar-w"><div class="rank-bar" style="width:76%"></div></div><div class="rank-score">76</div></div>
+      <div class="rank-item"><div class="rank-num">6</div><div class="rank-name">TechFlow LTDA</div><div class="rank-bar-w"><div class="rank-bar" style="width:71%"></div></div><div class="rank-score">71</div></div>
+    </div>
+
+    <!-- COMMENTS -->
+    <div class="sec-hdr"><div><div class="sec-title">Comentários Recentes</div><div class="sec-sub">Anotações internas por cliente</div></div></div>
+    <div class="comment-area">
+      <div class="cmt-list">
+        <div class="cmt"><div class="cmt-av">CG</div><div class="cmt-body"><div class="cmt-author">Carlos Gomes</div><div class="cmt-text">Cliente Grupo Omega solicitou revisão da integração após atualização do sistema deles. Agendei call para quinta-feira às 14h.</div><div class="cmt-time">Hoje às 10:32</div></div></div>
+        <div class="cmt"><div class="cmt-av" style="background:linear-gradient(135deg,#f0a500,#f05060)">MS</div><div class="cmt-body"><div class="cmt-author">Maria Souza</div><div class="cmt-text">TechFlow concluiu onboarding com sucesso. Time já está usando o Chatwoot. CSAT da semana foi 4.8/5.</div><div class="cmt-time">Ontem às 16:15</div></div></div>
+        <div class="cmt"><div class="cmt-av" style="background:linear-gradient(135deg,#00e87a,#00c8f0)">RP</div><div class="cmt-body"><div class="cmt-author">Rodrigo Pires</div><div class="cmt-text">Loja Nexus está em risco. Última resposta ao e-mail foi há 8 dias. Recomendo ativar fluxo de reengajamento automático.</div><div class="cmt-time">Há 2 dias às 09:44</div></div></div>
+      </div>
+      <div class="cmt-input-row">
+        <input class="cmt-input" placeholder="Adicionar comentário sobre um cliente...">
+        <button class="tbtn primary" onclick="alert('Comentário seria salvo e notificaria o time.')">Comentar</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const clients=[
+  {name:'Industrias Verde',plan:'Enterprise',health:96,score:'96/100',last:'Hoje',status:'ok'},
+  {name:'Alpha Solutions',plan:'Pro',health:91,score:'91/100',last:'Ontem',status:'ok'},
+  {name:'BestBuy Digital',plan:'Pro',health:88,score:'88/100',last:'Há 2 dias',status:'ok'},
+  {name:'Marca XYZ',plan:'Starter',health:82,score:'82/100',last:'Há 3 dias',status:'ok'},
+  {name:'Supermercados SR',plan:'Enterprise',health:76,score:'76/100',last:'Há 4 dias',status:'ok'},
+  {name:'TechFlow LTDA',plan:'Pro',health:71,score:'71/100',last:'Há 5 dias',status:'ok'},
+  {name:'Grupo Omega',plan:'Enterprise',health:54,score:'54/100',last:'Há 7 dias',status:'warn'},
+  {name:'Loja Nexus',plan:'Starter',health:38,score:'38/100',last:'Há 11 dias',status:'danger'},
+  {name:'MegaStar E-com',plan:'Pro',health:31,score:'31/100',last:'Há 14 dias',status:'danger'},
+];
+const tbody=document.getElementById('clientTable');
+clients.forEach(c=>{
+  const hc=c.health>=70?'#00e87a':c.health>=50?'#f0a500':'#f05060';
+  const ps=c.status==='ok'?'ok':c.status==='warn'?'warn':'danger';
+  const plbl=c.status==='ok'?'Saudável':c.status==='warn'?'Atenção':'Em Risco';
+  tbody.innerHTML+=`<tr>
+    <td><strong style="color:var(--text)">${c.name}</strong></td>
+    <td>${c.plan}</td>
+    <td><div class="health-bar-wrap"><div class="health-bar" style="width:${c.health}%;background:${hc}"></div></div></td>
+    <td><strong style="color:${hc}">${c.score}</strong></td>
+    <td style="color:var(--muted)">${c.last}</td>
+    <td><span class="pill ${ps}">${plbl}</span></td>
+    <td><button class="abtn" onclick="alert('Abrindo perfil de ${c.name}...')">Ver perfil</button></td>
+  </tr>`;
+});
+
+const actions=[
+  {client:'Grupo Omega',title:'Revisão de Integração de API',desc:'Cliente reportou falha na integração após atualização. Necessário revisar endpoints e tokens de autenticação.',due:'28/03/2025',priority:'danger'},
+  {client:'Loja Nexus',title:'Campanha de Reativação',desc:'Cliente sem engajamento há 11 dias. Acionar fluxo de reengajamento via WhatsApp com oferta personalizada.',due:'30/03/2025',priority:'danger'},
+  {client:'MegaStar E-com',title:'Call de Acompanhamento',desc:'Agendar reunião para entender motivo do baixo engajamento e apresentar novos recursos da plataforma.',due:'02/04/2025',priority:'warn'},
+];
+const acts=document.getElementById('actCards');
+actions.forEach(a=>{
+  const c=a.priority==='danger'?'var(--danger)':'var(--warn)';
+  acts.innerHTML+=`<div class="act-card" style="--bar-c:${c}">
+    <div class="act-client">${a.client}</div>
+    <div class="act-title">${a.title}</div>
+    <div class="act-desc">${a.desc}</div>
+    <div class="act-footer">
+      <span class="act-due">Prazo: ${a.due}</span>
+      <div class="act-btns">
+        <button class="abtn" onclick="alert('Comentário adicionado.')">Comentar</button>
+        <button class="abtn primary" onclick="alert('Plano marcado como concluído!')">Concluir</button>
+      </div>
+    </div>
+  </div>`;
+});
+document.querySelectorAll('.sitem').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('.sitem').forEach(e=>e.classList.remove('active'));el.classList.add('active')}));
+</script>
+</body>
+</html>

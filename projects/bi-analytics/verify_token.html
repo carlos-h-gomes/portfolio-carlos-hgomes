@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Verify Token - Hi Platform Dashboard{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3><i data-feather="key"></i> Verify Token</h3>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-4">
+                    A 6-digit token has been sent to:<br>
+                    <strong>{{ email }}</strong>
+                </p>
+                
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="token" class="form-label">Enter Token</label>
+                        <input type="text" class="form-control text-center" id="token" name="token" 
+                               maxlength="6" pattern="[0-9]{6}" required 
+                               style="font-size: 1.5rem; letter-spacing: 0.2rem;">
+                        <div class="form-text">
+                            Enter the 6-digit code from your email
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i data-feather="check"></i> Verify & Login
+                        </button>
+                        <a href="{{ url_for('auth_routes.resend_token') }}" class="btn btn-outline-secondary">
+                            <i data-feather="refresh-cw"></i> Resend Token
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <small class="text-muted">
+                    <i data-feather="clock"></i>
+                    Token expires in 15 minutes
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto-focus token input
+document.getElementById('token').focus();
+
+// Format token input
+document.getElementById('token').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 6) value = value.substring(0, 6);
+    e.target.value = value;
+});
+</script>
+{% endblock %}

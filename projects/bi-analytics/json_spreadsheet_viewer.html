@@ -1,0 +1,532 @@
+{% extends "base.html" %}
+
+{% block title %}Visualizador JSON - Estilo Planilha{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Dados da API - Visualização em Planilha</h2>
+                <div>
+                    <span class="badge bg-info me-2">Cliente: {{ client.name }}</span>
+                    <button class="btn btn-primary me-2" onclick="createDashboardFromSelection()">
+                        <i data-feather="plus"></i> Criar Dashboard com Seleção
+                    </button>
+                    <a href="{{ url_for('manual_dashboard.create_manual_dashboard', client_id=client.id) }}" class="btn btn-outline-secondary">
+                        <i data-feather="arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="eventTypeFilter" class="form-label">Tipo de Evento</label>
+                    <select class="form-select" id="eventTypeFilter" onchange="filterData()">
+                        <option value="all">Todos</option>
+                        <option value="DT.Chat">Chat/Atendimento</option>
+                        <option value="Hi.Bot">Bot</option>
+                        <option value="Hi.Whatsapp.HSM">HSM/WhatsApp</option>
+                        <option value="Inbox">Tickets/Inbox</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="startDate" class="form-label">Data Início</label>
+                    <input type="date" class="form-control" id="startDate" value="{{ start_date }}" onchange="loadData()">
+                </div>
+                <div class="col-md-3">
+                    <label for="endDate" class="form-label">Data Fim</label>
+                    <input type="date" class="form-control" id="endDate" value="{{ end_date }}" onchange="loadData()">
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100" onclick="loadData()">
+                        <i data-feather="refresh-cw"></i> Atualizar Dados
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Dados da API</h5>
+                <div>
+                    <span id="recordCount" class="badge bg-secondary">0 registros</span>
+                    <button class="btn btn-sm btn-outline-primary ms-2" onclick="selectAllVisible()">
+                        <i data-feather="check-square"></i> Selecionar Todos Visíveis
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary ms-1" onclick="clearSelection()">
+                        <i data-feather="square"></i> Limpar Seleção
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive" style="max-height: 600px;">
+                <table class="table table-hover table-striped mb-0" id="dataTable">
+                    <thead class="table-dark sticky-top">
+                        <tr>
+                            <th width="30"><input type="checkbox" id="selectAllCheck" onchange="toggleSelectAll()"></th>
+                            <th>Tipo de Evento</th>
+                            <th>Data/Hora</th>
+                            <th>Departamento</th>
+                            <th>Estado</th>
+                            <th>Origem</th>
+                            <th>Usuário/Cliente</th>
+                            <th>Duração (s)</th>
+                            <th>Dados Extras</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody">
+                        <tr>
+                            <td colspan="10" class="text-center text-muted py-4">
+                                <i data-feather="database"></i> Carregue os dados usando os filtros acima
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Selection Summary -->
+    <div class="card mt-4" id="selectionSummary" style="display: none;">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Resumo da Seleção</h5>
+        </div>
+        <div class="card-body">
+            <div class="row" id="selectionStats"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para criar dashboard -->
+<div class="modal fade" id="createDashboardModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Criar Dashboard com Dados Selecionados</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="dashboardForm">
+                    <div class="mb-3">
+                        <label for="dashboardNameModal" class="form-label">Nome do Dashboard</label>
+                        <input type="text" class="form-control" id="dashboardNameModal" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Métricas Disponíveis</label>
+                        <div id="availableMetrics"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Agrupamentos Disponíveis</label>
+                        <div id="availableGroupings"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveDashboard()">Criar Dashboard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const clientId = {{ client.id }};
+let allData = [];
+let filteredData = [];
+let selectedRows = new Set();
+
+// Load initial data
+document.addEventListener('DOMContentLoaded', function() {
+    loadData();
+});
+
+function loadData() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    if (!startDate || !endDate) {
+        alert('Por favor, selecione as datas');
+        return;
+    }
+    
+    const params = new URLSearchParams({
+        start_date: startDate,
+        end_date: endDate
+    });
+    
+    document.getElementById('dataTableBody').innerHTML = `
+        <tr>
+            <td colspan="10" class="text-center text-muted py-4">
+                <div class="spinner-border spinner-border-sm me-2"></div>
+                Carregando dados...
+            </td>
+        </tr>
+    `;
+    
+    fetch(`/manual-dashboard/api/preview-data/${clientId}?${params}&full_data=true`)
+        .then(response => {
+            if (response.status === 429) {
+                return response.json().then(data => {
+                    throw new Error(data.error + ' - API temporariamente limitada');
+                });
+            }
+            if (!response.ok) {
+                throw new Error('Erro HTTP: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            
+            allData = data.items || [];
+            filterData();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('dataTableBody').innerHTML = `
+                <tr>
+                    <td colspan="10" class="text-center text-danger py-4">
+                        <i data-feather="alert-circle"></i> Erro ao carregar dados: ${error.message}
+                        ${error.message.includes('limitada') ? '<br><small>Tente novamente em alguns minutos</small>' : ''}
+                    </td>
+                </tr>
+            `;
+            feather.replace();
+        });
+}
+
+function filterData() {
+    const eventTypeFilter = document.getElementById('eventTypeFilter').value;
+    
+    filteredData = allData.filter(item => {
+        if (eventTypeFilter === 'all') return true;
+        return item.eventType?.name === eventTypeFilter;
+    });
+    
+    renderTable();
+    updateRecordCount();
+}
+
+function renderTable() {
+    const tbody = document.getElementById('dataTableBody');
+    
+    if (filteredData.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="10" class="text-center text-muted py-4">
+                    <i data-feather="info"></i> Nenhum dado encontrado com os filtros aplicados
+                </td>
+            </tr>
+        `;
+        feather.replace();
+        return;
+    }
+    
+    let html = '';
+    filteredData.forEach((item, index) => {
+        const doc = item.document || {};
+        const eventType = item.eventType?.name || 'Unknown';
+        const department = doc.department?.name || '-';
+        const state = doc.state?.name || '-';
+        const origin = doc.origin?.name || '-';
+        const customer = getCustomerName(item) || '-';
+        const duration = getDuration(doc) || 0;
+        const createDate = item.originGeneratedDate || doc.createdat || '-';
+        
+        html += `
+            <tr ${selectedRows.has(index) ? 'class="table-primary"' : ''}>
+                <td>
+                    <input type="checkbox" ${selectedRows.has(index) ? 'checked' : ''} 
+                           onchange="toggleRowSelection(${index})">
+                </td>
+                <td><span class="badge bg-info">${eventType}</span></td>
+                <td>${formatDate(createDate)}</td>
+                <td>${department}</td>
+                <td>${state}</td>
+                <td>${origin}</td>
+                <td>${customer}</td>
+                <td>${Math.round(duration / 1000)}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" onclick="showItemDetails(${index})">
+                        <i data-feather="eye"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-outline-success" onclick="addToSelection(${index})">
+                        <i data-feather="plus"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    
+    tbody.innerHTML = html;
+    feather.replace();
+}
+
+function getCustomerName(item) {
+    const customerAttrs = item.customerAttributes || [];
+    for (let attr of customerAttrs) {
+        if (attr.name === 'name' || attr.key === 'name') {
+            return attr.value;
+        }
+    }
+    return item.document?.customer?.name || null;
+}
+
+function getDuration(doc) {
+    return doc.times?.dialog?.summary?.durationInMillis || 
+           doc.times?.totalDurationInMillis || 
+           doc.durationInMillis || 0;
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '-';
+    try {
+        return new Date(dateStr).toLocaleString('pt-BR');
+    } catch {
+        return dateStr;
+    }
+}
+
+function toggleRowSelection(index) {
+    if (selectedRows.has(index)) {
+        selectedRows.delete(index);
+    } else {
+        selectedRows.add(index);
+    }
+    
+    renderTable();
+    updateSelectionSummary();
+}
+
+function toggleSelectAll() {
+    const checked = document.getElementById('selectAllCheck').checked;
+    
+    if (checked) {
+        filteredData.forEach((_, index) => selectedRows.add(index));
+    } else {
+        selectedRows.clear();
+    }
+    
+    renderTable();
+    updateSelectionSummary();
+}
+
+function selectAllVisible() {
+    filteredData.forEach((_, index) => selectedRows.add(index));
+    renderTable();
+    updateSelectionSummary();
+}
+
+function clearSelection() {
+    selectedRows.clear();
+    document.getElementById('selectAllCheck').checked = false;
+    renderTable();
+    updateSelectionSummary();
+}
+
+function updateRecordCount() {
+    document.getElementById('recordCount').textContent = `${filteredData.length} registros`;
+}
+
+function updateSelectionSummary() {
+    const summaryDiv = document.getElementById('selectionSummary');
+    const statsDiv = document.getElementById('selectionStats');
+    
+    if (selectedRows.size === 0) {
+        summaryDiv.style.display = 'none';
+        return;
+    }
+    
+    summaryDiv.style.display = 'block';
+    
+    // Calculate statistics for selected rows
+    const selectedData = Array.from(selectedRows).map(index => filteredData[index]);
+    const eventTypes = {};
+    const departments = {};
+    
+    selectedData.forEach(item => {
+        const eventType = item.eventType?.name || 'Unknown';
+        const dept = item.document?.department?.name || 'Unknown';
+        
+        eventTypes[eventType] = (eventTypes[eventType] || 0) + 1;
+        departments[dept] = (departments[dept] || 0) + 1;
+    });
+    
+    let html = `
+        <div class="col-md-4">
+            <h6>Selecionados: ${selectedRows.size}</h6>
+            <p class="text-muted mb-0">De ${filteredData.length} registros filtrados</p>
+        </div>
+        <div class="col-md-4">
+            <h6>Por Tipo de Evento:</h6>
+            ${Object.entries(eventTypes).map(([type, count]) => 
+                `<span class="badge bg-info me-1">${type}: ${count}</span>`
+            ).join('')}
+        </div>
+        <div class="col-md-4">
+            <h6>Por Departamento:</h6>
+            ${Object.entries(departments).map(([dept, count]) => 
+                `<span class="badge bg-secondary me-1">${dept}: ${count}</span>`
+            ).join('')}
+        </div>
+    `;
+    
+    statsDiv.innerHTML = html;
+}
+
+function showItemDetails(index) {
+    const item = filteredData[index];
+    const modal = new bootstrap.Modal(document.createElement('div'));
+    
+    // Create details modal
+    const modalHtml = `
+        <div class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Detalhes do Item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <pre class="bg-light p-3 rounded">${JSON.stringify(item, null, 2)}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    const modalEl = document.body.lastElementChild;
+    const modalInstance = new bootstrap.Modal(modalEl);
+    modalInstance.show();
+    
+    modalEl.addEventListener('hidden.bs.modal', () => {
+        modalEl.remove();
+    });
+}
+
+function createDashboardFromSelection() {
+    if (selectedRows.size === 0) {
+        alert('Selecione ao menos um registro para criar o dashboard');
+        return;
+    }
+    
+    // Prepare metrics based on selected data
+    const selectedData = Array.from(selectedRows).map(index => filteredData[index]);
+    
+    const modal = new bootstrap.Modal(document.getElementById('createDashboardModal'));
+    
+    // Populate available metrics
+    const metricsDiv = document.getElementById('availableMetrics');
+    metricsDiv.innerHTML = `
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="totalCount" checked>
+            <label class="form-check-label" for="totalCount">Total de Registros</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="avgDuration">
+            <label class="form-check-label" for="avgDuration">Duração Média</label>
+        </div>
+    `;
+    
+    // Populate groupings
+    const groupingsDiv = document.getElementById('availableGroupings');
+    groupingsDiv.innerHTML = `
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="groupByEventType" checked>
+            <label class="form-check-label" for="groupByEventType">Agrupar por Tipo de Evento</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="groupByDepartment">
+            <label class="form-check-label" for="groupByDepartment">Agrupar por Departamento</label>
+        </div>
+    `;
+    
+    modal.show();
+}
+
+function saveDashboard() {
+    const dashboardName = document.getElementById('dashboardNameModal').value;
+    
+    if (!dashboardName) {
+        alert('Digite o nome do dashboard');
+        return;
+    }
+    
+    const selectedData = Array.from(selectedRows).map(index => filteredData[index]);
+    
+    // Create widgets based on selected metrics
+    const widgets = [];
+    
+    if (document.getElementById('totalCount').checked) {
+        widgets.push({
+            name: 'Total de Registros',
+            type: 'count',
+            data: selectedData,
+            value: selectedData.length
+        });
+    }
+    
+    if (document.getElementById('groupByEventType').checked) {
+        const eventTypes = {};
+        selectedData.forEach(item => {
+            const type = item.eventType?.name || 'Unknown';
+            eventTypes[type] = (eventTypes[type] || 0) + 1;
+        });
+        
+        widgets.push({
+            name: 'Por Tipo de Evento',
+            type: 'chart',
+            chart_type: 'bar',
+            data: eventTypes
+        });
+    }
+    
+    const config = {
+        name: dashboardName,
+        widgets: widgets,
+        data_source: 'manual_selection',
+        total_records: selectedData.length
+    };
+    
+    fetch(`/manual-dashboard/api/create-custom-dashboard/${clientId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(config)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert('Erro: ' + data.error);
+            return;
+        }
+        
+        alert('Dashboard criado com sucesso!');
+        window.location.href = `/admin/client/${clientId}/dashboards`;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Erro ao criar dashboard');
+    });
+}
+</script>
+{% endblock %}

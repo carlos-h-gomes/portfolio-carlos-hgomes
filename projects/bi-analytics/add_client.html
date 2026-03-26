@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Add Client - Hi Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h3><i data-feather="plus"></i> Add New Client</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Client Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="form-text">Company or client name (e.g., "SKY", "Senff")</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="emails" class="form-label">Client Emails *</label>
+                        <textarea class="form-control" id="emails" name="emails" rows="3" placeholder="user1@example.com&#10;user2@example.com&#10;user3@example.com" required></textarea>
+                        <div class="form-text">Um email por linha. O primeiro será o contato principal.</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="api_user" class="form-label">API User *</label>
+                                <input type="text" class="form-control" id="api_user" name="api_user" required>
+                                <div class="form-text">Usuário da API Hi Platform</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="api_password" class="form-label">API Password *</label>
+                                <input type="password" class="form-control" id="api_password" name="api_password" required>
+                                <div class="form-text">Senha da API Hi Platform</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="data_start_date" class="form-label">Data Inicial dos Dados *</label>
+                                <input type="date" class="form-control" id="data_start_date" name="data_start_date" required>
+                                <div class="form-text">Data inicial para buscar dados na API Timeline</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="data_retention_days" class="form-label">Período de Retenção *</label>
+                                <select class="form-select" id="data_retention_days" name="data_retention_days" required>
+                                    <option value="30">30 dias (1 mês)</option>
+                                    <option value="90" selected>90 dias (3 meses)</option>
+                                    <option value="180">180 dias (6 meses)</option>
+                                    <option value="365">365 dias (1 ano)</option>
+                                    <option value="1095">1095 dias (3 anos)</option>
+                                    <option value="1825">1825 dias (5 anos)</option>
+                                </select>
+                                <div class="form-text">Período máximo de dados mantidos</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="refresh_interval" class="form-label">Intervalo de Atualização</label>
+                        <select class="form-select" id="refresh_interval" name="refresh_interval">
+                            <option value="1">A cada 1 hora</option>
+                            <option value="3">A cada 3 horas</option>
+                            <option value="6">A cada 6 horas</option>
+                            <option value="12">A cada 12 horas</option>
+                            <option value="24" selected>A cada 24 horas</option>
+                            <option value="72">A cada 72 horas</option>
+                        </select>
+                        <div class="form-text">Frequência de atualização dos dados da API</div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i data-feather="info"></i>
+                        <strong>What happens next:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>A user account will be created for the client email</li>
+                            <li>API connection will be tested</li>
+                            <li>Default dashboards will be generated automatically</li>
+                            <li>Client can login using email token authentication</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('admin.clients') }}" class="btn btn-secondary">
+                            <i data-feather="arrow-left"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i data-feather="plus"></i> Add Client
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

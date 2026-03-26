@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Client Health — Preview</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b1020;color:#e6ecff}
+.wrap{padding:12px}
+select{padding:10px;border-radius:10px;border:1px solid #ffffff33;background:#121a3f;color:#e6ecff}
+iframe{width:100%;height:80vh;border:0;background:#000;margin-top:10px;border-top:1px solid #ffffff22}
+</style>
+<div class="wrap">
+  <label>Preview:
+    <select id="sel">
+      <option value="admin.html">admin.html</option><option value="admin_backup.html">admin_backup.html</option><option value="clientes.html">clientes.html</option><option value="cliente_form.html">cliente_form.html</option><option value="comentar.html">comentar.html</option><option value="comentario_card.html">comentario_card.html</option><option value="historico.html">historico.html</option><option value="login.html">login.html</option><option value="navbar.html">navbar.html</option><option value="planos.html">planos.html</option><option value="planos_cliente.html">planos_cliente.html</option><option value="planos_kanban.html">planos_kanban.html</option><option value="planos_timeline.html">planos_timeline.html</option><option value="plano_detalhado.html">plano_detalhado.html</option><option value="ranking.html">ranking.html</option><option value="verify.html">verify.html</option>
+    </select>
+  </label>
+  <iframe id="f" src="admin.html" title="preview"></iframe>
+</div>
+<script>
+const s=document.getElementById('sel'), f=document.getElementById('f');
+s.addEventListener('change',()=>f.src=s.value);
+</script>

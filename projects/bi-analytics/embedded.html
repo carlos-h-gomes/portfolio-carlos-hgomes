@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Bi Analytics — Preview</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0b1020;color:#e6ecff}
+.wrap{padding:12px}
+select{padding:10px;border-radius:10px;border:1px solid #ffffff33;background:#121a3f;color:#e6ecff}
+iframe{width:100%;height:80vh;border:0;background:#000;margin-top:10px;border-top:1px solid #ffffff22}
+</style>
+<div class="wrap">
+  <label>Preview:
+    <select id="sel">
+      <option value="add_client.html">add_client.html</option><option value="base.html">base.html</option><option value="clients.html">clients.html</option><option value="client_dashboards.html">client_dashboards.html</option><option value="cross_filters.html">cross_filters.html</option><option value="dashboard.html">dashboard.html</option><option value="edit_client.html">edit_client.html</option><option value="json_spreadsheet_viewer.html">json_spreadsheet_viewer.html</option><option value="login.html">login.html</option><option value="manual_charts.html">manual_charts.html</option><option value="manual_dashboard_builder.html">manual_dashboard_builder.html</option><option value="power_bi_dashboard.html">power_bi_dashboard.html</option><option value="verify_token.html">verify_token.html</option><option value="view_dashboard.html">view_dashboard.html</option><option value="view_dashboard_improved.html">view_dashboard_improved.html</option>
+    </select>
+  </label>
+  <iframe id="f" src="add_client.html" title="preview"></iframe>
+</div>
+<script>
+const s=document.getElementById('sel'), f=document.getElementById('f');
+s.addEventListener('change',()=>f.src=s.value);
+</script>

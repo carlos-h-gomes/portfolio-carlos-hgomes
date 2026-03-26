@@ -1,0 +1,442 @@
+{% extends "base.html" %}
+
+{% block title %}{{ client.name }} Dashboards - Hi Platform{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i data-feather="bar-chart-2"></i> {{ client.name }} Dashboards</h1>
+    <div>
+        {% if not dashboards %}
+            <a href="{{ url_for('admin.generate_client_dashboards', client_id=client.id) }}" class="btn btn-primary me-2">
+                <i data-feather="plus"></i> Generate Dashboards
+            </a>
+        {% endif %}
+        <a href="{{ url_for('manual_dashboard.create_manual_dashboard', client_id=client.id) }}" class="btn btn-primary me-2">
+            <i data-feather="plus"></i> Dashboard Manual
+        </a>
+        <a href="{{ url_for('admin.refresh_client_data', client_id=client.id) }}" class="btn btn-info me-2">
+            <i data-feather="refresh-cw"></i> Refresh Data
+        </a>
+        <a href="{{ url_for('admin.clients') }}" class="btn btn-secondary">
+            <i data-feather="arrow-left"></i> Back to Clients
+        </a>
+    </div>
+</div>
+
+<!-- Client Info Card -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>{{ client.name }}</h5>
+                <p class="text-muted mb-1">
+                    {% if client.users %}
+                        {{ client.users[0].user.email }}
+                        {% if client.users|length > 1 %}
+                            (+{{ client.users|length - 1 }} more users)
+                        {% endif %}
+                    {% else %}
+                        No users associated
+                    {% endif %}
+                </p>
+                <p class="text-muted mb-0">
+                    Last Updated: 
+                    {% if client.last_data_update %}
+                        {{ client.last_data_update.strftime('%Y-%m-%d %H:%M') }}
+                    {% else %}
+                        Never
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <span class="badge bg-{{ 'success' if client.is_active else 'secondary' }} me-2">
+                    {{ 'Active' if client.is_active else 'Inactive' }}
+                </span>
+                <span class="badge bg-info">{{ client.refresh_interval }}h refresh</span>
+                {% if client.api_user and client.api_password %}
+                    <span class="badge bg-success">API Connected</span>
+                {% else %}
+                    <span class="badge bg-warning">No API Credentials</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Departments Filter (if available) -->
+{% if departments %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h6 class="mb-0"><i data-feather="filter"></i> Filter by Department</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for dept in departments %}
+                <div class="col-md-3 mb-2">
+                    <button class="btn btn-outline-primary btn-sm department-filter" data-dept-id="{{ dept.id }}">
+                        {{ dept.name }}
+                    </button>
+                </div>
+            {% endfor %}
+            <div class="col-md-3 mb-2">
+                <button class="btn btn-outline-secondary btn-sm" id="clear-filter">
+                    <i data-feather="x"></i> Clear Filter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Dashboards Grid -->
+{% if dashboards %}
+    <div class="row">
+        <!-- Hi Chat Analytics -->
+        {% for dashboard in dashboards %}
+            {% if dashboard.product_type == 'hi_chat' %}
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i data-feather="message-circle"></i> {{ dashboard.name }}
+                            </h6>
+                            <span class="badge bg-primary">Hi Chat</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Análise de atendimentos, operadores, departamentos e satisfação</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="metric-value" id="total-chats-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Total Chats</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="avg-response-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Tempo Resposta</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="satisfaction-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Satisfação</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="chart-{{ dashboard.id }}" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ url_for('client.view_dashboard', dashboard_id=dashboard.id) }}" class="btn btn-primary btn-sm">
+                                <i data-feather="eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Hi Inbox Analytics -->
+        {% for dashboard in dashboards %}
+            {% if dashboard.product_type == 'hi_inbox' %}
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i data-feather="inbox"></i> {{ dashboard.name }}
+                            </h6>
+                            <span class="badge bg-success">Hi Inbox</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">TMA, SLA, tickets por operador e classificações</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="metric-value" id="total-tickets-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Total Tickets</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="avg-handling-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">TMA (min)</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="sla-compliance-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">SLA (%)</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="chart-{{ dashboard.id }}" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ url_for('client.view_dashboard', dashboard_id=dashboard.id) }}" class="btn btn-primary btn-sm">
+                                <i data-feather="eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Bot Analytics -->
+        {% for dashboard in dashboards %}
+            {% if dashboard.product_type == 'bot' %}
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i data-feather="cpu"></i> {{ dashboard.name }}
+                            </h6>
+                            <span class="badge bg-warning">Bot</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Taxa de retenção, artigos mais acessados e fluxos</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="metric-value" id="bot-interactions-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Interações</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="retention-rate-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Retenção (%)</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="articles-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Artigos</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="chart-{{ dashboard.id }}" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ url_for('client.view_dashboard', dashboard_id=dashboard.id) }}" class="btn btn-primary btn-sm">
+                                <i data-feather="eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- HSM Analytics -->
+        {% for dashboard in dashboards %}
+            {% if dashboard.product_type == 'hsm' %}
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i data-feather="send"></i> {{ dashboard.name }}
+                            </h6>
+                            <span class="badge bg-info">HSM</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Disparos, taxas de entrega e leitura, templates</p>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="metric-value" id="hsm-sent-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">HSMs Enviados</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="delivery-rate-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Entrega (%)</small>
+                                </div>
+                                <div class="col-4">
+                                    <div class="metric-value" id="templates-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Templates</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="chart-{{ dashboard.id }}" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ url_for('client.view_dashboard', dashboard_id=dashboard.id) }}" class="btn btn-primary btn-sm">
+                                <i data-feather="eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- General Analytics -->
+        {% for dashboard in dashboards %}
+            {% if dashboard.product_type == 'general' %}
+                <div class="col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i data-feather="trending-up"></i> {{ dashboard.name }}
+                            </h6>
+                            <span class="badge bg-dark">General</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Visão geral de todas as interações, picos de volume e canais</p>
+                            <div class="row text-center">
+                                <div class="col-3">
+                                    <div class="metric-value" id="total-interactions-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Total Interações</small>
+                                </div>
+                                <div class="col-3">
+                                    <div class="metric-value" id="peak-hour-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Horário Pico</small>
+                                </div>
+                                <div class="col-3">
+                                    <div class="metric-value" id="daily-avg-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Média Diária</small>
+                                </div>
+                                <div class="col-3">
+                                    <div class="metric-value" id="channels-{{ dashboard.id }}">-</div>
+                                    <small class="text-muted">Canais Ativos</small>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <canvas id="chart-{{ dashboard.id }}" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ url_for('client.view_dashboard', dashboard_id=dashboard.id) }}" class="btn btn-primary btn-sm">
+                                <i data-feather="eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+    <!-- No Dashboards Message -->
+    <div class="card">
+        <div class="card-body text-center py-5">
+            <i data-feather="bar-chart-2" class="text-muted mb-3" style="width: 64px; height: 64px;"></i>
+            <h4 class="text-muted">No Dashboards Available</h4>
+            <p class="text-muted mb-4">
+                {% if client.api_user and client.api_password %}
+                    Generate default dashboards to start viewing analytics for this client.
+                {% else %}
+                    Add API credentials first, then generate dashboards to start viewing analytics.
+                {% endif %}
+            </p>
+            {% if client.api_user and client.api_password %}
+                <a href="{{ url_for('admin.generate_client_dashboards', client_id=client.id) }}" class="btn btn-primary">
+                    <i data-feather="plus"></i> Generate Dashboards
+                </a>
+            {% else %}
+                <a href="{{ url_for('admin.edit_client', client_id=client.id) }}" class="btn btn-warning">
+                    <i data-feather="settings"></i> Configure API Credentials
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+<style>
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--bs-primary);
+}
+</style>
+
+<script>
+// Load dashboard data for charts
+{% for dashboard in dashboards %}
+fetch('/admin/api/dashboard-data/{{ dashboard.id }}')
+    .then(response => response.json())
+    .then(data => {
+        updateDashboardMetrics({{ dashboard.id }}, '{{ dashboard.product_type }}', data);
+        createChart({{ dashboard.id }}, data);
+    })
+    .catch(error => console.error('Error loading dashboard {{ dashboard.id }}:', error));
+{% endfor %}
+
+function updateDashboardMetrics(dashboardId, productType, data) {
+    // Update metrics based on product type
+    if (productType === 'hi_chat') {
+        updateElement(`total-chats-${dashboardId}`, data.total_chats ? data.total_chats.values[0] : '-');
+        updateElement(`avg-response-${dashboardId}`, data.average_response_time ? `${Math.round(data.average_response_time.values[0])}s` : '-');
+        updateElement(`satisfaction-${dashboardId}`, data.satisfaction_scores ? `${data.satisfaction_scores.values[0].toFixed(1)}` : '-');
+    } else if (productType === 'hi_inbox') {
+        updateElement(`total-tickets-${dashboardId}`, data.total_tickets ? data.total_tickets.values[0] : '-');
+        updateElement(`avg-handling-${dashboardId}`, data.average_handling_time ? `${Math.round(data.average_handling_time.values[0])}` : '-');
+        updateElement(`sla-compliance-${dashboardId}`, data.sla_compliance ? `${data.sla_compliance.values[0].toFixed(1)}%` : '-');
+    } else if (productType === 'bot') {
+        updateElement(`bot-interactions-${dashboardId}`, data.bot_interactions ? data.bot_interactions.values[0] : '-');
+        updateElement(`retention-rate-${dashboardId}`, data.retention_rate ? `${data.retention_rate.values[0].toFixed(1)}%` : '-');
+        updateElement(`articles-${dashboardId}`, data.article_usage ? data.article_usage.values[0] : '-');
+    } else if (productType === 'hsm') {
+        updateElement(`hsm-sent-${dashboardId}`, data.hsm_sent ? data.hsm_sent.values[0] : '-');
+        updateElement(`delivery-rate-${dashboardId}`, data.delivery_rate ? `${data.delivery_rate.values[0].toFixed(1)}%` : '-');
+        updateElement(`templates-${dashboardId}`, data.hsm_by_template ? Object.keys(data.hsm_by_template.data).length : '-');
+    } else if (productType === 'general') {
+        updateElement(`total-interactions-${dashboardId}`, data.total_interactions ? data.total_interactions.values[0] : '-');
+        if (data.peak_hours && data.peak_hours.data) {
+            const peakHour = Object.keys(data.peak_hours.data)[0];
+            updateElement(`peak-hour-${dashboardId}`, peakHour || '-');
+        }
+        if (data.daily_volume && data.daily_volume.values.length > 0) {
+            const avgDaily = Math.round(data.daily_volume.values.reduce((a, b) => a + b, 0) / data.daily_volume.values.length);
+            updateElement(`daily-avg-${dashboardId}`, avgDaily);
+        }
+        updateElement(`channels-${dashboardId}`, data.channel_distribution ? Object.keys(data.channel_distribution.data).length : '-');
+    }
+}
+
+function updateElement(elementId, value) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = value;
+    }
+}
+
+function createChart(dashboardId, data) {
+    const canvas = document.getElementById(`chart-${dashboardId}`);
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Create a simple chart with the most relevant metric
+    const firstMetric = Object.keys(data)[0];
+    if (!firstMetric || !data[firstMetric] || !data[firstMetric].labels) return;
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data[firstMetric].labels.slice(-7), // Last 7 data points
+            datasets: [{
+                label: firstMetric.replace(/_/g, ' ').toUpperCase(),
+                data: data[firstMetric].values.slice(-7),
+                borderColor: 'var(--bs-primary)',
+                backgroundColor: 'var(--bs-primary)',
+                tension: 0.1,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+}
+
+// Department filtering
+document.querySelectorAll('.department-filter').forEach(button => {
+    button.addEventListener('click', function() {
+        const deptId = this.dataset.deptId;
+        // TODO: Implement department filtering
+        console.log('Filter by department:', deptId);
+    });
+});
+
+document.getElementById('clear-filter')?.addEventListener('click', function() {
+    // TODO: Clear department filter
+    console.log('Clear department filter');
+});
+</script>
+{% endblock %}

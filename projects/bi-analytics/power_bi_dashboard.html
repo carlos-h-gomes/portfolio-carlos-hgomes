@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+
+{% block title %}Power BI Style Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <i data-feather="grid"></i>
+                    Dashboard Estilo Power BI
+                </h2>
+                <a href="{{ url_for('power_bi_style.power_bi_builder') }}" class="btn btn-primary">
+                    <i data-feather="plus"></i> Criar Dashboard Personalizado
+                </a>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>Dashboard Estilo Power BI:</strong> Interface inspirada no Power BI usando dados reais da API Timeline da Hi Platform.
+                Visualizações interativas com KPIs, gráficos e tabelas baseadas nos dados do cliente "{{ client_data[clients[0].id].name if clients else 'N/A' }}".
+            </div>
+            
+            <!-- Client Selector -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <select class="form-select" id="clientSelector" onchange="loadClientData()">
+                        <option value="">Selecione um cliente</option>
+                        {% for client in clients %}
+                            <option value="{{ client.id }}" {% if loop.first %}selected{% endif %}>
+                                {{ client.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-8 text-end">
+                    <button class="btn btn-outline-primary" onclick="refreshData()">
+                        <i data-feather="refresh-cw"></i> Atualizar Dados
+                    </button>
+                    <button class="btn btn-outline-success" onclick="exportDashboard()">
+                        <i data-feather="download"></i> Exportar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- KPI Row -->
+            <div class="row mb-4" id="kpiRow">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-title">Total de Tickets</h6>
+                                    <h3 id="kpi-total-tickets">-</h3>
+                                    <small id="kpi-total-tickets-trend">Carregando...</small>
+                                </div>
+                                <i data-feather="inbox" size="48" class="opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-title">Satisfação Média</h6>
+                                    <h3 id="kpi-satisfaction">-</h3>
+                                    <small id="kpi-satisfaction-trend">Carregando...</small>
+                                </div>
+                                <i data-feather="star" size="48" class="opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-title">Tempo Resposta</h6>
+                                    <h3 id="kpi-response-time">-</h3>
+                                    <small id="kpi-response-time-trend">Carregando...</small>
+                                </div>
+                                <i data-feather="clock" size="48" class="opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-title">Tempo Resolução</h6>
+                                    <h3 id="kpi-resolution-time">-</h3>
+                                    <small id="kpi-resolution-time-trend">Carregando...</small>
+                                </div>
+                                <i data-feather="check-circle" size="48" class="opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts Row -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i data-feather="pie-chart"></i> Tickets por Estado</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="statesChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i data-feather="bar-chart-2"></i> Volume por Grupo</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="groupsChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tables Row -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i data-feather="users"></i> Top Operadores</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm" id="operatorsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Operador</th>
+                                            <th>Tickets</th>
+                                            <th>Tempo Médio</th>
+                                            <th>Satisfação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="4" class="text-center text-muted">Carregando...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6><i data-feather="list"></i> Tickets Recentes</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm" id="ticketsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Assunto</th>
+                                            <th>Estado</th>
+                                            <th>Tempo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td colspan="4" class="text-center text-muted">Carregando...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+let statesChart, groupsChart;
+
+// Load data when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const firstClientId = document.querySelector('#clientSelector option[value]:not([value=""])')?.value;
+    if (firstClientId) {
+        loadClientData();
+    }
+});
+
+function loadClientData() {
+    const clientId = document.getElementById('clientSelector').value;
+    if (!clientId) return;
+    
+    // Show loading states
+    document.getElementById('kpi-total-tickets').textContent = 'Carregando...';
+    document.getElementById('kpi-satisfaction').textContent = 'Carregando...';
+    document.getElementById('kpi-response-time').textContent = 'Carregando...';
+    document.getElementById('kpi-resolution-time').textContent = 'Carregando...';
+    
+    fetch(`/api/power-bi-data/${clientId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error('Error:', data.error);
+                return;
+            }
+            
+            // Update KPIs
+            updateKPIs(data.kpis);
+            
+            // Update Charts
+            updateCharts(data.charts);
+            
+            // Update Tables
+            updateTables(data.tables);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function updateKPIs(kpis) {
+    // Total Tickets
+    document.getElementById('kpi-total-tickets').textContent = kpis.total_tickets?.value || '0';
+    document.getElementById('kpi-total-tickets-trend').textContent = kpis.total_tickets?.trend || '';
+    
+    // Satisfaction
+    const satisfaction = kpis.satisfaction_score?.value || 0;
+    document.getElementById('kpi-satisfaction').textContent = satisfaction.toFixed(1) + '/5';
+    document.getElementById('kpi-satisfaction-trend').textContent = kpis.satisfaction_score?.trend || '';
+    
+    // Response Time
+    const responseTime = kpis.response_time?.value || 0;
+    document.getElementById('kpi-response-time').textContent = Math.round(responseTime) + 's';
+    document.getElementById('kpi-response-time-trend').textContent = kpis.response_time?.trend || '';
+    
+    // Resolution Time
+    const resolutionTime = kpis.resolution_time?.value || 0;
+    document.getElementById('kpi-resolution-time').textContent = resolutionTime.toFixed(1) + 'h';
+    document.getElementById('kpi-resolution-time-trend').textContent = kpis.resolution_time?.trend || '';
+}
+
+function updateCharts(charts) {
+    // Destroy existing charts
+    if (statesChart) statesChart.destroy();
+    if (groupsChart) groupsChart.destroy();
+    
+    // States Chart (Donut)
+    const statesCtx = document.getElementById('statesChart').getContext('2d');
+    const statesData = charts.tickets_by_state?.data || {};
+    
+    statesChart = new Chart(statesCtx, {
+        type: 'doughnut',
+        data: {
+            labels: Object.keys(statesData).map(key => key.replace('TicketState', '')),
+            datasets: [{
+                data: Object.values(statesData),
+                backgroundColor: ['#28a745', '#ffc107', '#dc3545', '#17a2b8', '#6f42c1']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Groups Chart (Bar)
+    const groupsCtx = document.getElementById('groupsChart').getContext('2d');
+    const groupsData = charts.tickets_by_group?.data || {};
+    
+    groupsChart = new Chart(groupsCtx, {
+        type: 'bar',
+        data: {
+            labels: Object.keys(groupsData).map(key => key.length > 15 ? key.substring(0, 12) + '...' : key),
+            datasets: [{
+                data: Object.values(groupsData),
+                backgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+function updateTables(tables) {
+    // Operators Table
+    const operatorsBody = document.querySelector('#operatorsTable tbody');
+    const operatorsData = tables.top_operators?.data || [];
+    
+    operatorsBody.innerHTML = '';
+    if (operatorsData.length === 0) {
+        operatorsBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Nenhum dado disponível</td></tr>';
+    } else {
+        operatorsData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row[0]}</td>
+                <td><span class="badge bg-primary">${row[1]}</span></td>
+                <td>${row[2]}</td>
+                <td>${row[3]}</td>
+            `;
+            operatorsBody.appendChild(tr);
+        });
+    }
+    
+    // Tickets Table
+    const ticketsBody = document.querySelector('#ticketsTable tbody');
+    const ticketsData = tables.recent_tickets?.data || [];
+    
+    ticketsBody.innerHTML = '';
+    if (ticketsData.length === 0) {
+        ticketsBody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Nenhum dado disponível</td></tr>';
+    } else {
+        ticketsData.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row[0]}</td>
+                <td>${row[1]}</td>
+                <td><span class="badge bg-info">${row[2]}</span></td>
+                <td>${row[3]}</td>
+            `;
+            ticketsBody.appendChild(tr);
+        });
+    }
+}
+
+function refreshData() {
+    loadClientData();
+}
+
+function exportDashboard() {
+    alert('Funcionalidade de exportação será implementada em breve!');
+}
+</script>
+{% endblock %}
