@@ -171,8 +171,9 @@
     .tlist li{padding:5px 0 5px 14px;color:var(--muted2);font-size:.85rem;border-left:2px solid var(--border);margin-bottom:5px;transition:var(--ease)}
     .tlist li:hover{border-left-color:var(--a);color:var(--text);padding-left:18px}
     /* CONTACT */
-    .cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media(max-width:768px){.cgrid{grid-template-columns:1fr}}
+    .cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    @media(max-width:900px){.cgrid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.cgrid{grid-template-columns:1fr}}
     .ccrd{border-radius:18px;border:1px solid var(--border);background:var(--bgcard);padding:26px;transition:var(--ease);display:flex;flex-direction:column;align-items:flex-start;position:relative;overflow:hidden}
     .ccrd:hover{transform:translateY(-5px);border-color:var(--a)}
     .ccrd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--a),var(--a2));transform:scaleX(0);transition:var(--ease);transform-origin:left}
@@ -291,8 +292,8 @@
       </div>
       <div class="hero-metrics">
         <div class="mcrd"><span class="mn" data-count="12">0</span><span class="mk" id="mky">anos em TI</span></div>
-        <div class="mcrd"><span class="mn" data-count="80" data-suffix="%">0</span><span class="mk" id="mkg">redução de tempo</span></div>
-        <div class="mcrd"><span class="mn" style="color:var(--a)">B2B</span><span class="mk" id="mkf">foco em operações</span></div>
+        <div class="mcrd"><span class="mn" style="color:var(--a3)">R$60K</span><span class="mk" id="mkg">/mês recuperados p/ clientes</span></div>
+        <div class="mcrd"><span class="mn" style="color:var(--a)">R$40K+</span><span class="mk" id="mkf">/mês em saving operacional</span></div>
       </div>
     </div>
     <div class="hcard">
@@ -314,7 +315,7 @@
       <div class="pscont">
         <div class="pslbl" id="pslbl">Fundador & Arquiteto de Soluções</div>
         <div class="pstitle">Process<span>Surge</span></div>
-        <p class="psdesc" id="psdesc">Ajudamos quem está começando a vender pela internet a crescer com estrutura. Criamos lojas e vitrines online, integramos com os principais marketplaces e ativamos automação, dados e atendimento com IA para que o vendedor foque só em vender.</p>
+        <p class="psdesc" id="psdesc">Plataforma B2B de automação de processos, integrações e IA Generativa para e-commerce e operações. Como fundador e arquiteto técnico, concebo e implanto sistemas que geram impacto mensurável: recuperação de receita, redução de custos operacionais e automação de processos críticos para PMEs.</p>
         <div class="pschips"><span class="pschip">Automação</span><span class="pschip">Integrações</span><span class="pschip">IA Generativa</span><span class="pschip">n8n</span><span class="pschip">Python</span><span class="pschip">B2B SaaS</span></div>
         <div class="pscta">
           <a class="bprim" href="https://www.processsurge.com/pt" target="_blank" rel="noopener" id="psctabtn">🌐 Visitar ProcessSurge</a>
@@ -380,8 +381,10 @@
     <div class="slbl" id="scbl">Experiência</div>
     <h2 class="stitle rev" id="stitlc">Carreira</h2>
     <div class="timeline">
-      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp1">Set/2021 – Atual</div><div class="ttitle" id="tt1">Especialista de Automação e Integração</div><div class="tco">Hi Platform</div><div class="tdesc" id="td1">Desenvolvimento de APIs, integrações e automações para operações e atendimento, com foco em escala e ganhos operacionais.</div><ul class="tlist"><li>APIs e serviços back-end para ingestão e normalização de dados (Python, Flask, PostgreSQL).</li><li>Integrações via REST APIs, Webhooks, Celery/Redis e orquestração com n8n.</li><li>Pipelines da Meta API, métricas de WhatsApp (CTR), dashboards no Superset e IA aplicada a QA.</li></ul></div>
-      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp2">Jun/2018 – Ago/2021</div><div class="ttitle" id="tt2">Técnico de TI</div><div class="tco">Grupo Semar</div><div class="tdesc" id="td2">Suporte à infraestrutura corporativa e automação de rotinas técnicas.</div><ul class="tlist"><li>Suporte a redes, estações de trabalho e sistemas internos.</li><li>Scripts em Python para inventário, backups e tarefas recorrentes.</li><li>Padronização de rotinas e apoio à estabilidade operacional.</li></ul></div>
+      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp1">Set/2021 – Atual</div><div class="ttitle" id="tt1">Especialista de Automação e Integração</div><div class="tco">Hi Platform</div><div class="tdesc" id="td1">Automação de processos internos, integrações com APIs externas e deploy de workflows com IA em produção.</div><ul class="tlist"><li>Processos Salesforce automatizados: renovações de contrato de 1 semana reduzidas para 30 minutos.</li><li>Recuperacao de carrinho via WhatsApp Business API para clientes enterprise (Tena): R$60K+/mes, 15% de retorno.</li><li>Hi Boards, plataforma interna de BI substituindo produto de terceiro: R$40K+/mes em saving, 15 agentes, ~1.000 tickets/mes.</li><li>50K+ disparos HSM mensais e workflows GPT-4/Gemini para QA e sumarizacao de atendimento.</li></ul></div>
+      <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp2">Jun/2018 – Ago/2021</div><div class="ttitle" id="tt2">Analista de TI</div><div class="tco">Grupo Semar Supermercados</div><div class="tdesc" id="td2">Gestao de infraestrutura de TI para rede com 30+ lojas, suportando milhares de dispositivos.</div><ul class="tlist"><li>PDVs, Auto Checkout, servidores e workstations em toda a rede de lojas.</li><li>Configuracao de redes do zero em cada unidade: mapeamento, layout, cabeamento e conectividade.</li><li>Administracao de ERPs (Bluesoft e Arius) e implantacao do Atlassian Jira para chamados de TI.</li><li>Primeiras automacoes e integracoes via API, ponto de partida para especializacao em sistemas.</li></ul></div>
+      <div class="ti"><div class="tdot"></div><div class="tperiod">2015 – 2018</div><div class="ttitle">Consultor de TI</div><div class="tco">Gomes e Gomes Informática</div><div class="tdesc">Consultoria independente de TI para PMEs: projetos end-to-end do escopo à manutenção.</div><ul class="tlist"><li>Design de rede, configuracao de servidores, instalacao de sistemas e suporte contínuo.</li><li>Gestao completa do relacionamento com clientes, da proposta à entrega.</li></ul></div>
+      <div class="ti"><div class="tdot"></div><div class="tperiod">2013 – 2015</div><div class="ttitle">Técnico de TI</div><div class="tco">Webcyber Informática</div><div class="tdesc">Suporte técnico e montagem de hardware especializado.</div><ul class="tlist"><li>Montagem, configuracao de SO e suporte técnico; especializado em PCs customizados para gaming e uso profissional.</li></ul></div>
       <div class="ti"><div class="tdot"></div><div class="tperiod" id="tp3">2025 – Atual</div><div class="ttitle" id="tt3">Fundador da ProcessSurge</div><div class="tco"><a href="https://www.processsurge.com/pt" target="_blank" rel="noopener" style="color:var(--a)">processsurge.com</a></div><div class="tdesc" id="td3">Empresa focada em ajudar vendedores que estão começando na internet. Do zero: loja online, marketplaces, automação e atendimento com IA.</div><ul class="tlist"><li>Criação de lojas e vitrines online integradas aos principais marketplaces.</li><li>Produtos: Cart Recovery, Surge Assist, BI Analytics, BotFlow, Client Health Monitor.</li><li>Stack: Python, n8n, Docker, LLMs, PostgreSQL, Redis, Apache Superset.</li></ul></div>
     </div>
   </div>
@@ -396,6 +399,7 @@
       <div class="ccrd rev"><div class="cicon">📧</div><h3 id="cet">E-mail</h3><p id="ced">Clique abaixo para abrir seu cliente de e-mail e me enviar uma mensagem diretamente.</p><a class="bprim" href="mailto:carloshegomes@outlook.com" style="width:100%;justify-content:center">carloshegomes@outlook.com</a></div>
       <div class="ccrd rev rd1"><div class="cicon">💬</div><h3 id="cwt">WhatsApp</h3><p id="cwd">Converse comigo diretamente pelo app. Respondo rápido!</p><a class="bprim bwa" href="https://wa.me/5511981648739" target="_blank" rel="noopener" style="width:100%;justify-content:center;color:#fff">+55 11 98164-8739</a></div>
       <div class="ccrd rev rd2"><div class="cicon">🔗</div><h3 id="clt">LinkedIn</h3><p id="cld">Acesse meu perfil profissional e me envie uma mensagem por lá.</p><a class="bprim bli" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank" rel="noopener" style="width:100%;justify-content:center;color:#fff">linkedin.com/in/carlos-he-gomes</a></div>
+      <div class="ccrd rev rd3"><div class="cicon">💻</div><h3 id="cgt">GitHub</h3><p id="cgd">Veja meus projetos, código e contribuições open source.</p><a class="bprim" href="https://github.com/carlos-h-gomes" target="_blank" rel="noopener" style="width:100%;justify-content:center;background:linear-gradient(135deg,#24292e,#444d56);border-color:transparent;color:#fff">github.com/carlos-h-gomes</a></div>
     </div>
   </div>
 </section>
@@ -406,6 +410,7 @@
     <a class="flink" href="#projects">Projetos</a>
     <a class="flink" href="https://www.processsurge.com/pt" target="_blank">ProcessSurge ↗</a>
     <a class="flink" href="https://www.linkedin.com/in/carlos-he-gomes" target="_blank">LinkedIn</a>
+    <a class="flink" href="https://github.com/carlos-h-gomes" target="_blank">GitHub</a>
     <a class="flink" href="mailto:carloshegomes@outlook.com">E-mail</a>
   </div>
   <p>© <span id="yr"></span> Carlos Henrique Gomes · Todos os direitos reservados.</p>
@@ -501,12 +506,12 @@ const i18n={
     hcvpt:'📄 Baixar CV (PT)',hcven:'📄 CV (EN)',
     hcvpt_href:'docs/Curriculo_Carlos_Henrique_Gomes.pdf',hcven_href:'docs/Carlos_Henrique_Gomes_CV_EN.pdf',
     navCvBtn_href:'docs/Curriculo_Carlos_Henrique_Gomes.pdf',
-    mky:'anos em TI',mkg:'redução de tempo',mkf:'foco em operações',
+    mky:'anos em TI',mkg:'/mês recuperados p/ clientes',mkf:'/mês em saving operacional',
     hclbl:'O que eu faço',hc1t:'Integrações & APIs',hc1d:'REST APIs, Webhooks, n8n, jobs agendados',
     hc2t:'IA Generativa',hc2d:'LLMs para QA, sumarização e triagem',
     hc3t:'Automação',hc3d:'Fluxos escaláveis com Python & Docker',
     hc4t:'Analytics',hc4d:'Dashboards, KPIs e pipelines de dados',
-    pslbl:'Fundador & Arquiteto de Soluções',psdesc:'Ajudamos quem está começando a vender pela internet a crescer com estrutura. Criamos lojas e vitrines online, integramos com os principais marketplaces e ativamos automação, dados e atendimento com IA para que o vendedor foque só em vender.',
+    pslbl:'Fundador & Arquiteto de Soluções',psdesc:'Plataforma B2B de automação de processos, integrações e IA Generativa para e-commerce e operações. Como fundador e arquiteto técnico, concebo e implanto sistemas que geram impacto mensurável: recuperação de receita, redução de custos operacionais e automação de processos críticos para PMEs.',
     psctabtn:'🌐 Visitar ProcessSurge',psproj:'Ver projetos →',psrl:'Função',psrv:'Founder',pssl:'Desde',psfl:'Foco',psfv:'B2B SaaS',
     splbl:'Projetos',stitlep:'Projetos em destaque',ssubp:'Produtos e iniciativas com foco em automação, IA, integrações e operação.',
     sskbl:'Habilidades',stitles:'Stack & Tecnologias',ssubs:'Ferramentas e tecnologias que uso no dia a dia.',
@@ -516,43 +521,45 @@ const i18n={
     ask:'Principais Habilidades',avt:'Valores',avd:'Tecnologia deve gerar impacto real no negócio: menos operação manual, mais previsibilidade, qualidade e escala.',
     aet:'Formação',ast:'Stack Principal',
     scbl:'Experiência',stitlc:'Carreira',
-    tp1:'Set/2021 – Atual',tt1:'Especialista de Automação e Integração',td1:'Desenvolvimento de APIs, integrações e automações para operações e atendimento.',
-    tp2:'Jun/2018 – Ago/2021',tt2:'Técnico de TI',td2:'Suporte à infraestrutura corporativa e automação de rotinas técnicas.',
-    tp3:'2025 – Atual',tt3:'Fundador da ProcessSurge',td3:'Empresa focada em ajudar quem está começando a vender online. Do zero: loja, marketplaces, automação e atendimento com IA.',
+    tp1:'Set/2021 – Atual',tt1:'Especialista de Automação e Integração',td1:'Automação de processos internos, integrações com APIs externas e deploy de workflows com IA em produção.',
+    tp2:'Jun/2018 – Ago/2021',tt2:'Analista de TI',td2:'Gestão de infraestrutura de TI para rede com 30+ lojas, suportando milhares de dispositivos.',
+    tp3:'2025 – Atual',tt3:'Fundador da ProcessSurge',td3:'Plataforma B2B de automação, integrações e IA Generativa. Fundador e arquiteto técnico de todos os produtos.',
     sccbl:'Contato',stitlec:'Vamos conversar?',ssubc:'Aberto a projetos, parcerias e oportunidades.',
     cet:'E-mail',ced:'Clique abaixo para abrir seu cliente de e-mail.',
     cwt:'WhatsApp',cwd:'Converse comigo diretamente pelo app. Respondo rápido!',
     clt:'LinkedIn',cld:'Acesse meu perfil profissional.',
+    cgt:'GitHub',cgd:'Veja meus projetos, código e contribuições open source.',
     cname:'Carlinhos · Assistente',cstatus:'Online agora',ctip:'Pergunte sobre mim!',
     modalTabTxt:'Nova aba',modalCloseTxt:'Fechar'},
-  en:{hbadge:'Available for new projects',
+  en:{hbadge:'Open to Remote · Available Now',
     htitle:'<span class="hl">Automation & AI</span> solutions<br>that drive real business impact<span class="cblink"></span>',
     hsub:'Automation, systems integration (APIs/Webhooks), and Generative AI specialist. Focused on scaling operations, reducing manual work and generating real intelligence for businesses.',
     hcvpt:'📄 Download CV (PT)',hcven:'📄 CV (EN)',
     hcvpt_href:'docs/Curriculo_Carlos_Henrique_Gomes.pdf',hcven_href:'docs/Carlos_Henrique_Gomes_CV_EN.pdf',
     navCvBtn_href:'docs/Carlos_Henrique_Gomes_CV_EN.pdf',
-    mky:'years in IT',mkg:'time reduction',mkf:'operations-focused',
+    mky:'years in IT',mkg:'/month client revenue recovered',mkf:'/month operational savings',
     hclbl:'What I do',hc1t:'Integrations & APIs',hc1d:'REST APIs, Webhooks, n8n, scheduled jobs',
     hc2t:'Generative AI',hc2d:'LLMs for QA, summarization and triage',
     hc3t:'Automation',hc3d:'Scalable flows with Python & Docker',
     hc4t:'Analytics',hc4d:'Dashboards, KPIs and data pipelines',
-    pslbl:'Founder & Solution Architect',psdesc:'We help those starting to sell online grow with the right structure. We build online stores, integrate with the main marketplaces, and activate automation, data and AI-powered support so sellers can focus on what matters.',
+    pslbl:'Founder & Technical Architect',psdesc:'B2B platform for workflow automation, systems integration and Generative AI for e-commerce and operations. As founder and technical architect, I design and ship systems that drive measurable impact: revenue recovery, operational cost reduction and process automation for SMBs.',
     psctabtn:'🌐 Visit ProcessSurge',psproj:'View projects →',psrl:'Role',psrv:'Founder',pssl:'Since',psfl:'Focus',psfv:'B2B SaaS',
     splbl:'Projects',stitlep:'Featured Projects',ssubp:'Products and initiatives focused on automation, AI, integrations, and operations.',
     sskbl:'Skills',stitles:'Stack & Technologies',ssubs:'Tools and technologies I use daily to build high-impact solutions.',
     scbe:'Back-end & APIs',scau:'Automation & Orchestration',scai:'AI & LLMs',scda:'Data & Analytics',scec:'E-commerce & Marketplaces',scsw:'Platforms & SaaS',
     sabl:'About',stitlea:'About me',
-    ssuba:'Technology professional with <strong>12+ years of experience</strong> in automation, integrations and back-end development. Founder of <strong>ProcessSurge</strong>, a company that helps sellers grow online with stores, marketplace integrations, automation and AI-powered support.',
+    ssuba:'Technology professional with <strong>12+ years of experience</strong> in automation, systems integration and back-end development. Founder of <strong>ProcessSurge</strong>, a B2B automation platform. Specialized in production-grade workflow automation, REST API integrations, and <strong>Generative AI</strong> applied to real operational problems.',
     ask:'Main Skills',avt:'Values',avd:'Technology must generate real business impact: less manual operation, more predictability, quality and scale.',
     aet:'Education',ast:'Main Stack',
     scbl:'Experience',stitlc:'Career',
-    tp1:'Sep/2021 – Present',tt1:'Automation & Integration Specialist',td1:'API development, integrations and automations for operations and support.',
-    tp2:'Jun/2018 – Aug/2021',tt2:'IT Technician',td2:'Corporate IT infrastructure support and technical automation.',
-    tp3:'2025 – Present',tt3:'Founder at ProcessSurge',td3:'Company focused on helping people who are starting to sell online. From scratch: store, marketplaces, automation and AI-powered support.',
+    tp1:'Sep/2021 – Present',tt1:'Automation & AI Integration Specialist',td1:'Internal process automation, external API integrations, and production AI workflow deployment.',
+    tp2:'Jun/2018 – Aug/2021',tt2:'IT Analyst',td2:'IT infrastructure management across a 30+ store retail network, supporting thousands of devices.',
+    tp3:'2025 – Present',tt3:'Founder at ProcessSurge',td3:'B2B automation platform for workflow automation, integrations and Generative AI. Founder and technical architect of all products.',
     sccbl:'Contact',stitlec:"Let's talk?",ssubc:'Open to projects, partnerships and opportunities.',
     cet:'E-mail',ced:'Click below to open your email client and send me a message.',
     cwt:'WhatsApp',cwd:'Chat with me directly. I reply fast!',
     clt:'LinkedIn',cld:'Visit my professional profile and send me a message.',
+    cgt:'GitHub',cgd:'Explore my projects, code and open source contributions.',
     cname:"Carlinhos · Assistant",cstatus:'Online now',ctip:'Ask me about him!',
     modalTabTxt:'New tab',modalCloseTxt:'Close'}
 };
@@ -617,9 +624,9 @@ const KB=[
   {kw:['ia','inteligência artificial','llm','gpt','gemini','prompt','ai','machine learning','rag','modelo'],
    pt:'🤖 Carlos tem experiência avançada em **IA Generativa**:\n\n• Prompt Engineering e design de fluxos com LLMs\n• RAG (Retrieval-Augmented Generation)\n• QA automatizado com GPT/Gemini\n• Sumarização de contexto para atendimento\n• Triagem de tickets com heurísticas + LLMs\n• MBA em IA & Big Data',
    en:'🤖 Carlos has advanced experience in **Generative AI**:\n\n• Prompt Engineering and LLM flow design\n• RAG (Retrieval-Augmented Generation)\n• Automated QA with GPT/Gemini\n• Context summarization for support\n• Ticket triage with heuristics + LLMs\n• MBA in AI & Big Data'},
-  {kw:['experiência','cargo','trabalho','carreira','emprego','hi platform','semar','experience','career','job','anos'],
-   pt:'💼 **Experiência do Carlos:**\n\n**ProcessSurge** (2025–Atual) | Founder\n\n**Hi Platform** (Set/2021–Atual)\nEspecialista de Automação e Integração\n• APIs, Webhooks, n8n, Celery/Redis\n• Pipelines Meta API + dashboards Superset\n• IA para QA e sumarização\n\n**Grupo Semar** (2018–2021)\nTécnico de TI',
-   en:'💼 **Carlos\'s experience:**\n\n**ProcessSurge** (2025–Present) | Founder\n\n**Hi Platform** (Sep/2021–Present)\nAutomation & Integration Specialist\n• APIs, Webhooks, n8n, Celery/Redis\n• Meta API pipelines + Superset dashboards\n• AI for QA and summarization\n\n**Grupo Semar** (2018–2021)\nIT Technician'},
+  {kw:['experiência','cargo','trabalho','carreira','emprego','hi platform','semar','experience','career','job','anos','resultado','impacto'],
+   pt:'💼 **Experiência do Carlos:**\n\n**ProcessSurge** (2025–Atual) | Founder & Technical Architect\n\n**Hi Platform** (Set/2021–Atual)\nEspecialista de Automação e Integração\n• R$60K+/mês recuperados via WhatsApp para cliente enterprise\n• R$40K+/mês em saving com plataforma interna de BI\n• Salesforce: processo de 1 semana reduzido para 30 minutos\n• 50K+ disparos HSM mensais + IA (GPT-4/Gemini) para QA\n\n**Grupo Semar** (2018–2021) | Analista de TI\n30+ lojas, ERPs Bluesoft/Arius, Jira',
+   en:'💼 **Carlos\'s experience:**\n\n**ProcessSurge** (2025–Present) | Founder & Technical Architect\n\n**Hi Platform** (Sep/2021–Present)\nAutomation & AI Integration Specialist\n• R$60K+/month recovered via WhatsApp for enterprise client\n• R$40K+/month in savings from internal BI platform\n• Salesforce: 1-week process cut to 30 minutes\n• 50K+ monthly HSM dispatches + GPT-4/Gemini for QA\n\n**Grupo Semar** (2018–2021) | IT Analyst\n30+ store network, ERPs, Jira'},
   {kw:['projeto','project','produto','product','cart','recovery','botflow','analytics','assist','health','vacation','portfólio'],
    pt:'📂 **Projetos do Carlos:**\n\n🚀 ProcessSurge: Plataforma B2B de automação e IA\n🛒 Cart Recovery: Abandono de carrinho (VTEX + n8n)\n🎯 Surge Assist: Triagem de tickets com LLMs\n📊 BI Analytics: Dashboards por API\n🤖 BotFlow Orchestrator: Orquestração de chatbots\n❤️ Client Health Monitor: Risco de churn',
    en:'📂 **Carlos\'s projects:**\n\n🚀 ProcessSurge: B2B automation & AI platform\n🛒 Cart Recovery: Cart abandonment (VTEX + n8n)\n🎯 Surge Assist: LLM-powered ticket triage\n📊 BI Analytics: API-driven dashboards\n🤖 BotFlow Orchestrator: Chatbot flow orchestration\n❤️ Client Health Monitor: Churn risk monitoring'},
@@ -631,21 +638,4 @@ const KB=[
    en:'🎓 **Carlos\'s education:**\n\n• MBA in Software Quality Management\n• MBA in Artificial Intelligence & Big Data\n\nSolid technical foundation combined with strategic business vision.'},
   {kw:['n8n','docker','automação','automatiza','workflow','orquestração','automation','pipeline'],
    pt:'⚡ Carlos é especialista em **orquestração de fluxos**:\n\n• n8n para automações low-code complexas\n• Docker para stack self-hosted\n• Redis + Celery para processamento assíncrono\n• Pipelines end-to-end sem intervenção manual',
-   en:'⚡ Carlos specializes in **workflow orchestration**:\n\n• n8n for complex low-code automations\n• Docker for self-hosted stack\n• Redis + Celery for async processing\n• End-to-end pipelines without manual intervention'},
-  {kw:['python','flask','fastapi','postgresql','api','backend','back-end','banco','database','rest'],
-   pt:'🐍 **Back-end com Carlos:**\n\n• Python (Flask, FastAPI) para APIs robustas e escaláveis\n• PostgreSQL + SQLAlchemy para modelagem de dados\n• Ingestão e normalização de dados\n• Integração com sistemas corporativos',
-   en:'🐍 **Carlos\'s back-end work:**\n\n• Python (Flask, FastAPI) for robust, scalable APIs\n• PostgreSQL + SQLAlchemy for data modeling\n• Data ingestion and normalization\n• Enterprise systems integration'}
-];
-const fallback={pt:'Boa pergunta! 😊 Para detalhes, fale diretamente com o Carlos:\n\n📧 carloshegomes@outlook.com\n💬 +55 11 98164-8739',en:"Good question! 😊 For details, reach Carlos directly:\n\n📧 carloshegomes@outlook.com\n💬 +55 11 98164-8739"};
-const welcome={pt:'Oi! 👋 Sou o **Carlinhos**, mascote da ProcessSurge. Posso contar sobre as skills, projetos e experiência do Carlos. Como posso ajudar?',en:"Hi! 👋 I'm **Carlinhos**, ProcessSurge's mascot. I can tell you about Carlos's skills, projects and experience. How can I help?"};
-let chatOpen=false;
-function botReply(msg){const m=msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');for(const e of KB){if(e.kw.some(k=>m.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,''))))return lang==='pt'?e.pt:e.en}return fallback[lang]}
-function toggleChat(){chatOpen=!chatOpen;const p=document.getElementById('chatPanel');if(chatOpen){p.classList.add('open');if(!document.querySelector('#chatMsgs .cmsg'))addMsg(welcome[lang],'bot');setTimeout(()=>document.getElementById('chatInput').focus(),100)}else p.classList.remove('open')}
-function addMsg(txt,type){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className=`cmsg ${type}`;d.innerHTML=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
-function addTyping(){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='ctyping';d.innerHTML='<span></span><span></span><span></span>';m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
-function sendChat(){const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;inp.value='';addMsg(msg,'user');document.getElementById('csuggs').style.display='none';const ty=addTyping();setTimeout(()=>{ty.remove();addMsg(botReply(msg),'bot')},480+Math.random()*260)}
-function sendSugg(btn){document.getElementById('chatInput').value=btn.textContent;sendChat()}
-function onChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat()}}
-</script>
-</body>
-</html>
+   en:'⚡ Carlos specializes in **workflow orchestration**:\n\n• n8n for complex low-code automations\n• Docker for self-hosted stack\n• Redis + Celery for async pro
