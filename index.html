@@ -638,4 +638,21 @@ const KB=[
    en:'🎓 **Carlos\'s education:**\n\n• MBA in Software Quality Management\n• MBA in Artificial Intelligence & Big Data\n\nSolid technical foundation combined with strategic business vision.'},
   {kw:['n8n','docker','automação','automatiza','workflow','orquestração','automation','pipeline'],
    pt:'⚡ Carlos é especialista em **orquestração de fluxos**:\n\n• n8n para automações low-code complexas\n• Docker para stack self-hosted\n• Redis + Celery para processamento assíncrono\n• Pipelines end-to-end sem intervenção manual',
-   en:'⚡ Carlos specializes in **workflow orchestration**:\n\n• n8n for complex low-code automations\n• Docker for self-hosted stack\n• Redis + Celery for async pro
+   en:'\u26a1 Carlos specializes in **workflow orchestration**:\n\n\u2022 n8n for complex low-code automations\n\u2022 Docker for self-hosted stack\n\u2022 Redis + Celery for async processing\n\u2022 End-to-end pipelines without manual intervention'},
+  {kw:['python','flask','fastapi','postgresql','api','backend','back-end','banco','database','rest'],
+   pt:'\ud83d\udc0d **Back-end com Carlos:**\n\n\u2022 Python (Flask, FastAPI) para APIs robustas e escal\u00e1veis\n\u2022 PostgreSQL + SQLAlchemy para modelagem de dados\n\u2022 Ingest\u00e3o e normaliza\u00e7\u00e3o de dados\n\u2022 Integra\u00e7\u00e3o com sistemas corporativos',
+   en:'\ud83d\udc0d **Carlos\'s back-end work:**\n\n\u2022 Python (Flask, FastAPI) for robust, scalable APIs\n\u2022 PostgreSQL + SQLAlchemy for data modeling\n\u2022 Data ingestion and normalization\n\u2022 Enterprise systems integration'}
+];
+const fallback={pt:'Boa pergunta! \ud83d\ude0a Para detalhes, fale diretamente com o Carlos:\n\n\ud83d\udce7 carloshegomes@outlook.com\n\ud83d\udcac +55 11 98164-8739',en:"Good question! \ud83d\ude0a For details, reach Carlos directly:\n\n\ud83d\udce7 carloshegomes@outlook.com\n\ud83d\udcac +55 11 98164-8739"};
+const welcome={pt:'Oi! \ud83d\udc4b Sou o **Carlinhos**, mascote da ProcessSurge. Posso contar sobre as skills, projetos e experi\u00eancia do Carlos. Como posso ajudar?',en:"Hi! \ud83d\udc4b I'm **Carlinhos**, ProcessSurge's mascot. I can tell you about Carlos's skills, projects and experience. How can I help?"};
+let chatOpen=false;
+function botReply(msg){const m=msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');for(const e of KB){if(e.kw.some(k=>m.includes(k.normalize('NFD').replace(/[\u0300-\u036f]/g,''))))return lang==='pt'?e.pt:e.en}return fallback[lang]}
+function toggleChat(){chatOpen=!chatOpen;const p=document.getElementById('chatPanel');if(chatOpen){p.classList.add('open');if(!document.querySelector('#chatMsgs .cmsg'))addMsg(welcome[lang],'bot');setTimeout(()=>document.getElementById('chatInput').focus(),100)}else p.classList.remove('open')}
+function addMsg(txt,type){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className=`cmsg ${type}`;d.innerHTML=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
+function addTyping(){const m=document.getElementById('chatMsgs'),d=document.createElement('div');d.className='ctyping';d.innerHTML='<span></span><span></span><span></span>';m.appendChild(d);m.scrollTop=m.scrollHeight;return d}
+function sendChat(){const inp=document.getElementById('chatInput'),msg=inp.value.trim();if(!msg)return;inp.value='';addMsg(msg,'user');document.getElementById('csuggs').style.display='none';const ty=addTyping();setTimeout(()=>{ty.remove();addMsg(botReply(msg),'bot')},480+Math.random()*260)}
+function sendSugg(btn){document.getElementById('chatInput').value=btn.textContent;sendChat()}
+function onChatKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat()}}
+</script>
+</body>
+</html>
