@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: converting large bot knowledge bases into automated React Flow system maps with Python and n8n.">
+  <meta name="theme-color" content="#08111f">
+  <title>Knowledge Base Visualization Pipeline | Carlos Gomes</title>
+  <link rel="stylesheet" href="../assets/portfolio.css">
+  <script src="../assets/portfolio.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../index.html" aria-label="Carlos Henrique Gomes, home"><span class="brand-mark" aria-hidden="true">CG</span><span>Carlos Gomes</span></a>
+      <nav class="desktop-nav" aria-label="Case study navigation"><a href="#challenge">Challenge</a><a href="#architecture">Architecture</a><a href="#outcome">Outcome</a></nav>
+      <a class="button button-small desktop-cta" href="../docs/Carlos_Henrique_Gomes_CV_EN.pdf">Resume</a>
+      <details class="mobile-nav"><summary aria-label="Open navigation">Menu</summary><nav aria-label="Mobile navigation"><a href="#challenge">Challenge</a><a href="#architecture">Architecture</a><a href="#outcome">Outcome</a><a href="../index.html">Portfolio home</a></nav></details>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="case-hero">
+      <div class="container">
+        <a class="back-link" href="../index.html#work">← Back to selected work</a>
+        <p class="case-eyebrow">Case study 02 · Workflow visualization</p>
+        <h1>Turning bot knowledge bases into visual system maps</h1>
+        <p class="case-summary">I replaced a manual Figma diagramming process with a pipeline that exports bot knowledge bases, interprets their structure, and renders navigable React Flow diagrams.</p>
+        <ul class="case-meta" aria-label="Technology stack"><li>Python</li><li>n8n</li><li>JSON</li><li>React</li><li>React Flow</li></ul>
+      </div>
+    </section>
+
+    <section class="result-band" aria-label="Case study results">
+      <dl class="container result-grid">
+        <div><dt>Up to 30 days</dt><dd>previous manual effort for a large knowledge base</dd></div>
+        <div><dt>About 8 hours</dt><dd>automated processing time for the largest cases</dd></div>
+        <div><dt>40+ flows</dt><dd>using the automated visualization pattern</dd></div>
+      </dl>
+    </section>
+
+    <section class="section">
+      <div class="container case-layout">
+        <aside class="case-sidebar" aria-label="Case study summary">
+          <dl>
+            <div><dt>My role</dt><dd>Solution design, automation, data transformation, and visualization pipeline</dd></div>
+            <div><dt>Users</dt><dd>Bot specialists documenting and maintaining customer flows</dd></div>
+            <div><dt>Largest input</dt><dd>More than 1,400 articles with multiple blocks per article</dd></div>
+            <div><dt>Primary outcome</dt><dd>Repeatable diagrams that update from the source structure</dd></div>
+          </dl>
+        </aside>
+
+        <div class="case-body">
+          <section id="challenge">
+            <p class="section-label">The challenge</p>
+            <h2>Documentation was accurate only until the bot changed again.</h2>
+            <p>Specialists manually recreated bot knowledge bases in Figma, article by article and block by block. A large base could contain more than 1,400 articles and 10 to 30 blocks per article. The work could consume most of a month, and later changes required the diagram to be updated manually again.</p>
+          </section>
+
+          <section>
+            <p class="section-label">What I owned</p>
+            <h2>A source-driven pipeline instead of a drawing exercise.</h2>
+            <ul>
+              <li>Mapped the exported JSON structure and the relationships required for a readable flow.</li>
+              <li>Built the transformation from articles and blocks into nodes and edges.</li>
+              <li>Created the visual layer in React Flow so specialists could navigate large structures.</li>
+              <li>Used workflow orchestration to make exports and updates repeatable.</li>
+              <li>Included variables and block types so the diagram carried operational context, not just shape.</li>
+            </ul>
+          </section>
+
+          <section id="architecture">
+            <p class="section-label">Architecture</p>
+            <h2>The bot remains the source of truth.</h2>
+            <div class="flow-diagram" aria-label="Architecture flow from bot knowledge base to visual map">
+              <div class="flow-step"><strong>Bot knowledge base</strong><span>Articles, blocks, variables, and navigation relationships</span></div>
+              <div class="flow-step"><strong>JSON export</strong><span>Structured snapshot produced through an automated workflow</span></div>
+              <div class="flow-step"><strong>Python transform</strong><span>Normalization into graph nodes, edges, labels, and metadata</span></div>
+              <div class="flow-step"><strong>React Flow</strong><span>Navigable visual map for analysis and customer documentation</span></div>
+            </div>
+          </section>
+
+          <section>
+            <p class="section-label">Key decisions</p>
+            <h2>Generate documentation from structure, not screenshots.</h2>
+            <ul class="decision-list">
+              <li><strong>JSON as the handoff</strong>Preserved the bot's hierarchy and made the transformation deterministic.</li>
+              <li><strong>Graph-based rendering</strong>Matched the mental model of navigation flows better than static pages.</li>
+              <li><strong>Metadata in the nodes</strong>Made variables and block types visible to the people maintaining the system.</li>
+              <li><strong>Repeatable updates</strong>Allowed the same pipeline to regenerate diagrams when the source changed.</li>
+            </ul>
+          </section>
+
+          <section id="outcome">
+            <p class="section-label">Outcome</p>
+            <h2>A reusable internal product replaced a month-long manual process.</h2>
+            <p>For the largest knowledge bases, the end-to-end process moved from up to 30 days of manual diagramming to approximately eight hours of automated processing. At least 40 flows now follow this pattern, and updates can be regenerated from the exported source instead of redrawn.</p>
+            <p class="confidentiality-note"><strong>Confidentiality:</strong> The diagram shown here is an architectural representation. Customer data, internal URLs, and production screenshots are not included.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-case"><div class="container next-case-inner"><div><p>Next case study</p><h2>Enterprise contract-renewal automation</h2></div><a class="button" href="contract-renewal.html">Read case 03</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span data-current-year>2026</span> Carlos Henrique Gomes</p><p><a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a></p></div></footer>
+</body>
+</html>
+

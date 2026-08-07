@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: replacing a third-party analytics platform with an internal Python, PostgreSQL, Superset, and Docker solution.">
+  <meta name="theme-color" content="#08111f">
+  <title>Analytics Platform Replacement | Carlos Gomes</title>
+  <link rel="stylesheet" href="../assets/portfolio.css">
+  <script src="../assets/portfolio.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../index.html" aria-label="Carlos Henrique Gomes, home"><span class="brand-mark" aria-hidden="true">CG</span><span>Carlos Gomes</span></a>
+      <nav class="desktop-nav" aria-label="Case study navigation"><a href="#challenge">Challenge</a><a href="#architecture">Architecture</a><a href="#outcome">Outcome</a></nav>
+      <a class="button button-small desktop-cta" href="../docs/Carlos_Henrique_Gomes_CV_EN.pdf">Resume</a>
+      <details class="mobile-nav"><summary aria-label="Open navigation">Menu</summary><nav aria-label="Mobile navigation"><a href="#challenge">Challenge</a><a href="#architecture">Architecture</a><a href="#outcome">Outcome</a><a href="../index.html">Portfolio home</a></nav></details>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="case-hero">
+      <div class="container">
+        <a class="back-link" href="../index.html#work">← Back to selected work</a>
+        <p class="case-eyebrow">Case study 01 · Data platform</p>
+        <h1>Replacing a third-party analytics platform</h1>
+        <p class="case-summary">I built the backend and migration path for an internal analytics product that reduced vendor dependency, moved an existing enterprise customer base, and made future onboarding easier.</p>
+        <ul class="case-meta" aria-label="Technology stack"><li>Python</li><li>PostgreSQL</li><li>Apache Superset</li><li>REST APIs</li><li>Docker</li></ul>
+      </div>
+    </section>
+
+    <section class="result-band" aria-label="Case study results">
+      <dl class="container result-grid">
+        <div><dt>18 customers</dt><dd>migrated to the internal platform</dd></div>
+        <div><dt>6 additional</dt><dd>customers onboarded after migration</dd></div>
+        <div><dt>Five-figure</dt><dd>monthly vendor dependency removed</dd></div>
+      </dl>
+    </section>
+
+    <section class="section">
+      <div class="container case-layout">
+        <aside class="case-sidebar" aria-label="Case study summary">
+          <dl>
+            <div><dt>My role</dt><dd>Backend architecture, implementation, integration, and migration support</dd></div>
+            <div><dt>Environment</dt><dd>Enterprise B2B SaaS analytics</dd></div>
+            <div><dt>Core constraint</dt><dd>Move an active customer base without interrupting service</dd></div>
+            <div><dt>Primary outcome</dt><dd>Internal ownership and a repeatable onboarding path</dd></div>
+          </dl>
+        </aside>
+
+        <div class="case-body">
+          <section id="challenge">
+            <p class="section-label">The challenge</p>
+            <h2>Analytics depended on an external product that limited control.</h2>
+            <p>The existing platform served 18 enterprise customers. Product changes depended on a third party, and the cost grew with the customer base. The replacement had to preserve reporting continuity while giving the internal team control over data collection, configuration, and future product evolution.</p>
+          </section>
+
+          <section>
+            <p class="section-label">What I owned</p>
+            <h2>The backend and the path from customer data to dashboards.</h2>
+            <ul>
+              <li>Designed and developed the backend services and configuration flows.</li>
+              <li>Connected the product to existing customer and timeline data through APIs.</li>
+              <li>Implemented collection and database-population routines for analytics workloads.</li>
+              <li>Containerized the deployment pattern so the solution could be replicated across environments.</li>
+              <li>Supported the migration of the existing customer base and the onboarding of new customers.</li>
+            </ul>
+          </section>
+
+          <section id="architecture">
+            <p class="section-label">Architecture</p>
+            <h2>A clear boundary between source data, ingestion, storage, and presentation.</h2>
+            <div class="flow-diagram" aria-label="Architecture flow from source systems to dashboards">
+              <div class="flow-step"><strong>Source systems</strong><span>Customer and operational data exposed through APIs</span></div>
+              <div class="flow-step"><strong>Python services</strong><span>Collection, normalization, configuration, and orchestration</span></div>
+              <div class="flow-step"><strong>PostgreSQL</strong><span>Structured analytics storage and customer-level datasets</span></div>
+              <div class="flow-step"><strong>Superset</strong><span>Dashboards and reusable analytics views</span></div>
+            </div>
+          </section>
+
+          <section>
+            <p class="section-label">Key decisions</p>
+            <h2>Build for internal ownership, not just feature parity.</h2>
+            <ul class="decision-list">
+              <li><strong>API-first data access</strong>Kept data collection separate from dashboard presentation and made new sources easier to integrate.</li>
+              <li><strong>PostgreSQL as the stable core</strong>Provided a relational layer the team could inspect, maintain, and extend.</li>
+              <li><strong>Superset for presentation</strong>Avoided rebuilding mature dashboard capabilities while retaining control of the data product.</li>
+              <li><strong>Containerized replication</strong>Made environment setup more repeatable across multiple platform instances.</li>
+            </ul>
+          </section>
+
+          <section id="outcome">
+            <p class="section-label">Outcome</p>
+            <h2>The company moved from vendor dependence to a platform it could evolve.</h2>
+            <p>The internal product replaced the previous analytics service for 18 customers and supported six additional onboardings. Beyond the direct financial effect, the team gained control over feature evolution, deployment, data pipelines, and the technical foundation for future analytics and AI work.</p>
+            <p class="confidentiality-note"><strong>Confidentiality:</strong> Company, vendor, customer, and contract details are intentionally omitted. The published figures use conservative values from internal operational evidence.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-case"><div class="container next-case-inner"><div><p>Next case study</p><h2>Knowledge-base visualization pipeline</h2></div><a class="button" href="bot-visualization.html">Read case 02</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span data-current-year>2026</span> Carlos Henrique Gomes</p><p><a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a></p></div></footer>
+</body>
+</html>
+

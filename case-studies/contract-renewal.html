@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Case study: automating more than 100 monthly contract renewals through Salesforce APIs and n8n.">
+  <meta name="theme-color" content="#08111f">
+  <title>Contract Renewal Automation | Carlos Gomes</title>
+  <link rel="stylesheet" href="../assets/portfolio.css">
+  <script src="../assets/portfolio.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../index.html" aria-label="Carlos Henrique Gomes, home"><span class="brand-mark" aria-hidden="true">CG</span><span>Carlos Gomes</span></a>
+      <nav class="desktop-nav" aria-label="Case study navigation"><a href="#challenge">Challenge</a><a href="#architecture">Architecture</a><a href="#outcome">Outcome</a></nav>
+      <a class="button button-small desktop-cta" href="../docs/Carlos_Henrique_Gomes_CV_EN.pdf">Resume</a>
+      <details class="mobile-nav"><summary aria-label="Open navigation">Menu</summary><nav aria-label="Mobile navigation"><a href="#challenge">Challenge</a><a href="#architecture">Architecture</a><a href="#outcome">Outcome</a><a href="../index.html">Portfolio home</a></nav></details>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="case-hero">
+      <div class="container">
+        <a class="back-link" href="../index.html#work">← Back to selected work</a>
+        <p class="case-eyebrow">Case study 03 · Enterprise automation</p>
+        <h1>Automating high-volume contract renewals</h1>
+        <p class="case-summary">I designed an API-driven workflow that moved a repetitive, week-long contract process into a structured automation handling more than 100 renewals per month.</p>
+        <ul class="case-meta" aria-label="Technology stack"><li>Salesforce API</li><li>n8n</li><li>Webhooks</li><li>Templates</li><li>Workflow automation</li></ul>
+      </div>
+    </section>
+
+    <section class="result-band" aria-label="Case study results">
+      <dl class="container result-grid">
+        <div><dt>100+ contracts</dt><dd>processed through the workflow each month</dd></div>
+        <div><dt>One week</dt><dd>previous batch-processing cycle</dd></div>
+        <div><dt>~30 minutes</dt><dd>automated cycle after implementation</dd></div>
+      </dl>
+    </section>
+
+    <section class="section">
+      <div class="container case-layout">
+        <aside class="case-sidebar" aria-label="Case study summary">
+          <dl>
+            <div><dt>My role</dt><dd>Process discovery, integration design, and workflow implementation</dd></div>
+            <div><dt>Environment</dt><dd>Enterprise commercial and administrative operations</dd></div>
+            <div><dt>Previous model</dt><dd>Two people processing renewal batches manually</dd></div>
+            <div><dt>Primary outcome</dt><dd>Faster cycles and capacity returned to the team</dd></div>
+          </dl>
+        </aside>
+
+        <div class="case-body">
+          <section id="challenge">
+            <p class="section-label">The challenge</p>
+            <h2>A critical recurring process depended on manual batch work.</h2>
+            <p>More than 100 contracts moved through renewal each month. Two people spent approximately one week per cycle coordinating expiration dates, templates, approvals, updates, and administrative follow-up. The process carried avoidable delay, rework, and human-error risk.</p>
+          </section>
+
+          <section>
+            <p class="section-label">What I owned</p>
+            <h2>The workflow from renewal trigger to recorded result.</h2>
+            <ul>
+              <li>Mapped the renewal states, dependencies, administrative variations, and approval steps.</li>
+              <li>Designed the integration boundary around Salesforce APIs and workflow orchestration.</li>
+              <li>Automated expiration triggers, template selection, approvals, and system updates.</li>
+              <li>Extended the pattern to related scope-change and administrative processes.</li>
+              <li>Kept the resulting records inside the system used by the operating team.</li>
+            </ul>
+          </section>
+
+          <section id="architecture">
+            <p class="section-label">Architecture</p>
+            <h2>A state-driven workflow around the system of record.</h2>
+            <div class="flow-diagram" aria-label="Architecture flow for automated contract renewal">
+              <div class="flow-step"><strong>Renewal trigger</strong><span>Expiration and contract context read from Salesforce</span></div>
+              <div class="flow-step"><strong>Workflow rules</strong><span>n8n evaluates path, required data, and template</span></div>
+              <div class="flow-step"><strong>Approval actions</strong><span>Commercial and administrative steps follow the defined route</span></div>
+              <div class="flow-step"><strong>System update</strong><span>Outcome and new contract state are recorded in Salesforce</span></div>
+            </div>
+          </section>
+
+          <section>
+            <p class="section-label">Key decisions</p>
+            <h2>Automate the coordination while preserving the business record.</h2>
+            <ul class="decision-list">
+              <li><strong>Salesforce remains authoritative</strong>The workflow reads and writes the contract state where the operating team already works.</li>
+              <li><strong>Rules are explicit</strong>Renewal, scope-change, and administrative paths are separated instead of hidden in manual judgment.</li>
+              <li><strong>Templates follow context</strong>The workflow chooses the required action from contract information rather than relying on copy-and-paste.</li>
+              <li><strong>Orchestration stays visible</strong>n8n gives the team a workflow they can inspect and evolve as the process changes.</li>
+            </ul>
+          </section>
+
+          <section id="outcome">
+            <p class="section-label">Outcome</p>
+            <h2>A week-long monthly cycle became a short operational run.</h2>
+            <p>The automated workflow reduced a full week of batch processing to approximately 30 minutes while handling more than 100 contracts per month. It returned capacity to two team members and reduced the operational exposure created by manual coordination.</p>
+            <p class="confidentiality-note"><strong>Confidentiality:</strong> Contract content, internal rules, company identifiers, and production records are omitted. The public case focuses on the system boundary and conservative operational outcome.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-case"><div class="container next-case-inner"><div><p>Return to the portfolio</p><h2>See the complete experience and capabilities</h2></div><a class="button" href="../index.html">Portfolio home</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span data-current-year>2026</span> Carlos Henrique Gomes</p><p><a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a></p></div></footer>
+</body>
+</html>
