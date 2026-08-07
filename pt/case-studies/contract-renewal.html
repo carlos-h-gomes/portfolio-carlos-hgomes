@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estudo de caso: automação de mais de 100 renovações contratuais mensais por APIs do Salesforce e n8n.">
+  <meta name="theme-color" content="#08111f"><title>Automação de Renovações Contratuais | Carlos Gomes</title>
+  <link rel="alternate" hreflang="en" href="../../case-studies/contract-renewal.html"><link rel="alternate" hreflang="pt-BR" href="contract-renewal.html">
+  <link rel="stylesheet" href="../../assets/portfolio.css?v=20260807-complete"><script src="../../assets/portfolio.js?v=20260807-complete" defer></script>
+</head>
+<body data-asset-base="../..">
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell">
+    <a class="brand" href="../index.html" aria-label="Carlos Henrique Gomes, início"><span class="brand-mark" aria-hidden="true">CG</span><span>Carlos Gomes</span></a>
+    <nav class="desktop-nav" aria-label="Navegação do estudo de caso"><a href="#challenge">Desafio</a><a href="#architecture">Arquitetura</a><a href="#outcome">Resultado</a></nav>
+    <a class="language-switch" href="../../case-studies/contract-renewal.html" lang="en" hreflang="en" aria-label="Ler este estudo de caso em inglês">EN</a>
+    <a class="button button-small desktop-cta" href="../../docs/Curriculo_Carlos_Henrique_Gomes.pdf">Currículo</a>
+    <details class="mobile-nav"><summary aria-label="Abrir navegação">Menu</summary><nav aria-label="Navegação móvel"><a href="#challenge">Desafio</a><a href="#architecture">Arquitetura</a><a href="#outcome">Resultado</a><a href="../index.html">Início do portfólio</a><a href="../../case-studies/contract-renewal.html" lang="en" hreflang="en">English</a></nav></details>
+  </div></header>
+  <main id="main">
+    <section class="case-hero"><div class="container">
+      <a class="back-link" href="../index.html#work">← Voltar aos trabalhos selecionados</a><p class="case-eyebrow">Estudo de caso 03 · Automação empresarial</p>
+      <h1>Automação de renovações contratuais em alto volume</h1>
+      <p class="case-summary">Projetei um fluxo orientado por APIs que levou um processo contratual repetitivo, com duração de uma semana, para uma automação estruturada capaz de tratar mais de 100 renovações por mês.</p>
+      <ul class="case-meta" aria-label="Tecnologias"><li>Salesforce API</li><li>n8n</li><li>Webhooks</li><li>Templates</li><li>Automação de fluxos</li></ul>
+    </div></section>
+    <section class="result-band" aria-label="Resultados do estudo de caso"><dl class="container result-grid"><div><dt>100+ contratos</dt><dd>processados pelo fluxo a cada mês</dd></div><div><dt>Uma semana</dt><dd>de processamento manual por lote anteriormente</dd></div><div><dt>~30 minutos</dt><dd>por ciclo automatizado após a implementação</dd></div></dl></section>
+    <section class="section"><div class="container case-layout">
+      <aside class="case-sidebar" aria-label="Resumo do estudo de caso"><dl><div><dt>Meu papel</dt><dd>Descoberta do processo, desenho da integração e implementação do fluxo</dd></div><div><dt>Ambiente</dt><dd>Operações comerciais e administrativas empresariais</dd></div><div><dt>Modelo anterior</dt><dd>Duas pessoas processando lotes de renovação manualmente</dd></div><div><dt>Resultado principal</dt><dd>Ciclos mais rápidos e capacidade devolvida à equipe</dd></div></dl></aside>
+      <div class="case-body">
+        <section id="challenge"><p class="section-label">O desafio</p><h2>Um processo recorrente e crítico dependia de trabalho manual em lote.</h2><p>Mais de 100 contratos passavam por renovação a cada mês. Duas pessoas usavam aproximadamente uma semana por ciclo para coordenar vencimentos, modelos, aprovações, atualizações e acompanhamento administrativo. O processo trazia atrasos, retrabalho e risco de erro humano evitáveis.</p></section>
+        <section><p class="section-label">O que eu assumi</p><h2>O fluxo completo, do gatilho de renovação ao resultado registrado.</h2><ul><li>Mapeei estados, dependências, variações administrativas e etapas de aprovação.</li><li>Desenhei a fronteira de integração ao redor das APIs do Salesforce e da orquestração.</li><li>Automatizei gatilhos de vencimento, escolha de modelos, aprovações e atualizações.</li><li>Estendi o padrão a processos relacionados de alteração de escopo e administração.</li><li>Mantive os registros resultantes dentro do sistema usado pela equipe.</li></ul></section>
+        <section id="architecture"><p class="section-label">Arquitetura</p><h2>Um fluxo orientado a estados ao redor do sistema oficial.</h2><div class="flow-diagram" aria-label="Fluxo de arquitetura da renovação contratual automatizada"><div class="flow-step"><strong>Gatilho de renovação</strong><span>Vencimento e contexto do contrato lidos no Salesforce</span></div><div class="flow-step"><strong>Regras do fluxo</strong><span>n8n avalia rota, dados necessários e modelo</span></div><div class="flow-step"><strong>Ações de aprovação</strong><span>Etapas comerciais e administrativas seguem a rota definida</span></div><div class="flow-step"><strong>Atualização do sistema</strong><span>Resultado e novo estado são registrados no Salesforce</span></div></div></section>
+        <section><p class="section-label">Decisões principais</p><h2>Automatizar a coordenação e preservar o registro de negócio.</h2><ul class="decision-list"><li><strong>Salesforce continua oficial</strong>O fluxo lê e escreve o estado do contrato onde a equipe já trabalha.</li><li><strong>Regras explícitas</strong>Renovação, mudança de escopo e rotas administrativas ficam separadas.</li><li><strong>Modelos seguem o contexto</strong>O fluxo escolhe a ação com base no contrato, sem depender de copiar e colar.</li><li><strong>Orquestração visível</strong>O n8n deixa o processo inspecionável e evolutivo.</li></ul></section>
+        <section id="outcome"><p class="section-label">Resultado</p><h2>Um ciclo mensal de uma semana virou uma execução operacional curta.</h2><p>A automação reduziu uma semana inteira de processamento em lote para aproximadamente 30 minutos, tratando mais de 100 contratos por mês. Ela devolveu capacidade a duas pessoas da equipe e reduziu a exposição operacional da coordenação manual.</p><p class="confidentiality-note"><strong>Confidencialidade:</strong> Conteúdo contratual, regras internas, identificadores da empresa e registros de produção foram omitidos. O caso público se concentra na fronteira do sistema e no resultado operacional conservador.</p></section>
+      </div>
+    </div></section>
+    <section class="next-case"><div class="container next-case-inner"><div><p>Voltar ao portfólio</p><h2>Veja a experiência e as competências completas</h2></div><a class="button" href="../index.html">Início do portfólio</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span data-current-year>2026</span> Carlos Henrique Gomes</p><p><a href="../../case-studies/contract-renewal.html" lang="en" hreflang="en">English version</a> · <a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a></p></div></footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estudo de caso: conversão de grandes bases de conhecimento de bots em mapas automatizados com Python, n8n e React Flow.">
+  <meta name="theme-color" content="#08111f"><title>Pipeline de Visualização de Bases de Conhecimento | Carlos Gomes</title>
+  <link rel="alternate" hreflang="en" href="../../case-studies/bot-visualization.html"><link rel="alternate" hreflang="pt-BR" href="bot-visualization.html">
+  <link rel="stylesheet" href="../../assets/portfolio.css?v=20260807-complete"><script src="../../assets/portfolio.js?v=20260807-complete" defer></script>
+</head>
+<body data-asset-base="../..">
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell">
+    <a class="brand" href="../index.html" aria-label="Carlos Henrique Gomes, início"><span class="brand-mark" aria-hidden="true">CG</span><span>Carlos Gomes</span></a>
+    <nav class="desktop-nav" aria-label="Navegação do estudo de caso"><a href="#challenge">Desafio</a><a href="#architecture">Arquitetura</a><a href="#outcome">Resultado</a></nav>
+    <a class="language-switch" href="../../case-studies/bot-visualization.html" lang="en" hreflang="en" aria-label="Ler este estudo de caso em inglês">EN</a>
+    <a class="button button-small desktop-cta" href="../../docs/Curriculo_Carlos_Henrique_Gomes.pdf">Currículo</a>
+    <details class="mobile-nav"><summary aria-label="Abrir navegação">Menu</summary><nav aria-label="Navegação móvel"><a href="#challenge">Desafio</a><a href="#architecture">Arquitetura</a><a href="#outcome">Resultado</a><a href="../index.html">Início do portfólio</a><a href="../../case-studies/bot-visualization.html" lang="en" hreflang="en">English</a></nav></details>
+  </div></header>
+  <main id="main">
+    <section class="case-hero"><div class="container">
+      <a class="back-link" href="../index.html#work">← Voltar aos trabalhos selecionados</a><p class="case-eyebrow">Estudo de caso 02 · Visualização de fluxos</p>
+      <h1>Bases de conhecimento de bots transformadas em mapas visuais</h1>
+      <p class="case-summary">Substituí um processo manual de diagramação no Figma por um pipeline que exporta bases de conhecimento, interpreta sua estrutura e renderiza diagramas navegáveis em React Flow.</p>
+      <ul class="case-meta" aria-label="Tecnologias"><li>Python</li><li>n8n</li><li>JSON</li><li>React</li><li>React Flow</li></ul>
+    </div></section>
+    <section class="result-band" aria-label="Resultados do estudo de caso"><dl class="container result-grid">
+      <div><dt>Até 30 dias</dt><dd>de trabalho manual anterior para uma base grande</dd></div><div><dt>Cerca de 8 horas</dt><dd>de processamento automatizado nos maiores casos</dd></div><div><dt>40+ fluxos</dt><dd>usando o padrão de visualização automatizada</dd></div>
+    </dl></section>
+    <section class="section"><div class="container case-layout">
+      <aside class="case-sidebar" aria-label="Resumo do estudo de caso"><dl>
+        <div><dt>Meu papel</dt><dd>Desenho da solução, automação, transformação de dados e pipeline visual</dd></div><div><dt>Usuários</dt><dd>Especialistas que documentam e mantêm fluxos de bots</dd></div><div><dt>Maior entrada</dt><dd>Mais de 1.400 artigos, cada um com múltiplos blocos</dd></div><div><dt>Resultado principal</dt><dd>Diagramas repetíveis e atualizados a partir da estrutura de origem</dd></div>
+      </dl></aside>
+      <div class="case-body">
+        <section id="challenge"><p class="section-label">O desafio</p><h2>A documentação ficava correta apenas até a próxima mudança no bot.</h2><p>Especialistas recriavam manualmente bases de conhecimento no Figma, artigo por artigo e bloco por bloco. Uma base grande podia ter mais de 1.400 artigos e de 10 a 30 blocos por artigo. O trabalho ocupava a maior parte de um mês e qualquer mudança posterior exigia atualizar o diagrama novamente à mão.</p></section>
+        <section><p class="section-label">O que eu assumi</p><h2>Um pipeline orientado pela origem no lugar de um exercício de desenho.</h2><ul><li>Mapeei a estrutura do JSON exportado e as relações necessárias para um fluxo legível.</li><li>Construí a transformação de artigos e blocos em nós e conexões.</li><li>Criei a camada visual em React Flow para navegar por estruturas grandes.</li><li>Usei orquestração de fluxos para tornar exportações e atualizações repetíveis.</li><li>Incluí variáveis e tipos de blocos para preservar o contexto operacional.</li></ul></section>
+        <section id="architecture"><p class="section-label">Arquitetura</p><h2>O bot continua sendo a fonte da verdade.</h2><div class="flow-diagram" aria-label="Fluxo de arquitetura da base do bot ao mapa visual">
+          <div class="flow-step"><strong>Base do bot</strong><span>Artigos, blocos, variáveis e relações de navegação</span></div><div class="flow-step"><strong>Exportação JSON</strong><span>Retrato estruturado produzido por um fluxo automatizado</span></div><div class="flow-step"><strong>Transformação em Python</strong><span>Normalização em nós, conexões, rótulos e metadados</span></div><div class="flow-step"><strong>React Flow</strong><span>Mapa navegável para análise e documentação do cliente</span></div>
+        </div></section>
+        <section><p class="section-label">Decisões principais</p><h2>Gerar a documentação a partir da estrutura, não de capturas de tela.</h2><ul class="decision-list"><li><strong>JSON como passagem</strong>Preservou a hierarquia do bot e tornou a transformação determinística.</li><li><strong>Renderização em grafo</strong>Representou os fluxos de navegação melhor que páginas estáticas.</li><li><strong>Metadados nos nós</strong>Expôs variáveis e tipos de blocos para quem mantém o sistema.</li><li><strong>Atualizações repetíveis</strong>Permitiu regenerar diagramas sempre que a origem mudasse.</li></ul></section>
+        <section id="outcome"><p class="section-label">Resultado</p><h2>Um produto interno reutilizável substituiu um processo manual de um mês.</h2><p>Nas maiores bases, o processo completo passou de até 30 dias de diagramação manual para aproximadamente oito horas de processamento automatizado. Mais de 40 fluxos já seguem esse padrão e podem ser regenerados a partir da origem exportada.</p><p class="confidentiality-note"><strong>Confidencialidade:</strong> O diagrama publicado é uma representação arquitetural. Dados de clientes, URLs internas e capturas de produção não foram incluídos.</p></section>
+      </div>
+    </div></section>
+    <section class="next-case"><div class="container next-case-inner"><div><p>Próximo estudo de caso</p><h2>Automação empresarial de renovações contratuais</h2></div><a class="button" href="contract-renewal.html">Ler o caso 03</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span data-current-year>2026</span> Carlos Henrique Gomes</p><p><a href="../../case-studies/bot-visualization.html" lang="en" hreflang="en">English version</a> · <a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a></p></div></footer>
+</body>
+</html>

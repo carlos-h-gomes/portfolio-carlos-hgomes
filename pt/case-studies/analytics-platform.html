@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Estudo de caso: substituição de uma plataforma terceirizada de analytics por uma solução interna com Python, PostgreSQL, Superset e Docker.">
+  <meta name="theme-color" content="#08111f">
+  <title>Substituição da Plataforma de Analytics | Carlos Gomes</title>
+  <link rel="alternate" hreflang="en" href="../../case-studies/analytics-platform.html">
+  <link rel="alternate" hreflang="pt-BR" href="analytics-platform.html">
+  <link rel="stylesheet" href="../../assets/portfolio.css?v=20260807-complete">
+  <script src="../../assets/portfolio.js?v=20260807-complete" defer></script>
+</head>
+<body data-asset-base="../..">
+  <a class="skip-link" href="#main">Ir para o conteúdo</a>
+  <header class="site-header"><div class="container nav-shell">
+    <a class="brand" href="../index.html" aria-label="Carlos Henrique Gomes, início"><span class="brand-mark" aria-hidden="true">CG</span><span>Carlos Gomes</span></a>
+    <nav class="desktop-nav" aria-label="Navegação do estudo de caso"><a href="#challenge">Desafio</a><a href="#architecture">Arquitetura</a><a href="#outcome">Resultado</a></nav>
+    <a class="language-switch" href="../../case-studies/analytics-platform.html" lang="en" hreflang="en" aria-label="Ler este estudo de caso em inglês">EN</a>
+    <a class="button button-small desktop-cta" href="../../docs/Curriculo_Carlos_Henrique_Gomes.pdf">Currículo</a>
+    <details class="mobile-nav"><summary aria-label="Abrir navegação">Menu</summary><nav aria-label="Navegação móvel"><a href="#challenge">Desafio</a><a href="#architecture">Arquitetura</a><a href="#outcome">Resultado</a><a href="../index.html">Início do portfólio</a><a href="../../case-studies/analytics-platform.html" lang="en" hreflang="en">English</a></nav></details>
+  </div></header>
+
+  <main id="main">
+    <section class="case-hero"><div class="container">
+      <a class="back-link" href="../index.html#work">← Voltar aos trabalhos selecionados</a>
+      <p class="case-eyebrow">Estudo de caso 01 · Plataforma de dados</p>
+      <h1>Substituição de uma plataforma terceirizada de analytics</h1>
+      <p class="case-summary">Construí o backend e a rota de migração de um produto interno de analytics que reduziu a dependência de fornecedor, migrou uma base ativa de clientes empresariais e simplificou novas implantações.</p>
+      <ul class="case-meta" aria-label="Tecnologias"><li>Python</li><li>PostgreSQL</li><li>Apache Superset</li><li>APIs REST</li><li>Docker</li></ul>
+    </div></section>
+    <section class="result-band" aria-label="Resultados do estudo de caso"><dl class="container result-grid">
+      <div><dt>18 clientes</dt><dd>migrados para a plataforma interna</dd></div>
+      <div><dt>Mais 6</dt><dd>clientes implantados após a migração</dd></div>
+      <div><dt>30+ clientes</dt><dd>usando hoje a plataforma interna</dd></div>
+    </dl></section>
+
+    <section class="section"><div class="container case-layout">
+      <aside class="case-sidebar" aria-label="Resumo do estudo de caso"><dl>
+        <div><dt>Meu papel</dt><dd>Arquitetura e implementação de backend, integração e apoio à migração</dd></div>
+        <div><dt>Ambiente</dt><dd>Produto SaaS B2B de analytics empresarial</dd></div>
+        <div><dt>Restrição central</dt><dd>Mover uma base ativa sem interromper o serviço</dd></div>
+        <div><dt>Resultado principal</dt><dd>Controle interno e uma rota repetível de implantação</dd></div>
+      </dl></aside>
+      <div class="case-body">
+        <section id="challenge"><p class="section-label">O desafio</p><h2>Analytics dependia de um produto externo que limitava o controle.</h2><p>A plataforma existente atendia 18 clientes empresariais. Mudanças de produto dependiam de terceiros e o custo crescia com a base. A substituição precisava preservar a continuidade dos relatórios e, ao mesmo tempo, dar à equipe controle sobre coleta, configuração e evolução do produto.</p></section>
+        <section><p class="section-label">O que eu assumi</p><h2>O backend e o caminho dos dados do cliente até os dashboards.</h2><ul>
+          <li>Projetei e desenvolvi os serviços de backend e os fluxos de configuração.</li>
+          <li>Conectei o produto aos dados existentes de clientes e timelines por APIs.</li>
+          <li>Implementei rotinas de coleta e carga do banco para as análises.</li>
+          <li>Containerizei o padrão de implantação para replicá-lo entre ambientes.</li>
+          <li>Apoiei a migração da base existente e a entrada de novos clientes.</li>
+        </ul></section>
+        <section id="architecture"><p class="section-label">Arquitetura</p><h2>Uma fronteira clara entre origem, ingestão, armazenamento e apresentação.</h2><div class="flow-diagram" aria-label="Fluxo de arquitetura dos sistemas de origem aos dashboards">
+          <div class="flow-step"><strong>Sistemas de origem</strong><span>Dados de clientes e operações expostos por APIs</span></div>
+          <div class="flow-step"><strong>Serviços em Python</strong><span>Coleta, normalização, configuração e orquestração</span></div>
+          <div class="flow-step"><strong>PostgreSQL</strong><span>Armazenamento analítico e conjuntos de dados por cliente</span></div>
+          <div class="flow-step"><strong>Superset</strong><span>Dashboards e visualizações analíticas reutilizáveis</span></div>
+        </div></section>
+        <section><p class="section-label">Decisões principais</p><h2>Construir para controle interno, não apenas para copiar funcionalidades.</h2><ul class="decision-list">
+          <li><strong>Acesso aos dados por APIs</strong>Separou a coleta da apresentação e facilitou a conexão de novas fontes.</li>
+          <li><strong>PostgreSQL como núcleo estável</strong>Criou uma camada relacional que a equipe consegue inspecionar, manter e ampliar.</li>
+          <li><strong>Superset para apresentação</strong>Preservou recursos maduros de dashboards sem abrir mão do controle sobre o produto de dados.</li>
+          <li><strong>Replicação em contêineres</strong>Tornou a configuração mais repetível entre diferentes instâncias.</li>
+        </ul></section>
+        <section id="outcome"><p class="section-label">Resultado</p><h2>A empresa saiu da dependência de fornecedor para uma plataforma própria e evolutiva.</h2><p>O produto interno substituiu o serviço anterior para 18 clientes, viabilizou mais seis implantações e hoje atende mais de 30 clientes. A equipe também ganhou controle sobre evolução funcional, implantação, pipelines de dados e a base técnica para novos recursos de analytics e IA.</p><p class="confidentiality-note"><strong>Confidencialidade:</strong> Empresa, fornecedor, clientes e contratos foram omitidos. Os números publicados usam valores conservadores extraídos de evidências operacionais internas.</p></section>
+      </div>
+    </div></section>
+    <section class="next-case"><div class="container next-case-inner"><div><p>Próximo estudo de caso</p><h2>Pipeline de visualização de bases de conhecimento</h2></div><a class="button" href="bot-visualization.html">Ler o caso 02</a></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><p>© <span data-current-year>2026</span> Carlos Henrique Gomes</p><p><a href="../../case-studies/analytics-platform.html" lang="en" hreflang="en">English version</a> · <a href="mailto:carloshegomes@outlook.com">carloshegomes@outlook.com</a></p></div></footer>
+</body>
+</html>
